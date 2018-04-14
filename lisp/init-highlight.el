@@ -48,7 +48,7 @@
   :config
   (setq show-paren-when-point-inside-paren t)
   (setq show-paren-when-point-in-periphery t)
-  (setq show-paren-style 'mixed))
+  (setq show-paren-style 'parenthesis))
 
 ;; Highlight indentions
 (use-package highlight-indent-guides

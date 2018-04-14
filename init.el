@@ -65,10 +65,6 @@
 (require 'init-basic)
 (require 'init-utils)
 
-;; Theme
-(require 'zenburn-theme)
-(load-theme 'zenburn t)
-
 ;; Visual and editing
 (require 'init-ui)
 (require 'init-edit)

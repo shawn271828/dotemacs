@@ -48,6 +48,11 @@
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
+;; Theme
+(use-package color-theme-sanityinc-tomorrow
+  :init
+  (load-theme 'sanityinc-tomorrow-eighties t))
+
 ;; Modeline
 (use-package spaceline-config
   :ensure spaceline
@@ -96,7 +101,7 @@
   :bind ("<f12>" . fci-mode)
   :config
   (setq fci-rule-width 2)
-  (setq fci-rule-color "IndianRed"))
+  (setq fci-rule-color "IndianRed1"))
 
 ;; Fonts
 (use-package cnfonts
