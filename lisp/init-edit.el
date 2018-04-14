@@ -68,7 +68,7 @@
  truncate-lines nil
  truncate-partial-width-windows nil
  visible-bell t
- echo-keystrokes 0.1)
+ echo-keystrokes 1)
 
 (line-number-mode t)
 (column-number-mode t)

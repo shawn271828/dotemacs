@@ -33,10 +33,10 @@
   :init (add-hook 'after-init-hook #'which-key-mode)
   :config
   (setq which-key-popup-type 'side-window)
-  (setq which-key-side-window-location '(right bottom))
+  (setq which-key-side-window-location 'bottom)
   (setq which-key-side-window-max-width 0.33)
   (setq which-key-side-window-max-height 0.4)
-  (setq which-key-idle-delay 0.5)
+  (setq which-key-idle-delay 1)
   (setq which-key-max-description-length 40)
   (setq which-key-add-column-padding 0)
   (setq which-key-max-display-columns nil)

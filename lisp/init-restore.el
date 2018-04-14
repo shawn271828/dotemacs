@@ -35,7 +35,7 @@
     (switch-to-buffer (caddr args))
     (undo-tree-load-history
      (undo-tree-make-history-save-file-name (cadr args))
-     nil)))
+     t)))
 
 ;; Save and restore status
 (use-package desktop
