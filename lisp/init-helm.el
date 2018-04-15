@@ -27,20 +27,31 @@
 ;;; Code:
 
 (use-package helm
+  :init (add-hook 'after-init-hook #'helm-mode)
   :diminish helm-mode
-  :init
-  (require 'helm-config)
-  (unbind-key "C-x c")
-  (helm-mode 1)
-  (ido-mode -1)
-  (helm-autoresize-mode t)
   :bind (("C-c h" . helm-command-prefix)
          ("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files))
+         ("C-x C-f" . helm-find-files)
+         :map helm-map
+         ("<tab>" . 'helm-execute-persistent-action)
+         ("C-i" . 'helm-execute-persistent-action)
+         ("M-x" . 'helm-select-action))
   :config
+  (require 'helm-config)
+  (helm-autoresize-mode t)
+  (setq helm-autoresize-min-height            25
+        helm-autoresize-max-height            0
+        helm-split-window-inside-p            t
+        helm-move-to-line-cycle-in-source     t
+        helm-scroll-amount                    8
+        helm-echo-input-in-header-line        t
+        helm-M-x-fuzzy-match                  t
+        helm-buffers-fuzzy-matching           t
+        helm-recentf-fuzzy-match              t)
+
   ;; minibuf hiding
   (defun spacemacs//helm-hide-minibuffer-maybe ()
     "Hide minibuffer in Helm session if we use the header line as input field."
@@ -57,17 +68,7 @@
   (defun pl/helm-alive-p ()
     (if (boundp 'helm-alive-p)
         (symbol-value 'helm-alive-p)))
-  (with-eval-after-load 'golden-ratio (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p))
-
-  (setq helm-autoresize-min-height            20
-        helm-autoresize-max-height            0
-        helm-split-window-inside-p            t
-        helm-move-to-line-cycle-in-source     t
-        helm-scroll-amount                    8
-        helm-echo-input-in-header-line        t
-        helm-M-x-fuzzy-match                  t
-        helm-buffers-fuzzy-matching           t
-        helm-recentf-fuzzy-match              t))
+  (with-eval-after-load 'golden-ratio (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
 
 (use-package helm-descbinds
   :bind (("C-h b" . helm-descbinds)
