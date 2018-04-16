@@ -50,8 +50,7 @@
 
 ;; Theme
 (use-package color-theme-sanityinc-tomorrow
-  :init
-  (load-theme 'sanityinc-tomorrow-eighties t))
+  :init (load-theme 'sanityinc-tomorrow-eighties t))
 
 ;; Modeline
 (use-package spaceline-config
@@ -60,7 +59,7 @@
   :init (add-hook 'after-init-hook #'spaceline-spacemacs-theme)
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator (if window-system 'arrow 'utf-8))
+  (setq powerline-default-separator 'zigzag)
   (setq powerline-image-apple-rgb sys/mac-x-p)
   (spaceline-helm-mode 1)
   (spaceline-info-mode 1))

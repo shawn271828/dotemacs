@@ -38,7 +38,7 @@
 (when sys/macp
   ;; make Mac's cmd key as meta
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'none))
+  (setq mac-option-modifier 'hyper))
 
 ;; Environment
 (when (or sys/mac-x-p sys/linux-x-p)

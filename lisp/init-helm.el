@@ -27,8 +27,8 @@
 ;;; Code:
 
 (use-package helm
-  :init (add-hook 'after-init-hook #'helm-mode)
   :diminish helm-mode
+  :init (helm-mode 1)
   :bind (("C-c h" . helm-command-prefix)
          ("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
