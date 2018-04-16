@@ -46,7 +46,7 @@
 ;; Save and restore status
 (use-package desktop
   :ensure nil
-  :init (desktop-save-mode 1)
+  :init (desktop-save-mode -1)
   :config
   (add-hook 'desktop-after-read-hook (lambda () (run-with-timer 2 nil #'restore-current-buffer-undo)))
   (setq desktop-restore-in-current-display nil)
