@@ -31,16 +31,15 @@
   :config
   (setq flycheck-indication-mode 'left-fringe)
   (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
-  ;; Colorful Flycheck mode line
-  (use-package flycheck-color-mode-line
-    :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
+;; Colorful Flycheck mode line
+(use-package flycheck-color-mode-line
+  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
-  ;; Display Flycheck errors in GUI tooltips
-  (use-package flycheck-pos-tip
-    :init (flycheck-pos-tip-mode 1)
-    :config (setq flycheck-pos-tip-timeout 15)))
+;; Display Flycheck errors in GUI tooltips
+(use-package flycheck-popup-tip
+  :init (add-hook 'flycheck-mode-hook #'flycheck-popup-tip-mode))
 
 (provide 'init-flycheck)
 
