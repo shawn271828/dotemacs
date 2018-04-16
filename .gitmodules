@@ -1,6 +1,0 @@
-[submodule "themes/color-theme-sanityinc-tomorrow"]
-	path = themes/color-theme-sanityinc-tomorrow
-	url = https://github.com/Shawn271828/color-theme-sanityinc-tomorrow.git
-[submodule "themes/zenburn-emacs"]
-	path = themes/zenburn-emacs
-	url = https://github.com/bbatsov/zenburn-emacs.git
