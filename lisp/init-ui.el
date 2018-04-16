@@ -49,8 +49,11 @@
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
 ;; Theme
-(use-package color-theme-sanityinc-tomorrow
-  :init (load-theme 'sanityinc-tomorrow-eighties t))
+(use-package zenburn-theme
+  :init (load-theme 'zenburn t)
+  :config (set-cursor-color "IndianRed1"))
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :init (load-theme 'sanityinc-tomorrow-eighties t))
 
 ;; Modeline
 (use-package spaceline-config
@@ -59,7 +62,7 @@
   :init (add-hook 'after-init-hook #'spaceline-spacemacs-theme)
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'zigzag)
+  (setq powerline-default-separator 'arrow)
   (setq powerline-image-apple-rgb sys/mac-x-p)
   (spaceline-helm-mode 1)
   (spaceline-info-mode 1))
