@@ -25,7 +25,6 @@
 ;;
 ;;; Code:
 
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -46,7 +45,7 @@
             (setq gc-cons-threshold (* 64 1024 1024))))
 
 ;; Prefers the newest version of a file
-;; (setq load-prefer-newer t)
+(setq load-prefer-newer t)
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -74,7 +73,9 @@
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-hippie-expand)
-(require 'init-company)
+;; (require 'init-company)
+;; (require 'init-python)
+(require 'init-conda)
 
 ;; Restore
 (require 'init-restore)

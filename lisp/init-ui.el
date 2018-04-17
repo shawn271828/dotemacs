@@ -109,8 +109,9 @@
 
 ;; Fonts
 (use-package cnfonts
-  :init
-  (add-hook 'after-init-hook #'cnfonts-enable)
+  :init (add-hook 'after-init-hook #'cnfonts-enable)
+  :bind (("C-M--" . cnfonts-decrease-fontsize)
+         ("C-M-=" . cnfonts-increase-fontsize))
   :config
   (setq cnfonts-keep-frame-size nil)
   (add-hook 'window-setup-hook

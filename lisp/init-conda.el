@@ -1,9 +1,9 @@
-;; init-hippie-expand.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-conda.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Hippie-expand configurations.
+;;             Conda configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,18 +26,14 @@
 ;;
 ;;; Code:
 
-(use-package hippie-expand
-  :ensure nil
-  :bind (("C-/" . hippie-expand))
-  :config
-  (setq hippie-expand-try-functions-list
-        '(try-complete-file-name-partially
-          try-complete-file-name
-          try-expand-dabbrev
-          try-expand-dabbrev-all-buffers
-          try-expand-dabbrev-from-kill)))
+(eval-when-compile
+  (require 'init-custom))
 
-(provide 'init-hippie-expand)
+(use-package conda
+  :demand
+  :init (setq conda-anaconda-home my-anaconda-home))
+
+(provide 'init-conda)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-hippie-expand.el ends here
+;;; init-python.el ends here
