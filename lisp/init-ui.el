@@ -58,7 +58,8 @@
 ;; Modeline
 (use-package spaceline-config
   :ensure spaceline
-  :demand
+  :init  (add-hook 'after-init-hook
+                   (lambda () (spaceline-spacemacs-theme 'my-conda)))
   :diminish eldoc-mode
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
@@ -72,10 +73,7 @@
     (when (eq major-mode 'python-mode)
       (concat "< "
               (or conda-env-current-name "NoConda")
-              " >")))
-  ;; Install theme
-  (add-hook 'after-init-hook
-            (lambda () (spaceline-spacemacs-theme 'my-conda))))
+              " >"))))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
