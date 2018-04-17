@@ -125,8 +125,10 @@
          ([remap isearch-query-replace] . anzu-isearch-query-replace)
          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
   :init (add-hook 'after-init-hook #'global-anzu-mode)
-  :config (setq anzu-replace-to-string-separator
-                (if (char-displayable-p ?→) " → " " -> ")))
+  :config
+  (setq anzu-replace-to-string-separator
+        (if (char-displayable-p ?→) " → " " -> "))
+  (setq anzu-cons-mode-line-p nil))
 
 ;; Move to the beginning/end of line or code
 (use-package mwim

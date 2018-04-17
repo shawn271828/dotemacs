@@ -58,14 +58,24 @@
 ;; Modeline
 (use-package spaceline-config
   :ensure spaceline
-  :commands spaceline-spacemacs-theme
-  :init (add-hook 'after-init-hook #'spaceline-spacemacs-theme)
+  :demand
+  :diminish eldoc-mode
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (setq powerline-default-separator 'arrow)
   (setq powerline-image-apple-rgb sys/mac-x-p)
   (spaceline-helm-mode 1)
-  (spaceline-info-mode 1))
+  (spaceline-info-mode 1)
+  ;; Define my segments
+  (spaceline-define-segment my-conda
+    "Current conda env name"
+    (when (eq major-mode 'python-mode)
+      (concat "< "
+              (or conda-env-current-name "NoConda")
+              " >")))
+  ;; Install theme
+  (add-hook 'after-init-hook
+            (lambda () (spaceline-spacemacs-theme 'my-conda))))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
