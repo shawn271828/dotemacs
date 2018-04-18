@@ -27,7 +27,7 @@
 ;;; Code:
 
 (use-package flycheck
-  :init (add-hook 'after-init-hook #'global-flycheck-mode)
+  :init (add-hook 'prog-mode-hook #'global-flycheck-mode)
   :config
   (setq flycheck-indication-mode 'left-fringe)
   (setq flycheck-emacs-lisp-load-path 'inherit)

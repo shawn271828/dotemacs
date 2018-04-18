@@ -31,24 +31,28 @@
   :config
   (require 'lsp-imenu)
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+
   ;; Python
-  ;; How to configure lsp-mode for Python:
-  ;; 1. Need to install pyls using: 'pip install 'python-language-server[all]'.
-  ;; 2. pyls honors VIRTUAL_ENV and project root path.
-  ;;    See `https://github.com/palantir/python-language-server/issues/126' and `workspace.py'.
-  ;; 3. See `https://github.com/emacs-lsp/lsp-mode/issues/167' if need to send settings to pyls.
-  (lsp-define-stdio-client lsp-python-mode
-                           "python"
-                           (lsp-make-traverser (lambda (dir)
-                                                 (directory-files
-                                                  dir
-                                                  nil
-                                                  "environment\\.yml")))
-                           '("/Users/ts/anaconda3/bin/pyls"))
-  (with-eval-after-load 'conda
-    (when (fboundp 'conda--switch-buffer-auto-activate)
-      (advice-add 'lsp-python-mode-enable :before #'conda--switch-buffer-auto-activate)))
-  (add-hook 'python-mode-hook #'lsp-python-mode-enable))
+  ;; caveat: lsp-symbol-highlight currently not supported by pyls
+  (use-package python
+    ;; How to configure lsp-mode for Python:
+    ;; 1. Need to install pyls using: 'pip install 'python-language-server[all]'.
+    ;; 2. pyls honors VIRTUAL_ENV and project root path.
+    ;;    See `https://github.com/palantir/python-language-server/issues/126' and `workspace.py'.
+    ;; 3. See `https://github.com/emacs-lsp/lsp-mode/issues/167' if need to send settings to pyls.
+    :config
+    (lsp-define-stdio-client lsp-python-mode
+                             "python"
+                             (lsp-make-traverser (lambda (dir)
+                                                   (directory-files
+                                                    dir
+                                                    nil
+                                                    "environment\\.yml")))
+                             '("/Users/ts/anaconda3/bin/pyls"))
+    (with-eval-after-load 'conda
+      (when (fboundp 'conda--switch-buffer-auto-activate)
+        (advice-add 'lsp-python-mode-enable :before #'conda--switch-buffer-auto-activate)))
+    (add-hook 'python-mode-hook #'lsp-python-mode-enable)))
 
 (provide 'init-lsp)
 
