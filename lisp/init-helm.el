@@ -35,10 +35,14 @@
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
+         :map helm-command-map
+         ("M-o" . helm-occur)
          :map helm-map
-         ("<tab>" . 'helm-execute-persistent-action)
+         ;; ("<tab>" . 'helm-execute-persistent-action)
          ("C-i" . 'helm-execute-persistent-action)
-         ("M-x" . 'helm-select-action))
+         ;; ("M-x" . 'helm-select-action)
+         :map isearch-mode-map
+         ("M-o" . helm-occur-from-isearch))
   :config
   (require 'helm-config)
   (helm-autoresize-mode t)
