@@ -55,6 +55,10 @@
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :init (load-theme 'sanityinc-tomorrow-eighties t))
 
+;; Nyan cat
+(use-package nyan-mode
+  :init (add-hook 'after-init-hook #'nyan-mode))
+
 ;; Modeline
 (use-package spaceline-config
   :ensure spaceline
@@ -63,17 +67,18 @@
   :diminish eldoc-mode
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator 'nil)
   (setq powerline-image-apple-rgb sys/mac-x-p)
   (spaceline-helm-mode 1)
   (spaceline-info-mode 1)
   ;; Define my segments
   (spaceline-define-segment my-conda
     "Current conda env name"
-    (when (eq major-mode 'python-mode)
-      (concat "< "
-              (or conda-env-current-name "NoConda")
-              " >"))))
+    (if (boundp 'conda-env-current-name)
+        (or conda-env-current-name "System")
+      "System")
+    :when active
+    :face highlight-face))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
