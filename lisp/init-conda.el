@@ -30,10 +30,21 @@
   (require 'init-custom))
 
 (use-package conda
-  :demand
-  :init (setq conda-anaconda-home my-anaconda-home))
+  :init (setq conda-anaconda-home my-anaconda-home)
+  :config
+  ;; Use `.+' instead of `\\w+' as some char doesn't count as word
+  (defun new-conda--get-name-from-env-yml (filename)
+    (when filename
+      (let ((env-yml-contents (f-read-text filename)))
+        (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
+            (match-string 1 env-yml-contents)
+          ))))
+  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
+  ;; Hook open new file
+  (advice-add 'pop-to-buffer :after #'conda--switch-buffer-auto-activate)
+  (conda-env-autoactivate-mode t))
 
 (provide 'init-conda)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-python.el ends here
+;;; init-conda.el ends here
