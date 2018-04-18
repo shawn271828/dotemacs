@@ -30,6 +30,7 @@
   (require 'init-custom))
 
 (use-package conda
+  :demand
   :init (setq conda-anaconda-home my-anaconda-home)
   :config
   ;; Use `.+' instead of `\\w+' as some char doesn't count as word

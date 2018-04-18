@@ -34,6 +34,9 @@
 (when (version< emacs-version "24.4")
   (error "This requires Emacs 24.4 and above!"))
 
+;; Accept safe local variables
+(setq enable-local-variables :safe)
+
 ;; Optimize loading performance
 (defvar default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -73,9 +76,8 @@
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-hippie-expand)
-;; (require 'init-company)
-;; (require 'init-python)
 (require 'init-conda)
+(require 'init-lsp)
 
 ;; Restore
 (require 'init-restore)
