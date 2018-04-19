@@ -29,8 +29,28 @@
 (use-package lsp-mode
   :demand
   :config
+  ;; imenu support
   (require 'lsp-imenu)
   (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+
+  ;; ui integration
+  (use-package lsp-ui
+    :demand
+    :init (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+    :config
+    (defun sync-peek-face ()
+      (set-face-attribute 'lsp-ui-peek-selection nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'default :foreground))
+      (set-face-attribute 'lsp-ui-peek-filename nil :foreground (face-attribute 'font-lock-constant-face :foreground))
+      (set-face-attribute 'lsp-ui-peek-highlight nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'highlight :foreground) :distant-foreground (face-attribute 'highlight :foreground))
+      (set-face-attribute 'lsp-ui-peek-header nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'default :foreground)))
+    (sync-peek-face)
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)) 
+
+  ;; company integration
+  (use-package company-lsp
+    :demand
+    (shawn/local-push-company-backend 'company-lsp))
 
   ;; Python
   ;; caveat: lsp-symbol-highlight currently not supported by pyls
@@ -41,6 +61,7 @@
     ;;    See `https://github.com/palantir/python-language-server/issues/126' and `workspace.py'.
     ;; 3. See `https://github.com/emacs-lsp/lsp-mode/issues/167' if need to send settings to pyls.
     :config
+    (setq python-indent-offset 4)
     (lsp-define-stdio-client lsp-python-mode
                              "python"
                              (lsp-make-traverser (lambda (dir)

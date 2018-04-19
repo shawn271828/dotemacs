@@ -1,9 +1,9 @@
-;; init-conda.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-anaconda.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Conda configurations.
+;;             Anaconda configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -29,24 +29,17 @@
 (eval-when-compile
   (require 'init-custom))
 
-(use-package conda
+(use-package anaconda-mode
   :demand
-  :init (setq conda-anaconda-home my-anaconda-home)
   :config
-  (setq conda-message-on-environment-switch nil)
-  ;; Use `.+' instead of `\\w+' as some char doesn't count as word
-  (defun new-conda--get-name-from-env-yml (filename)
-    (when filename
-      (let ((env-yml-contents (f-read-text filename)))
-        (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
-            (match-string 1 env-yml-contents)
-          ))))
-  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
-  ;; Hook open new file
-  (advice-add 'pop-to-buffer :after #'conda--switch-buffer-auto-activate)
-  (conda-env-autoactivate-mode t))
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  (use-package company-anaconda
+    :demand
+    :config
+    (push 'company-anaconda company-backends)))
 
-(provide 'init-conda)
+(provide 'init-anaconda)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-conda.el ends here
+;;; init-anaconda.el ends here

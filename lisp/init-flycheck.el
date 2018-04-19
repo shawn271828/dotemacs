@@ -37,10 +37,6 @@
 (use-package flycheck-color-mode-line
   :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
-;; Display Flycheck errors in GUI tooltips
-(use-package flycheck-popup-tip
-  :init (add-hook 'flycheck-mode-hook #'flycheck-popup-tip-mode))
-
 (provide 'init-flycheck)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

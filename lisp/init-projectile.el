@@ -30,6 +30,7 @@
 
 ;; Manage and navigate projects
 (use-package projectile
+  :diminish
   :init (add-hook 'after-init-hook #'projectile-mode)
   :config
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name))))

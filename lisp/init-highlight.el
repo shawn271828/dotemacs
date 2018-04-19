@@ -27,9 +27,9 @@
 ;;; Code:
 
 ;; Highlight the current line
-;; (use-package hl-line
-;;   :ensure nil
-;;   :init (add-hook 'after-init-hook #'global-hl-line-mode))
+(use-package hl-line
+  :ensure nil
+  :init (add-hook 'after-init-hook #'global-hl-line-mode))
 
 ;; Highlight symbols
 (use-package symbol-overlay
@@ -57,10 +57,7 @@
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-character ?\|)
-  (setq highlight-indent-guides-auto-enabled nil)
-  (set-face-background 'highlight-indent-guides-odd-face "ivory")
-  (set-face-background 'highlight-indent-guides-even-face "cornsilk")
-  (set-face-foreground 'highlight-indent-guides-character-face "azure4"))
+  (setq highlight-indent-guides-auto-enabled nil))
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters

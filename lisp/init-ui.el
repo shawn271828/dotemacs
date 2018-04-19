@@ -49,9 +49,12 @@
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
 ;; Theme
-(use-package zenburn-theme
-  :init (load-theme 'zenburn t)
-  :config (set-cursor-color "IndianRed1"))
+(use-package spacemacs-theme
+  :init (load-theme 'spacemacs-dark t))
+
+;; (use-package zenburn-theme
+;;   :init (load-theme 'zenburn t)
+;; :config (set-cursor-color "IndianRed1"))
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :init (load-theme 'sanityinc-tomorrow-eighties t))
 
@@ -60,25 +63,18 @@
   :init (add-hook 'after-init-hook #'nyan-mode))
 
 ;; Modeline
-(use-package spaceline-config
-  :ensure spaceline
-  :init  (add-hook 'after-init-hook
-                   (lambda () (spaceline-spacemacs-theme 'my-conda)))
-  :diminish eldoc-mode
-  :config
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'nil)
-  (setq powerline-image-apple-rgb sys/mac-x-p)
-  (spaceline-helm-mode 1)
-  (spaceline-info-mode 1)
-  ;; Define my segments
-  (spaceline-define-segment my-conda
-    "Current conda env name"
-    (if (boundp 'conda-env-current-name)
-        (or conda-env-current-name "System")
-      "System")
-    :when active
-    :face highlight-face))
+;; (use-package spaceline-config
+;;   :ensure spaceline
+;;   :diminish eldoc-mode
+;;   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
+;;   :config
+;;   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
+;;   (setq powerline-default-separator 'nil)
+;;   (setq powerline-image-apple-rgb sys/mac-x-p))
+(use-package smart-mode-line
+  :init
+  (setq sml/theme 'dark)
+  (sml/setup))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
@@ -89,36 +85,36 @@
   (setq x-gtk-use-system-tooltips nil))
 
 ;; Transparency
-(use-package seethru
-  :bind (("C-M-8" . (lambda () (interactive) (seethru-relative -2)))
-         ("C-M-9" . (lambda () (interactive) (seethru-relative 2)))
-         ("C-M-0" . (lambda () (interactive) (seethru 100)))))
+;; (use-package seethru
+;;   :bind (("C-M-8" . (lambda () (interactive) (seethru-relative -2)))
+;;          ("C-M-9" . (lambda () (interactive) (seethru-relative 2)))
+;;          ("C-M-0" . (lambda () (interactive) (seethru 100)))))
 
 ;; Show native line numbers if possible
 (when (fboundp 'display-line-numbers-mode)
-    (use-package display-line-numbers
-      :ensure nil
-      :init (add-hook 'prog-mode-hook #'display-line-numbers-mode)))
+  (use-package display-line-numbers
+    :ensure nil
+    :init (add-hook 'prog-mode-hook #'display-line-numbers-mode)))
 
 ;; Prettify symbols
 (when (boundp 'global-prettify-symbols-mode)
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
 ;; Cursor beacon
-(use-package beacon
-  :diminish beacon
-  :init (add-hook 'after-init-hook #'beacon-mode)
-  :config
-  (setq-default beacon-lighter "")
-  (setq-default beacon-size 10)
-  (setq-default beacon-color "IndianRed1"))
+;; (use-package beacon
+;;   :diminish beacon
+;;   :init (add-hook 'after-init-hook #'beacon-mode)
+;;   :config
+;;   (setq-default beacon-lighter "")
+;;   (setq-default beacon-size 10)
+;;   (setq-default beacon-color "IndianRed1"))
 
 ;; Fill column indication
 (use-package fill-column-indicator
   :bind ("<f12>" . fci-mode)
   :config
   (setq fci-rule-width 2)
-  (setq fci-rule-color "IndianRed1"))
+  (setq fci-rule-color "green"))
 
 ;; Fonts
 (use-package cnfonts

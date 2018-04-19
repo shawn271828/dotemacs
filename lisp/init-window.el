@@ -27,9 +27,9 @@
 ;;; Code:
 
 ;; Directional window-selection routines
-(use-package windmove
-  :ensure nil
-  :init (add-hook 'after-init-hook #'windmove-default-keybindings))
+;; (use-package windmove
+;;   :ensure nil
+;;   :init (add-hook 'after-init-hook #'windmove-default-keybindings))
 
 ;; Restore old window configurations
 (use-package winner
@@ -54,23 +54,23 @@
   :demand
   :bind ("M-o" . ace-window)
   :config
-  (setq aw-dispatch-always t)
+  (setq aw-dispatch-always nil)
   (set-face-attribute 'aw-leading-char-face nil
-                      :height 2.5 :foreground "Green"))
+                      :height 2.0 :foreground "Green"))
 
 ;; Easy window config switching
-(use-package eyebrowse
-  :init
-  (progn
-    (setq eyebrowse-keymap-prefix (kbd "C-c w"))
-    (add-hook 'after-init-hook #'eyebrowse-mode)))
+;; (use-package eyebrowse
+;;   :init
+;;   (progn
+;;     (setq eyebrowse-keymap-prefix (kbd "C-c w"))
+;;     (add-hook 'after-init-hook #'eyebrowse-mode)))
 
 ;; Golden ratio
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :init (add-hook 'after-init-hook #'golden-ratio-mode)
-  :config
-  (add-to-list 'golden-ratio-extra-commands 'ace-window))
+;; (use-package golden-ratio
+;;   :diminish golden-ratio-mode
+;;   :init (add-hook 'after-init-hook #'golden-ratio-mode)
+;;   :config
+;;   (add-to-list 'golden-ratio-extra-commands 'ace-window))
 
 ;; Transpose window
 (use-package transpose-frame

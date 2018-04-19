@@ -31,9 +31,7 @@
   :ensure helm-company
   :init
   (add-hook 'after-init-hook #'global-company-mode)
-  :bind (
-         :map company-mode-map
-         ("M-/" . company-complete)
+  :bind (("M-/" . company-complete)
          ("C-M-/" . helm-company)
          :map company-active-map
          ("M-/" . company-other-backend)
@@ -54,10 +52,7 @@
         company-tooltip-align-annotations t
         company-quickhelp-delay .5))
 
-(use-package company-quickhelp
-  :init (add-hook 'after-init-hook #'company-quickhelp-mode))
-
-(defun sanityinc/local-push-company-backend (backend)
+(defun shawn/local-push-company-backend (backend)
   "Add BACKEND to a buffer-local version of `company-backends'."
   (make-local-variable 'company-backends)
   (push backend company-backends))

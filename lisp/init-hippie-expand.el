@@ -28,7 +28,7 @@
 
 (use-package hippie-expand
   :ensure nil
-  :bind (("C-/" . hippie-expand))
+  :bind (("H-/" . hippie-expand))
   :config
   (setq hippie-expand-try-functions-list
         '(try-complete-file-name-partially

@@ -67,8 +67,9 @@
  tooltip-delay 1.5
  truncate-lines nil
  truncate-partial-width-windows nil
- visible-bell t
- echo-keystrokes 1)
+ visible-bell nil
+ echo-keystrokes 1
+ fill-column 80)
 
 (line-number-mode t)
 (column-number-mode t)
@@ -142,7 +143,7 @@
   :config
   ;; autosave the undo-tree history
   (setq undo-tree-history-directory-alist  `((".*" . ,my-backup-dir)))
-  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-auto-save-history nil)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t))
 
@@ -154,7 +155,7 @@
   (add-hook 'prog-mode-hook #'subword-mode)
   (add-hook 'minibuffer-setup-hook #'subword-mode))
 
-;; Browse kill ring (replaced by helm-show-kill-ring)
+;; Browse kill ring
 ;; (use-package browse-kill-ring
 ;;   :bind ("M-Y" . browse-kill-ring)
 ;;   :config
@@ -230,13 +231,11 @@
 
 ;; Better than zap-up-to-char
 (use-package zop-to-char
-  :ensure t
   :bind (("M-z" . zop-up-to-char)
          ("M-Z" . zop-to-char)))
 
 ;; Move text and region
 (use-package move-text
-  :ensure t
   :bind
   (([(meta up)] . move-text-up)
    ([(meta down)] . move-text-down)))

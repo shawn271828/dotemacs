@@ -72,12 +72,15 @@
 (require 'init-edit)
 (require 'init-highlight)
 (require 'init-window)
-(require 'init-helm)
+;; (require 'init-helm)
+(require 'init-ivy)
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-hippie-expand)
+(require 'init-company)
 (require 'init-conda)
-(require 'init-lsp)
+;; (require 'init-anaconda)
+;; (require 'init-lsp)
 
 ;; Restore
 (require 'init-restore)
