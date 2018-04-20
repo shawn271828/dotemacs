@@ -57,7 +57,7 @@
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-character ?\|)
-  (setq highlight-indent-guides-auto-enabled nil))
+  (setq highlight-indent-guides-auto-enabled t))
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
