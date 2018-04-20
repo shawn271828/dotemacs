@@ -65,8 +65,8 @@
         (overlay-put ov 'face
                      (let ((bg-color (face-background 'default nil)))
                        `(:background ,bg-color :foreground ,bg-color)))
+        (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
         (setq-local cursor-type nil))))
-  (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
 
   ;; golden-ratio ignore
   (defun pl/helm-alive-p ()

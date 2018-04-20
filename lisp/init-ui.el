@@ -111,7 +111,7 @@
 
 ;; Fill column indication
 (use-package fill-column-indicator
-  :bind ("<f12>" . fci-mode)
+  :bind ("M-<f12>" . fci-mode)
   :config
   (setq fci-rule-width 2)
   (setq fci-rule-color "green"))

@@ -69,7 +69,7 @@
  truncate-partial-width-windows nil
  visible-bell nil
  echo-keystrokes 1
- fill-column 80)
+ fill-column 79)
 
 (line-number-mode t)
 (column-number-mode t)
@@ -246,8 +246,8 @@
   :init (add-hook 'after-init-hook #'super-save-mode))
 
 ;; Easy kill
-(use-package easy-kill
-  :bind ([remap kill-ring-save] . easy-kill))
+;; (use-package easy-kill
+;;   :bind ([remap kill-ring-save] . easy-kill))
 
 (provide 'init-edit)
 

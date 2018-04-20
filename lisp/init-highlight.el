@@ -95,6 +95,16 @@
   :diminish rainbow-mode
   :init (add-hook 'emacs-lisp-mode-hook #'rainbow-mode))
 
+;; Visualize TAB, (HARD) SPACE, NEWLINE
+(use-package whitespace
+  :ensure nil
+  :diminish whitespace-mode
+  :bind (("<f12>" . whitespace-mode))
+  :config
+  (setq whitespace-line-column fill-column) ;; limit line length
+  ;; automatically clean up bad whitespace
+  (setq whitespace-action '(report-on-bogus)))
+
 (provide 'init-highlight)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
