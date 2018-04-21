@@ -180,9 +180,7 @@
 ;; Multiple cursors
 (use-package iedit
   :bind (("C-;" . iedit-mode)
-         ("C-x r RET" . iedit-rectangle-mode)
-         :map isearch-mode-map
-         ("C-;" . iedit-mode-from-isearch)))
+         ("C-x r RET" . iedit-rectangle-mode)))
 
 ;; Comment
 (use-package comment-dwim-2
