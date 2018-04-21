@@ -27,7 +27,10 @@
 ;;; Code:
 
 (use-package spacemacs-theme
-  :init (load-theme 'spacemacs-dark t))
+  :init
+  (setq spacemacs-theme-comment-bg nil)
+  (setq spacemacs-theme-comment-italic t)
+  (load-theme 'spacemacs-dark t))
 
 (provide 'init-theme)
 

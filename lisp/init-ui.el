@@ -48,16 +48,6 @@
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; Theme
-(use-package spacemacs-theme
-  :init (load-theme 'spacemacs-dark t))
-
-;; (use-package zenburn-theme
-;;   :init (load-theme 'zenburn t)
-;; :config (set-cursor-color "IndianRed1"))
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :init (load-theme 'sanityinc-tomorrow-eighties t))
-
 ;; Nyan cat
 (use-package nyan-mode
   :init (add-hook 'after-init-hook #'nyan-mode))

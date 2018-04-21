@@ -69,6 +69,7 @@
 
 ;; Visual and editing
 (require 'init-ui)
+(require 'init-theme)
 (require 'init-edit)
 (require 'init-ibuffer)
 (require 'init-highlight)
@@ -82,6 +83,7 @@
 (require 'init-conda)
 ;; (require 'init-anaconda)
 ;; (require 'init-lsp)
+(require 'init-vcs)
 
 ;; Restore
 (require 'init-restore)
