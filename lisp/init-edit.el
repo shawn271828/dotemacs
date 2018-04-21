@@ -36,40 +36,37 @@
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
 (blink-cursor-mode -1)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
 
-(setq-default
- ;; initial-scratch-message nil
- ;; setq-default kill-whole-line t           ; Kill line including '\n'
- ;; make-backup-files nil                    ; Forbide to make backup files
- auto-save-default nil                    ; Disable auto save
- delete-by-moving-to-trash t              ; Deleting files go to OS's trash folder
- set-mark-command-repeat-pop t            ; Repeating C-SPC after popping mark pops it again
- delete-old-versions -1                   ; Don't remove old versions
- version-control t                        ; Backup as many versions as it could
- vc-make-backup-files t                   ; Even files under Git will be backuped
- inhibit-startup-screen t
- ;; visible-bell t
- track-eol t                              ; Keep cursor at end of lines. Require line-move-visual is nil.
- line-move-visual nil
- ;; blink-cursor-interval 0.4
- bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
- buffers-menu-max-size 30
- case-fold-search t
- require-final-newline t
- ediff-split-window-function 'split-window-horizontally
- ediff-window-setup-function 'ediff-setup-windows-plain
- indent-tabs-mode nil
- tab-width 4
- mouse-yank-at-point t
- save-interprogram-paste-before-kill t
- scroll-preserve-screen-position 'always
- set-mark-command-repeat-pop t
- tooltip-delay 1.5
- truncate-lines nil
- truncate-partial-width-windows nil
- visible-bell nil
- echo-keystrokes 1
- fill-column 79)
+(setq-default  auto-save-default nil                    ; Disable auto save
+               delete-by-moving-to-trash t              ; Deleting files go to OS's trash folder
+               set-mark-command-repeat-pop t            ; Repeating C-SPC after popping mark pops it again
+               delete-old-versions -1                   ; Don't remove old versions
+               version-control t                        ; Backup as many versions as it could
+               vc-make-backup-files t                   ; Even files under Git will be backuped
+               inhibit-startup-screen t
+               ;; visible-bell t
+               track-eol t                              ; Keep cursor at end of lines. Require line-move-visual is nil.
+               line-move-visual nil
+               ;; blink-cursor-interval 0.4
+               bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
+               buffers-menu-max-size 30
+               case-fold-search t
+               require-final-newline t
+               ediff-split-window-function 'split-window-horizontally
+               ediff-window-setup-function 'ediff-setup-windows-plain
+               indent-tabs-mode nil
+               tab-width 4
+               mouse-yank-at-point t
+               save-interprogram-paste-before-kill t
+               scroll-preserve-screen-position 'always
+               set-mark-command-repeat-pop t
+               tooltip-delay 1.5
+               truncate-lines nil
+               truncate-partial-width-windows nil
+               visible-bell nil
+               echo-keystrokes 1
+               fill-column 79)
 
 (line-number-mode t)
 (column-number-mode t)
@@ -107,8 +104,7 @@
 
 ;; Jump to things in Emacs tree-style
 (use-package avy
-  :bind (("C-;" . avy-goto-word-1)
-         ("C-M-;" . avy-goto-char-timer)
+  :bind (("C-M-;" . avy-goto-char-timer)
          ([remap goto-line] . avy-goto-line))
   :init (add-hook 'after-init-hook #'avy-setup-default)
   :config
@@ -118,18 +114,18 @@
   (setq avy-timeout-seconds 0.5))
 
 ;; Show number of matches in mode-line while searching
-(use-package anzu
-  :diminish anzu-mode
-  :bind (([remap query-replace] . anzu-query-replace)
-         ([remap query-replace-regexp] . anzu-query-replace-regexp)
-         :map isearch-mode-map
-         ([remap isearch-query-replace] . anzu-isearch-query-replace)
-         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  :init (add-hook 'after-init-hook #'global-anzu-mode)
-  :config
-  (setq anzu-replace-to-string-separator
-        (if (char-displayable-p ?→) " → " " -> "))
-  (setq anzu-cons-mode-line-p nil))
+;; (use-package anzu
+;;   :diminish anzu-mode
+;;   :bind (([remap query-replace] . anzu-query-replace)
+;;          ([remap query-replace-regexp] . anzu-query-replace-regexp)
+;;          :map isearch-mode-map
+;;          ([remap isearch-query-replace] . anzu-isearch-query-replace)
+;;          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
+;;   :init (add-hook 'after-init-hook #'global-anzu-mode)
+;;   :config
+;;   (setq anzu-replace-to-string-separator
+;;         (if (char-displayable-p ?→) " → " " -> "))
+;;   (setq anzu-cons-mode-line-p nil))
 
 ;; Move to the beginning/end of line or code
 (use-package mwim
@@ -156,16 +152,16 @@
   (add-hook 'minibuffer-setup-hook #'subword-mode))
 
 ;; Browse kill ring
-;; (use-package browse-kill-ring
-;;   :bind ("M-Y" . browse-kill-ring)
-;;   :config
-;;   (setq browse-kill-ring-separator "\f"))
+(use-package browse-kill-ring
+  :bind ("M-y" . browse-kill-ring)
+  :config
+  (setq browse-kill-ring-separator "\f"))
 
 ;; Page break lines
-;; (use-package page-break-lines
-;;   :diminish page-break-lines-mode
-;;   :init (add-hook 'after-init-hook 'global-page-break-lines-mode)
-;;   :config (push 'browse-kill-ring-mode page-break-lines-modes))
+(use-package page-break-lines
+  :diminish page-break-lines-mode
+  :init (add-hook 'after-init-hook 'global-page-break-lines-mode)
+  :config (push 'browse-kill-ring-mode page-break-lines-modes))
 
 ;; Make pairs balance
 (use-package elec-pair
@@ -182,13 +178,18 @@
 ;; (define-key cua--region-keymap (kbd "C-S-x") nil)
 
 ;; Multiple cursors
-(use-package multiple-cursors
-  :bind (("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c m c". mc/edit-lines)
-         ("C-c m e" . mc/edit-ends-of-lines)
-         ("C-c m a" . mc/edit-beginnings-of-lines)
-         ("C-M-<mouse-1>" . mc/add-cursor-on-click)))
+(use-package iedit
+  :bind (("C-;" . iedit-mode)
+         ("C-x r RET" . iedit-rectangle-mode)
+         :map isearch-mode-map
+         ("C-;" . iedit-mode-from-isearch)))
+;; (use-package multiple-cursors
+;;   :bind (("C->" . mc/mark-next-like-this)
+;;          ("C-<" . mc/mark-previous-like-this)
+;;          ("C-c m c". mc/edit-lines)
+;;          ("C-c m e" . mc/edit-ends-of-lines)
+;;          ("C-c m a" . mc/edit-beginnings-of-lines)
+;;          ("C-M-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;; Comment
 (use-package comment-dwim-2

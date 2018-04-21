@@ -28,44 +28,29 @@
 
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (("C-s" . swiper)
+  :bind (("C-s" . counsel-grep-or-swiper)
          ("C-S-s" . swiper-all)
-
          ("C-c C-r" . ivy-resume)
-         ("C-c v" . ivy-push-view)
-         ("C-c V" . ivy-pop-view)
-
+         ("C-c c v" . ivy-push-view)
+         ("C-c c V" . ivy-pop-view)
          :map counsel-mode-map
-         ([remap swiper] . counsel-grep-or-swiper)
-         ("C-x C-r" . counsel-recentf)
-         ("C-x j" . counsel-mark-ring)
-         ("C-c C-p" . counsel-package)
+         ("<f1> a" . counsel-apropos)
+         ("<f1> f" . counsel-describe-function-function)
+         ("<f1> v" . counsel-describe-variable)
+         ("<f1> u" . counsel-unicode-char) ; Insert unicode char
 
-         ("C-c c L" . counsel-find-library)
-         ("C-c c a" . counsel-apropos)
-         ("C-c c e" . counsel-colors-emacs)
-         ("C-c c f" . counsel-fzf)
-         ("C-c c g" . counsel-grep)
-         ("C-c c h" . counsel-command-history)
-         ("C-c c i" . counsel-git)
-         ("C-c c j" . counsel-git-grep)
-         ("C-c c l" . counsel-load-library)
-         ("C-c c m" . counsel-minibuffer-history)
-         ("C-c c o" . counsel-outline)
-         ("C-c c p" . counsel-pt)
-         ("C-c c r" . counsel-rg)
-         ("C-c c s" . counsel-ag)
-         ("C-c c u" . counsel-unicode-char)
-         ("C-c c w" . counsel-colors-web)
+         ("C-c c r" . counsel-recentf)  ; Find recent files
+         ("C-c c f" . counsel-fzf)      ; Find files by fuzzy matching recursively
+         ("C-c c g" . counsel-git)      ; Find files in git repository
 
-         :map ivy-minibuffer-map
-         ("C-w" . ivy-yank-word)
+         ("C-c c h" . counsel-command-history) ; Command history
+         ("C-c c m" . counsel-mark-ring)       ; Pop up marks
+
+         ("C-c c s" . counsel-rg)        ; Search current directory using ag
+         ("C-c c j" . counsel-git-grep)  ; Search current git repository
 
          :map counsel-find-file-map
-         ("C-h" . counsel-up-directory)
-
-         :map swiper-map
-         ("M-%" . swiper-query-replace))
+         ("C-h" . counsel-up-directory))
   :init
   (add-hook 'after-init-hook #'ivy-mode)
   (add-hook 'ivy-mode-hook #'counsel-mode)
@@ -84,21 +69,16 @@
           (t . ivy--regex-plus)))
 
   (setq swiper-action-recenter t)
-  (setq counsel-find-file-at-point t)
-  (setq counsel-yank-pop-separator "\n-------\n")
-
-  ;; Find counsel commands quickly
-  (bind-key "<f6>" (lambda ()
-                     (interactive)
-                     (counsel-M-x "^counsel ")))
+  (setq counsel-find-file-at-point nil)
+  (setq counsel-yank-pop-separator "\f")
 
   ;; Use faster search tools: ripgrep or the silver search
   (let ((command
          (cond
           ((executable-find "rg")
-           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+           "rg -i -M 120 --no-heading --line-number --color never %s %s")
           ((executable-find "ag")
-           "ag -i --noheading --nocolor --nofilename --numbers '%s' %s"))))
+           "ag -i --noheading --nocolor --nofilename --numbers %s %s"))))
     (setq counsel-grep-base-command command))
 
   ;; Integration with `projectile'
@@ -108,16 +88,6 @@
   ;; Integration with `magit'
   (with-eval-after-load 'magit
     (setq magit-completing-read-function 'ivy-completing-read))
-
-  ;; Search at point
-  ;; "M-j": word-at-point
-  ;; "M-n"/"C-w": symbol-at-point
-  ;; Refer to https://www.emacswiki.org/emacs/SearchAtPoint#toc8
-  ;; and https://github.com/abo-abo/swiper/wiki/FAQ
-  ;; (bind-key "C-w" (lambda ()
-  ;;                   (interactive)
-  ;;                   (insert (format "%s" (with-ivy-window (ivy-thing-at-point)))))
-  ;;           ivy-minibuffer-map)
 
   ;; Enhance M-x
   (use-package smex)

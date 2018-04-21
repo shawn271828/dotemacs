@@ -46,15 +46,22 @@
           "*cvs*"
           "*Buffer List*"
           "*Ibuffer*"
-          "*esh command on file*"))
+          "*esh command on file*"
+          "*Kill Ring*"))
   (add-hook 'after-init-hook #'winner-mode))
 
 ;; Quickly switch windows
 (use-package switch-window
   :bind (("M-o" . switch-window))
   :config
+  (require 'switch-window-mvborder)
+  (define-key switch-window-extra-map (kbd "k") 'switch-window-mvborder-up)
+  (define-key switch-window-extra-map (kbd "j") 'switch-window-mvborder-down)
+  (define-key switch-window-extra-map (kbd "h") 'switch-window-mvborder-left)
+  (define-key switch-window-extra-map (kbd "l") 'switch-window-mvborder-right)
   (setq switch-window-timeout nil)
   (setq switch-window-shortcut-style 'quail))
+
 ;; (use-package ace-window
 ;;   :demand
 ;;   :bind ("M-o" . ace-window)
