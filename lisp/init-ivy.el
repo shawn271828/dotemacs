@@ -35,7 +35,7 @@
          ("C-c c V" . ivy-pop-view)
          :map counsel-mode-map
          ("<f1> a" . counsel-apropos)
-         ("<f1> f" . counsel-describe-function-function)
+         ("<f1> f" . counsel-describe-function)
          ("<f1> v" . counsel-describe-variable)
          ("<f1> u" . counsel-unicode-char) ; Insert unicode char
 
@@ -72,6 +72,7 @@
   (setq counsel-find-file-at-point nil)
   (setq counsel-yank-pop-separator "\f")
 
+  (setq counsel-git-cmd "rg --files")
   ;; Use faster search tools: ripgrep or the silver search
   (let ((command
          (cond

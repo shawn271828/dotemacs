@@ -104,7 +104,7 @@
 
 ;; Jump to things in Emacs tree-style
 (use-package avy
-  :bind (("C-M-;" . avy-goto-char-timer)
+  :bind (("C-'" . avy-goto-char-timer)
          ([remap goto-line] . avy-goto-line))
   :init (add-hook 'after-init-hook #'avy-setup-default)
   :config
@@ -183,13 +183,6 @@
          ("C-x r RET" . iedit-rectangle-mode)
          :map isearch-mode-map
          ("C-;" . iedit-mode-from-isearch)))
-;; (use-package multiple-cursors
-;;   :bind (("C->" . mc/mark-next-like-this)
-;;          ("C-<" . mc/mark-previous-like-this)
-;;          ("C-c m c". mc/edit-lines)
-;;          ("C-c m e" . mc/edit-ends-of-lines)
-;;          ("C-c m a" . mc/edit-beginnings-of-lines)
-;;          ("C-M-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;; Comment
 (use-package comment-dwim-2
