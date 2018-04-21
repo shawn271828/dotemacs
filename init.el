@@ -70,6 +70,7 @@
 ;; Visual and editing
 (require 'init-ui)
 (require 'init-edit)
+(require 'init-ibuffer)
 (require 'init-highlight)
 (require 'init-window)
 ;; (require 'init-helm)

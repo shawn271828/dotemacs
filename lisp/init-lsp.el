@@ -1,4 +1,4 @@
-;; init-lsp.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-lsp.el --- Initialize lsp configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

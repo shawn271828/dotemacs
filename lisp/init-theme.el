@@ -1,9 +1,9 @@
-;; init-conda.el --- Initialize conda configurations.	-*- lexical-binding: t -*-
+;; init-theme.el --- Initialize theme configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Conda configurations.
+;;             UI configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,27 +26,10 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-custom))
+(use-package spacemacs-theme
+  :init (load-theme 'spacemacs-dark t))
 
-(use-package conda
-  :demand
-  :init (setq conda-anaconda-home my-anaconda-home)
-  :config
-  (setq conda-message-on-environment-switch nil)
-  ;; Use `.+' instead of `\\w+' as some char doesn't count as word
-  (defun new-conda--get-name-from-env-yml (filename)
-    (when filename
-      (let ((env-yml-contents (f-read-text filename)))
-        (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
-            (match-string 1 env-yml-contents)
-          ))))
-  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
-  ;; Hook open new file
-  (advice-add 'pop-to-buffer :after #'conda--switch-buffer-auto-activate)
-  (conda-env-autoactivate-mode t))
-
-(provide 'init-conda)
+(provide 'init-theme)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-conda.el ends here
+;;; init-theme.el ends here

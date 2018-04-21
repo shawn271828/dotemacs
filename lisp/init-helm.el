@@ -1,4 +1,4 @@
-;; init-helm.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-helm.el --- Initialize helm configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

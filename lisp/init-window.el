@@ -50,13 +50,18 @@
   (add-hook 'after-init-hook #'winner-mode))
 
 ;; Quickly switch windows
-(use-package ace-window
-  :demand
-  :bind ("M-o" . ace-window)
+(use-package switch-window
+  :bind (("M-o" . switch-window))
   :config
-  (setq aw-dispatch-always nil)
-  (set-face-attribute 'aw-leading-char-face nil
-                      :height 2.0 :foreground "Green"))
+  (setq switch-window-timeout nil)
+  (setq switch-window-shortcut-style 'quail))
+;; (use-package ace-window
+;;   :demand
+;;   :bind ("M-o" . ace-window)
+;;   :config
+;;   (setq aw-dispatch-always nil)
+;;   (set-face-attribute 'aw-leading-char-face nil
+;;                       :height 2.0 :foreground "Green"))
 
 ;; Easy window config switching
 ;; (use-package eyebrowse

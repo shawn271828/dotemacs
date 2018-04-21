@@ -1,4 +1,4 @@
-;; init-ivy --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-ivy --- Initialize ivy configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

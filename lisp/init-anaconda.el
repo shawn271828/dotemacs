@@ -1,4 +1,4 @@
-;; init-anaconda.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-anaconda.el --- Initialize anaconda configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

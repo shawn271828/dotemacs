@@ -1,4 +1,4 @@
-;; init-hippie-expand.el --- Initialize highlight configurations.	-*- lexical-binding: t -*-
+;; init-hippie-expand.el --- Initialize hippie-expand configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

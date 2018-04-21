@@ -1,4 +1,4 @@
-;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;;init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -72,6 +72,7 @@
 ;;   (setq powerline-default-separator 'nil)
 ;;   (setq powerline-image-apple-rgb sys/mac-x-p))
 (use-package smart-mode-line
+  :diminish eldoc-mode
   :init
   (setq sml/theme 'dark)
   (sml/setup))
