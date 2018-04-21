@@ -70,7 +70,7 @@
 
   (setq swiper-action-recenter t)
   (setq counsel-find-file-at-point nil)
-  (setq counsel-yank-pop-separator "\f")
+  (setq counsel-yank-pop-separator (concat "\n" (make-string 79 ?-) "\n"))
 
   (setq counsel-git-cmd "rg --files")
   ;; Use faster search tools: ripgrep or the silver search
