@@ -26,10 +26,9 @@
 ;;
 ;;; Code:
 
-(use-package persp-mode
-  :init
-  (setq persp-keymap-prefix (kbd "<f5>"))
-  (add-hook 'after-init-hook 'persp-mode))
+(use-package desktop+
+  :bind (("<f5>" . desktop+-load)
+         ("M-<f5>" . desktop+-create)))
 
 (provide 'init-restore)
 
