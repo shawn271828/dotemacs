@@ -54,26 +54,20 @@
           (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
               (match-string 1 env-yml-contents)
             ))))
-    (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
-
-    ;; Prepare for anaconda-mode
-    (defun shawn/setup-python-mode-variables (&rest r)
-      (let ((loc (car r)))
-        (if (not loc)
-            (setq python-shell-interpreter "python")
-          (setq python-shell-interpreter (concat loc "/bin/python"))
-          (setenv "PYTHONPATH" (concat loc "/lib/python3.6/site-packages")))))
-    (advice-add 'conda--set-python-shell-virtualenv-var :after #'shawn/setup-python-mode-variables)
-    
-    ;; Hook open new file
-    (advice-add 'pop-to-buffer :after #'conda--switch-buffer-auto-activate)
-    (conda-env-autoactivate-mode t))
+    (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml))
 
   ;; Python completion and backend
   (use-package anaconda-mode
     :init
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+    (add-hook 'python-mode-hook
+              '(lambda ()
+                 (progn
+                   (conda-env-activate-for-buffer)
+                   (setenv "PYTHONPATH"
+                           (concat (projectile-project-root) ":"
+                                   python-shell-virtualenv-root "/lib/python3.6/site-packages"))
+                   (anaconda-mode)
+                   (anaconda-eldoc-mode)))))
   (use-package company-anaconda
     :init
     (add-hook 'anaconda-mode-hook
