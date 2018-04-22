@@ -128,6 +128,10 @@
                                   ("program3" . 3)
                                   ("org-mode" . 6)
                                   ("read-book" . 8))))
+
+(use-package dimmer
+  :init (add-hook 'after-init-hook 'dimmer-mode))
+
 (provide 'init-ui)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

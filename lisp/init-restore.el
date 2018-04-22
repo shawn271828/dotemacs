@@ -29,33 +29,32 @@
 (eval-when-compile
   (require 'init-custom))
 
-(defun try-load-undo-tree-history (file-name)
-  (let ((name (undo-tree-make-history-save-file-name file-name)))
-    (when (file-exists-p name)
-      (undo-tree-load-history name t))))
+;; (defun try-load-undo-tree-history (file-name)
+;;   (let ((name (undo-tree-make-history-save-file-name file-name)))
+;;     (when (file-exists-p name)
+;;       (undo-tree-load-history name t))))
 
-(defun undo-tree-load-history-advice (&rest args)
-  (progn
-    (switch-to-buffer (nth 2 args))
-    (try-load-undo-tree-history (nth 1 args))
-    ))
+;; (defun undo-tree-load-history-advice (&rest args)
+;;   (progn
+;;     (switch-to-buffer (nth 2 args))
+;;     (try-load-undo-tree-history (nth 1 args))
+;;     ))
 
-(defun restore-current-buffer-undo ()
-  (try-load-undo-tree-history (buffer-file-name)))
+;; (defun restore-current-buffer-undo ()
+;;   (try-load-undo-tree-history (buffer-file-name)))
 
 ;; Save and restore status
 (use-package desktop
   :ensure nil
   :init (desktop-save-mode -1)
   :config
-  (add-hook 'desktop-after-read-hook (lambda () (run-with-timer 2 nil #'restore-current-buffer-undo)))
+  ;; (add-hook 'desktop-after-read-hook (lambda () (run-with-timer 2 nil #'restore-current-buffer-undo)))
   (setq desktop-restore-in-current-display nil)
   ;; Don't save/restore frames in tty
   (unless (display-graphic-p)
-    (setq desktop-restore-frames nil))
-  (with-eval-after-load 'undo-tree
-    (advice-add 'desktop-create-buffer :after #'undo-tree-load-history-advice))
-  )
+    (setq desktop-restore-frames nil)))
+;; (with-eval-after-load 'undo-tree
+;;   (advice-add 'desktop-create-buffer :after #'undo-tree-load-history-advice)))
 
 (provide 'init-restore)
 
