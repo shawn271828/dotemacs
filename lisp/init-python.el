@@ -32,7 +32,6 @@
 (use-package python
   :ensure nil
   :config
-
   ;; Setup flycheck pylint
   (setq flycheck-python-pylint-executable (concat my-anaconda-home "/bin/pylint"))
 
@@ -73,8 +72,10 @@
     (add-hook 'anaconda-mode-hook
               '(lambda () (progn
                        (make-local-variable 'company-backends)
-                       (push 'company-anaconda company-backends))))))
-  
+                       (push 'company-anaconda company-backends)))))
+
+  (use-package yapfify))
+
 (provide 'init-python)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

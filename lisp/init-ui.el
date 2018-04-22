@@ -59,7 +59,7 @@
   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'nil)
+  (setq powerline-default-separator 'arrow)
   (setq powerline-image-apple-rgb sys/mac-x-p))
 
 ;; Don't open a file in a new frame
@@ -97,7 +97,7 @@
 
 ;; Fill column indication
 (use-package fill-column-indicator
-  :bind ("M-<f12>" . fci-mode)
+  :bind ("<f12>" . fci-mode)
   :config
   (setq fci-rule-width 2)
   (setq fci-rule-color "green"))
