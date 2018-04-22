@@ -74,7 +74,6 @@
 (require 'init-ibuffer)
 (require 'init-highlight)
 (require 'init-window)
-;; (require 'init-helm)
 (require 'init-ivy)
 (require 'init-flycheck)
 (require 'init-projectile)

@@ -31,9 +31,14 @@
 
 (use-package conda
   :demand
-  :init (setq conda-anaconda-home my-anaconda-home)
+  :init
+  (setq conda-anaconda-home my-anaconda-home)
+  ;; Make spaceline show conda env as pyvenv (hack)
+  (defvaralias 'pyvenv-virtual-env-name 'conda-env-current-name)
+  (setq pyvenv-virtual-env "anaconda3")
   :config
   (setq conda-message-on-environment-switch nil)
+
   ;; Use `.+' instead of `\\w+' as some char doesn't count as word
   (defun new-conda--get-name-from-env-yml (filename)
     (when filename
@@ -42,6 +47,7 @@
             (match-string 1 env-yml-contents)
           ))))
   (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
+
   ;; Hook open new file
   (advice-add 'pop-to-buffer :after #'conda--switch-buffer-auto-activate)
   (conda-env-autoactivate-mode t))

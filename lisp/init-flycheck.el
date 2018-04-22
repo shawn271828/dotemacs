@@ -27,6 +27,7 @@
 ;;; Code:
 
 (use-package flycheck
+  :diminish
   :init (add-hook 'prog-mode-hook #'global-flycheck-mode)
   :config
   (setq flycheck-indication-mode 'left-fringe)

@@ -1,4 +1,4 @@
-;;init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -61,11 +61,6 @@
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (setq powerline-default-separator 'nil)
   (setq powerline-image-apple-rgb sys/mac-x-p))
-;; (use-package smart-mode-line
-;;   :diminish eldoc-mode
-;;   :init
-;;   (setq sml/theme 'dark)
-;;   (sml/setup))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
