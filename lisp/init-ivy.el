@@ -68,7 +68,7 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-plus)))
 
-  (setq swiper-action-recenter t)
+  (setq swiper-action-recenter nil)
   (setq counsel-find-file-at-point nil)
   (setq counsel-yank-pop-separator (concat "\n" (make-string 79 ?-) "\n"))
 

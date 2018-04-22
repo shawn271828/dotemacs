@@ -79,9 +79,7 @@
 (require 'init-projectile)
 (require 'init-hippie-expand)
 (require 'init-company)
-(require 'init-conda)
-;; (require 'init-anaconda)
-;; (require 'init-lsp)
+(require 'init-python)
 (require 'init-vcs)
 
 ;; Restore

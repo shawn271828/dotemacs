@@ -49,8 +49,8 @@
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
 ;; Nyan cat
-(use-package nyan-mode
-  :init (add-hook 'after-init-hook #'nyan-mode))
+;; (use-package nyan-mode
+;;   :init (add-hook 'after-init-hook #'nyan-mode))
 
 ;; Modeline
 (use-package spaceline-config
