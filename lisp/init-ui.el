@@ -53,19 +53,19 @@
   :init (add-hook 'after-init-hook #'nyan-mode))
 
 ;; Modeline
-;; (use-package spaceline-config
-;;   :ensure spaceline
-;;   :diminish eldoc-mode
-;;   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
-;;   :config
-;;   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-;;   (setq powerline-default-separator 'nil)
-;;   (setq powerline-image-apple-rgb sys/mac-x-p))
-(use-package smart-mode-line
+(use-package spaceline-config
+  :ensure spaceline
   :diminish eldoc-mode
-  :init
-  (setq sml/theme 'dark)
-  (sml/setup))
+  :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
+  :config
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
+  (setq powerline-default-separator 'nil)
+  (setq powerline-image-apple-rgb sys/mac-x-p))
+;; (use-package smart-mode-line
+;;   :diminish eldoc-mode
+;;   :init
+;;   (setq sml/theme 'dark)
+;;   (sml/setup))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)

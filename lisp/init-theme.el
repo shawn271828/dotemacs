@@ -26,11 +26,19 @@
 ;;
 ;;; Code:
 
-(use-package spacemacs-theme
+;; (use-package spacemacs-theme
+;;   :init
+;;   (setq spacemacs-theme-comment-bg nil)
+;;   (setq spacemacs-theme-comment-italic t)
+;;   (load-theme 'spacemacs-dark t))
+
+(use-package color-theme-sanityinc-tomorrow
   :init
-  (setq spacemacs-theme-comment-bg nil)
-  (setq spacemacs-theme-comment-italic t)
-  (load-theme 'spacemacs-dark t))
+  (load-theme 'sanityinc-tomorrow-eighties t))
+
+;; (use-package zenburn-theme
+;;   :init
+;;   (load-theme 'zenburn t))
 
 (provide 'init-theme)
 
