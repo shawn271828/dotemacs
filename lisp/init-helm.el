@@ -80,6 +80,7 @@
 (use-package helm-projectile
   :config (helm-projectile-on))
 
+(require 'wgrep-helm)
 (provide 'init-helm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

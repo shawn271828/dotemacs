@@ -241,10 +241,6 @@
 ;; (use-package easy-kill
 ;;   :bind ([remap kill-ring-save] . easy-kill))
 
-;; For modifying grep buffer
-(use-package wgrep
-  :defer 1)
-
 (provide 'init-edit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
