@@ -88,13 +88,13 @@
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
 ;; Cursor beacon
-;; (use-package beacon
-;;   :diminish beacon
-;;   :init (add-hook 'after-init-hook #'beacon-mode)
-;;   :config
-;;   (setq-default beacon-lighter "")
-;;   (setq-default beacon-size 10)
-;;   (setq-default beacon-color "IndianRed1"))
+(use-package beacon
+  :diminish beacon
+  :init (add-hook 'after-init-hook #'beacon-mode)
+  :config
+  (setq-default beacon-lighter "")
+  (setq-default beacon-size 20)
+  (setq-default beacon-color "IndianRed1"))
 
 ;; Fill column indication
 (use-package fill-column-indicator

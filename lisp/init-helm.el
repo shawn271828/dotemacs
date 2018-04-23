@@ -28,9 +28,8 @@
 
 (use-package helm
   :diminish helm-mode
-  :init (helm-mode 1)
-  :bind (("C-c h" . helm-command-prefix)
-         ("C-x b" . helm-mini)
+  :defer 1
+  :bind (("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
@@ -41,6 +40,8 @@
          ("M-o" . helm-occur-from-isearch))
   :config
   (require 'helm-config)
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
   (helm-autoresize-mode t)
   (setq helm-autoresize-min-height            25
         helm-autoresize-max-height            0
@@ -62,7 +63,9 @@
                      (let ((bg-color (face-background 'default nil)))
                        `(:background ,bg-color :foreground ,bg-color)))
         (setq-local cursor-type nil))))
-  (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe))
+  (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
+
+  (helm-mode 1))
 
   ;; golden-ratio ignore
   ;; (defun pl/helm-alive-p ()
