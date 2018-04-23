@@ -37,7 +37,7 @@
 
   ;; Conda environment management
   (use-package conda
-    :demand
+    :defer 1
     :init
     (setq conda-anaconda-home my-anaconda-home)
     ;; Make spaceline show conda env as pyvenv (hack)
@@ -71,8 +71,8 @@
     :init
     (add-hook 'anaconda-mode-hook
               '(lambda () (progn
-                       (make-local-variable 'company-backends)
-                       (push 'company-anaconda company-backends)))))
+                            (make-local-variable 'company-backends)
+                            (push 'company-anaconda company-backends)))))
 
   (use-package yapfify))
 

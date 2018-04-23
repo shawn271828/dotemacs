@@ -243,7 +243,7 @@
 
 ;; For modifying grep buffer
 (use-package wgrep
-  :demand)
+  :defer 1)
 
 (provide 'init-edit)
 

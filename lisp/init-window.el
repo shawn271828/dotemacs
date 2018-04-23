@@ -63,7 +63,7 @@
 ;;   (setq switch-window-shortcut-style 'quail))
 
 (use-package ace-window
-  :demand
+  :defer 1
   :bind ("M-o" . ace-window)
   :config
   (setq aw-dispatch-always nil)

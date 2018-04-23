@@ -27,7 +27,7 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :demand
+  :defer 1
   :config
   ;; imenu support
   (require 'lsp-imenu)
@@ -35,7 +35,7 @@
 
   ;; ui integration
   (use-package lsp-ui
-    :demand
+    :defer 1
     :init (add-hook 'lsp-mode-hook 'lsp-ui-mode)
     :config
     (defun sync-peek-face ()
@@ -49,7 +49,7 @@
 
   ;; company integration
   (use-package company-lsp
-    :demand
+    :defer 1
     (shawn/local-push-company-backend 'company-lsp))
 
   ;; Python
