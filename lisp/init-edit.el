@@ -152,10 +152,10 @@
   (add-hook 'minibuffer-setup-hook #'subword-mode))
 
 ;; Browse kill ring
-;; (use-package browse-kill-ring
-;;   :bind ("M-y" . browse-kill-ring)
-;;   :config
-;;   (setq browse-kill-ring-separator "\f"))
+(use-package browse-kill-ring
+  :bind ("M-y" . browse-kill-ring)
+  :config
+  (setq browse-kill-ring-separator "\f"))
 
 ;; Page break lines
 (use-package page-break-lines

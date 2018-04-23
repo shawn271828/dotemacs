@@ -28,12 +28,13 @@
 
 (use-package helm
   :diminish helm-mode
-  :defer 1
+  :ensure helm-descbinds
+  :init (helm-mode 1)
   :bind (("C-x b" . helm-mini)
+         ("C-h b" . helm-descbinds)
          ("C-h a" . helm-apropos)
-         ("M-y" . helm-show-kill-ring)
-         ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
+         ("M-x" . helm-M-x)
          :map helm-command-map
          ("M-o" . helm-occur)
          :map isearch-mode-map
@@ -43,15 +44,15 @@
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
   (helm-autoresize-mode t)
-  (setq helm-autoresize-min-height            25
+  (setq helm-autoresize-min-height            30
         helm-autoresize-max-height            0
         helm-split-window-inside-p            t
         helm-move-to-line-cycle-in-source     t
         helm-scroll-amount                    8
         helm-echo-input-in-header-line        t
         helm-M-x-fuzzy-match                  nil
-        helm-buffers-fuzzy-matching           t
-        helm-recentf-fuzzy-match              t)
+        helm-buffers-fuzzy-matching           nil
+        helm-recentf-fuzzy-match              nil)
 
   ;; minibuf hiding
   (defun spacemacs//helm-hide-minibuffer-maybe ()
@@ -65,22 +66,18 @@
         (setq-local cursor-type nil))))
   (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
 
-  (helm-mode 1))
+  ;; projectile integration
+  (use-package helm-projectile
+    :defer 1
+    :config
+    (use-package helm-ag)
+    (helm-projectile-on)
+    (with-eval-after-load 'projectile
+      (setq projectile-completion-system 'helm)))
 
-  ;; golden-ratio ignore
-  ;; (defun pl/helm-alive-p ()
-  ;;   (if (boundp 'helm-alive-p)
-  ;;       (symbol-value 'helm-alive-p)))
-  ;; (with-eval-after-load 'golden-ratio (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
+  ;; use wgrep from github
+  (require 'wgrep-helm))
 
-(use-package helm-descbinds
-  :bind (("C-h b" . helm-descbinds)
-         ("C-h w" . helm-descbinds)))
-
-(use-package helm-projectile
-  :config (helm-projectile-on))
-
-(require 'wgrep-helm)
 (provide 'init-helm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
