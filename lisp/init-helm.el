@@ -61,14 +61,14 @@
         (overlay-put ov 'face
                      (let ((bg-color (face-background 'default nil)))
                        `(:background ,bg-color :foreground ,bg-color)))
-        (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
         (setq-local cursor-type nil))))
+  (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe))
 
   ;; golden-ratio ignore
-  (defun pl/helm-alive-p ()
-    (if (boundp 'helm-alive-p)
-        (symbol-value 'helm-alive-p)))
-  (with-eval-after-load 'golden-ratio (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
+  ;; (defun pl/helm-alive-p ()
+  ;;   (if (boundp 'helm-alive-p)
+  ;;       (symbol-value 'helm-alive-p)))
+  ;; (with-eval-after-load 'golden-ratio (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
 
 (use-package helm-descbinds
   :bind (("C-h b" . helm-descbinds)

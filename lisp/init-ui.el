@@ -60,7 +60,8 @@
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (setq powerline-default-separator 'box)
-  (setq powerline-image-apple-rgb sys/mac-x-p))
+  (setq powerline-image-apple-rgb sys/mac-x-p)
+  (spaceline-helm-mode 1))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
@@ -124,8 +125,12 @@
                                   ("org-mode" . 6)
                                   ("read-book" . 8))))
 
+;; Dimmer
 (use-package dimmer
-  :init (add-hook 'after-init-hook 'dimmer-mode))
+  :init
+  ;; Do not dim helm and minibuffer
+  (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*")
+  (add-hook 'after-init-hook 'dimmer-mode))
 
 (provide 'init-ui)
 
