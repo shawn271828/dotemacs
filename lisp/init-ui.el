@@ -59,7 +59,7 @@
   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator 'box)
   (setq powerline-image-apple-rgb sys/mac-x-p))
 
 ;; Don't open a file in a new frame

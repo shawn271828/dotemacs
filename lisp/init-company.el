@@ -28,14 +28,11 @@
 
 (use-package company
   :diminish company-mode
-  :ensure helm-company
   :init
   (add-hook 'after-init-hook #'global-company-mode)
   :bind (("M-/" . company-complete)
-         ("C-M-/" . helm-company)
          :map company-active-map
          ("M-/" . company-other-backend)
-         ("C-M-/" . helm-company)
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous))
   :config

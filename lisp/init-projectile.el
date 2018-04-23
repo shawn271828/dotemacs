@@ -35,8 +35,7 @@
   :config
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name))))
   (setq projectile-sort-order 'recentf)
-  (setq projectile-use-git-grep t)
-  (setq projectile-completion-system 'helm))
+  (setq projectile-use-git-grep t))
 
 (provide 'init-projectile)
 

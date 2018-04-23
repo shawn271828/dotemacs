@@ -37,10 +37,6 @@
          ("C-x C-f" . helm-find-files)
          :map helm-command-map
          ("M-o" . helm-occur)
-         :map helm-map
-         ;; ("<tab>" . 'helm-execute-persistent-action)
-         ("C-i" . 'helm-execute-persistent-action)
-         ;; ("M-x" . 'helm-select-action)
          :map isearch-mode-map
          ("M-o" . helm-occur-from-isearch))
   :config
@@ -52,7 +48,7 @@
         helm-move-to-line-cycle-in-source     t
         helm-scroll-amount                    8
         helm-echo-input-in-header-line        t
-        helm-M-x-fuzzy-match                  t
+        helm-M-x-fuzzy-match                  nil
         helm-buffers-fuzzy-matching           t
         helm-recentf-fuzzy-match              t)
 

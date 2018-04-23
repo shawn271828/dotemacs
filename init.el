@@ -75,6 +75,7 @@
 (require 'init-highlight)
 (require 'init-window)
 (require 'init-ivy)
+;; (require 'init-helm)
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-hippie-expand)
