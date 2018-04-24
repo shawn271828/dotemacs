@@ -178,9 +178,35 @@
 ;; (define-key cua--region-keymap (kbd "C-S-x") nil)
 
 ;; Multiple cursors
-(use-package iedit
-  :bind (("C-;" . iedit-mode)
-         ("C-x r RET" . iedit-rectangle-mode)))
+(use-package multiple-cursors
+  :bind ("C-c m" . hydra-multiple-cursors/body)
+  :config
+  (defhydra hydra-multiple-cursors (:hint nil)
+    "
+^Mark^            ^Unmark^        ^Others^
+-----------------------------------------------------^
+_m_: smart        _N_: forward    _s_: sort region
+_n_: forward      _P_: backward   _S_: reverse region
+_p_: backward     _M-n_: skip     _i_: insert number
+_r_: rectangle    _M-p_: skip     _I_: insert string
+"
+    ("m" mc/mark-all-dwim :exit t)
+    ("l" mc/edit-lines :exit t)
+    ("n" mc/mark-next-like-this)
+    ("N" mc/skip-to-next-like-this)
+    ("M-n" mc/unmark-next-like-this)
+    ("p" mc/mark-previous-like-this)
+    ("P" mc/skip-to-previous-like-this)
+    ("M-p" mc/unmark-previous-like-this)
+    ("r" set-rectangular-region-anchor :exit t)
+    ("s" mc/sort-regions :exit t)
+    ("S" mc/reverse-regions :exit t)
+    ("i" mc/insert-numbers :exit t)
+    ("I" mc/insert-letters :exit t)
+    ("<mouse-1>" mc/add-cursor-on-click)
+    ("<down-mouse-1>" ignore)
+    ("<drag-mouse-1>" ignore)
+    ("q" nil "quit")))
 
 ;; Comment
 (use-package comment-dwim-2

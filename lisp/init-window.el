@@ -30,7 +30,7 @@
 (use-package ace-window
   :ensure transpose-frame
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("C-c SPC" . hydra-layout-manager/body)
+  :bind (("C-c w" . hydra-layout-manager/body)
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
