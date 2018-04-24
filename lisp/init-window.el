@@ -28,13 +28,13 @@
 
 ;; Windows management
 (use-package ace-window
-  :ensure transpose-frame
   :init (add-hook 'after-init-hook #'winner-mode)
   :bind (("C-c w" . hydra-layout-manager/body)
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
   (use-package winner :demand)
+  (use-package transpose-frame :demand)
   ;; Setup ace-window
   (setq aw-dispatch-always nil)
   (set-face-attribute 'aw-leading-char-face nil
@@ -55,7 +55,7 @@
           "*Kill Ring*"))
 
   ;; Layout hydra
-  (defhydra hydra-layout-manager (:color amaranth)
+  (defhydra hydra-layout-manager (:hint nil)
     "Layout Manager"
     ("h" hydra-move-splitter-left)
     ("j" hydra-move-splitter-down)
