@@ -123,6 +123,9 @@
       (ivy-set-display-transformer 'counsel-projectile-switch-to-buffer
                                    'ivy-rich-switch-buffer-transformer)))
 
+  ;; Use wgrep from github
+  (require 'wgrep)
+
   ;; Ivy integration for Projectile
   (use-package counsel-projectile
     :init (counsel-projectile-mode 1))
