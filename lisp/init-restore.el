@@ -27,8 +27,8 @@
 ;;; Code:
 
 (use-package desktop+
-  :bind (("<f5>" . desktop+-load)
-         ("M-<f5>" . desktop+-create)))
+  :bind (("<f2>" . desktop+-load)
+         ("M-<f2>" . desktop+-create)))
 
 (provide 'init-restore)
 

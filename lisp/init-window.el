@@ -26,15 +26,20 @@
 ;;
 ;;; Code:
 
-;; Directional window-selection routines
-;; (use-package windmove
-;;   :ensure nil
-;;   :init (add-hook 'after-init-hook #'windmove-default-keybindings))
-
-;; Restore old window configurations
-(use-package winner
-  :ensure nil
-  :init
+;; Windows management
+(use-package ace-window
+  :ensure transpose-frame
+  :init (add-hook 'after-init-hook #'winner-mode)
+  :bind (("C-c SPC" . hydra-layout-manager/body)
+         ("M-o" . ace-window))
+  :config
+  (use-package windmove :demand)
+  (use-package winner :demand)
+  ;; Setup ace-window
+  (setq aw-dispatch-always nil)
+  (set-face-attribute 'aw-leading-char-face nil
+                      :height 2.0 :foreground "Green")
+  ;; Winner settings
   (setq winner-boring-buffers
         '("*Completions*"
           "*Compile-Log*"
@@ -48,49 +53,56 @@
           "*Ibuffer*"
           "*esh command on file*"
           "*Kill Ring*"))
-  (add-hook 'after-init-hook #'winner-mode))
 
-;; Quickly switch windows
-;; (use-package switch-window
-;;   :bind (("M-o" . switch-window))
-;;   :config
-;;   (require 'switch-window-mvborder)
-;;   (define-key switch-window-extra-map (kbd "k") 'switch-window-mvborder-up)
-;;   (define-key switch-window-extra-map (kbd "j") 'switch-window-mvborder-down)
-;;   (define-key switch-window-extra-map (kbd "h") 'switch-window-mvborder-left)
-;;   (define-key switch-window-extra-map (kbd "l") 'switch-window-mvborder-right)
-;;   (setq switch-window-timeout nil)
-;;   (setq switch-window-shortcut-style 'quail))
+  ;; Layout hydra
+  (defhydra hydra-layout-manager (:color amaranth)
+    "Layout Manager"
+    ("h" hydra-move-splitter-left)
+    ("j" hydra-move-splitter-down)
+    ("k" hydra-move-splitter-up)
+    ("l" hydra-move-splitter-right)
+    ("<left>" winner-undo)
+    ("<right>" winner-redo)
+    ("t" transpose-frame)
+    ("f" flop-frame)
+    ("F" flip-frame)
+    ("r" rotate-frame-clockwise)
+    ("R" rotate-frame-anticlockwise)
+    ("o" ace-window)
+    ("q" nil "quit"))
 
-(use-package ace-window
-  :defer 1
-  :bind ("M-o" . ace-window)
-  :config
-  (setq aw-dispatch-always nil)
-  (set-face-attribute 'aw-leading-char-face nil
-                      :height 2.0 :foreground "Green"))
+  ;; splitter helper functions
+  (defun hydra-move-splitter-left (arg)
+    "Move window splitter left."
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'right))
+        (shrink-window-horizontally arg)
+      (enlarge-window-horizontally arg)))
 
-;; Easy window config switching
-;; (use-package eyebrowse
-;;   :init
-;;   (progn
-;;     (setq eyebrowse-keymap-prefix (kbd "C-c w"))
-;;     (add-hook 'after-init-hook #'eyebrowse-mode)))
+  (defun hydra-move-splitter-right (arg)
+    "Move window splitter right."
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'right))
+        (enlarge-window-horizontally arg)
+      (shrink-window-horizontally arg)))
 
-;; Golden ratio
-;; (use-package golden-ratio
-;;   :diminish golden-ratio-mode
-;;   :init (add-hook 'after-init-hook #'golden-ratio-mode)
-;;   :config
-;;   (add-to-list 'golden-ratio-extra-commands 'ace-window))
+  (defun hydra-move-splitter-up (arg)
+    "Move window splitter up."
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'up))
+        (enlarge-window arg)
+      (shrink-window arg)))
 
-;; Transpose window
-(use-package transpose-frame
-  :bind (("C-c t t" . transpose-frame)  ;swap x and y axis
-         ("C-c t f" . flip-frame)       ;flip vertically
-         ("C-c t F" . flop-frame)       ;flip horizontally
-         ("C-c t r" . rotate-frame-clockwise)
-         ("C-c t R" . rotate-frame-anticlockwise)))
+  (defun hydra-move-splitter-down (arg)
+    "Move window splitter down."
+    (interactive "p")
+    (if (let ((windmove-wrap-around))
+          (windmove-find-other-window 'up))
+        (shrink-window arg)
+      (enlarge-window arg))))
 
 (provide 'init-window)
 
