@@ -28,16 +28,18 @@
 
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (("C-s" . counsel-grep-or-swiper)
+  :bind (("C-s" . swiper)
          ("C-S-s" . swiper-all)
          ("C-c C-r" . ivy-resume)
          ("C-c c v" . ivy-push-view)
          ("C-c c V" . ivy-pop-view)
          :map counsel-mode-map
-         ("<f1> a" . counsel-apropos)
-         ("<f1> f" . counsel-describe-function)
-         ("<f1> v" . counsel-describe-variable)
-         ("<f1> u" . counsel-unicode-char) ; Insert unicode char
+         ([remap swiper] . counsel-grep-or-swiper)
+         ([remap apropos-command] . counsel-apropos)
+         ([remap describe-function] . counsel-describe-function)
+         ([remap describe-variable] . counsel-describe-variable)
+         ("C-h u" . counsel-unicode-char) ; Insert unicode char
+         ("<f1> u" . counsel-unicode-char)
 
          ("C-c c r" . counsel-recentf)  ; Find recent files
          ("C-c c f" . counsel-fzf)      ; Find files by fuzzy matching recursively
@@ -46,7 +48,8 @@
          ("C-c c h" . counsel-command-history) ; Command history
          ("C-c c m" . counsel-mark-ring)       ; Pop up marks
 
-         ("C-c c s" . counsel-rg)        ; Search current directory using ag
+         ("C-c c a" . counsel-ag)        ; Search current directory using ag
+         ("C-c c s" . counsel-rg)        ; Search current directory using rg
          ("C-c c j" . counsel-git-grep)  ; Search current git repository
 
          :map counsel-find-file-map
