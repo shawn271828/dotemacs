@@ -55,7 +55,7 @@
           "*Kill Ring*"))
 
   ;; Layout hydra
-  (defhydra hydra-layout-manager (:hint nil)
+  (defhydra hydra-layout-manager ()
     "Layout Manager"
     ("h" hydra-move-splitter-left)
     ("j" hydra-move-splitter-down)
