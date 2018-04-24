@@ -32,6 +32,13 @@
 (use-package python
   :ensure nil
   :config
+  ;; Disable readline based native completion
+  (setq python-shell-completion-native-enable nil)
+  (add-hook 'inferior-python-mode-hook
+            (lambda ()
+              (bind-key "C-c C-z"
+                        'kill-buffer-and-window inferior-python-mode-map)
+              (process-query-on-exit-flag (get-process "Python"))))
   ;; Setup flycheck pylint
   (setq flycheck-python-pylint-executable (concat my-anaconda-home "/bin/pylint"))
 
@@ -57,22 +64,20 @@
 
   ;; Python completion and backend
   (use-package anaconda-mode
-    :init
-    (add-hook 'python-mode-hook
-              '(lambda ()
-                 (progn
-                   (conda-env-activate-for-buffer)
-                   (setenv "PYTHONPATH"
-                           (concat (projectile-project-root) ":"
-                                   python-shell-virtualenv-root "/lib/python3.6/site-packages"))
-                   (anaconda-mode)
-                   (anaconda-eldoc-mode)))))
+    :diminish anaconda-mode
+    :init (add-hook 'python-mode-hook
+                    '(lambda ()
+                       (progn
+                         (conda-env-activate-for-buffer)
+                         (setenv "PYTHONPATH"
+                                 (concat (projectile-project-root) ":"
+                                         python-shell-virtualenv-root "/lib/python3.6/site-packages"))
+                         (anaconda-mode)
+                         (anaconda-eldoc-mode)))))
+
   (use-package company-anaconda
-    :init
-    (add-hook 'anaconda-mode-hook
-              '(lambda () (progn
-                            (make-local-variable 'company-backends)
-                            (push 'company-anaconda company-backends)))))
+    :defines company-backends
+    :init (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends))
 
   (use-package yapfify))
 

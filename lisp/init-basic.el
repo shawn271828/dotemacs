@@ -38,7 +38,9 @@
 (when sys/macp
   ;; make Mac's cmd key as meta
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'hyper))
+  (setq mac-option-modifier 'hyper)
+  ;; !!! Very important for emacs-macport !!!
+  (setq mac-pass-command-to-system nil))
 
 ;; Environment
 (when (or sys/mac-x-p sys/linux-x-p)

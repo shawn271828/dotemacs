@@ -1,9 +1,9 @@
-;; init-flycheck.el --- Initialize flycheck configurations.	-*- lexical-binding: t -*-
+;; init-yasnippet.el --- Initialize yasnippet configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Flycheck configurations.
+;;             Some configurations of yasnippet mode.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,23 +26,12 @@
 ;;
 ;;; Code:
 
-(use-package flycheck
-  :init (add-hook 'prog-mode-hook #'global-flycheck-mode)
-  :config
-  (setq flycheck-indication-mode 'left-fringe)
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :init (add-hook 'after-init-hook #'yas-global-mode)
+  :config (use-package yasnippet-snippets))
 
-;; Display Flycheck errors in GUI tooltips
-(use-package flycheck-pos-tip
-  :init (flycheck-pos-tip-mode 1)
-  :config (setq flycheck-pos-tip-timeout 15))
-
-;; Colorful Flycheck mode line
-(use-package flycheck-color-mode-line
-  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
-
-(provide 'init-flycheck)
+(provide 'init-yasnippet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-flycheck.el ends here
+;;; init-yasnippet.el ends here

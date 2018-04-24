@@ -80,6 +80,7 @@
 (require 'init-projectile)
 (require 'init-hippie-expand)
 (require 'init-company)
+(require 'init-yasnippet)
 (require 'init-python)
 (require 'init-vcs)
 
