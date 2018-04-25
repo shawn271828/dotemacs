@@ -224,12 +224,14 @@
     "
 ^Mark^            ^Unmark^        ^Others^
 -----------------------------------------------------^
-_m_: smart        _N_: forward    _s_: sort region
-_n_: forward      _P_: backward   _S_: reverse region
-_p_: backward     _M-n_: skip     _i_: insert number
-_r_: rectangle    _M-p_: skip     _I_: insert string
+_a_: all          _N_: forward    _s_: sort region
+_A_: regexp       _P_: backward   _S_: reverse region
+_n_: forward      _M-n_: skip     _i_: insert number
+_p_: backward     _M-p_: skip     _I_: insert string
+_r_: rectangle
 "
-    ("m" mc/mark-all-dwim :exit t)
+    ("a" mc/mark-all-like-this :exit t)
+    ("A" mc/mark-all-in-region-regexp :exit t)
     ("l" mc/edit-lines :exit t)
     ("n" mc/mark-next-like-this)
     ("N" mc/skip-to-next-like-this)
