@@ -72,9 +72,9 @@
 
   ;; projectile integration
   (use-package helm-projectile
-    :ensure helm-ag
-    :defer 1
+    :demand
     :config
+    (use-package helm-ag)
     (helm-projectile-on)
     (with-eval-after-load 'projectile
       (setq projectile-completion-system 'helm)))
