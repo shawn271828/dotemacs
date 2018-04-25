@@ -28,6 +28,7 @@
 
 ;; Windows management
 (use-package ace-window
+  :ensure hydra
   :init (add-hook 'after-init-hook #'winner-mode)
   :bind (("C-c w" . hydra-layout-manager/body)
          ("M-o" . ace-window))
