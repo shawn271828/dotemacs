@@ -32,7 +32,9 @@
   :init (helm-mode 1)
   :bind (("C-x b" . helm-mini)
          ("C-h b" . helm-descbinds)
+         ("<f1> b" . helm-descbinds)
          ("C-h a" . helm-apropos)
+         ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          :map helm-command-map
@@ -44,17 +46,19 @@
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
   (helm-autoresize-mode t)
-  (setq helm-autoresize-min-height            30
+  (setq helm-autoresize-min-height            25
         helm-autoresize-max-height            0
         helm-split-window-inside-p            t
-        helm-move-to-line-cycle-in-source     t
-        helm-scroll-amount                    8
+        helm-move-to-line-cycle-in-source     nil
+        helm-scroll-amount                    12
         helm-echo-input-in-header-line        t
         helm-M-x-fuzzy-match                  nil
         helm-buffers-fuzzy-matching           nil
         helm-recentf-fuzzy-match              nil)
+  (with-eval-after-load 'spaceline-config
+    (spaceline-helm-mode))
 
-  ;; minibuf hiding
+  ;; minibuffer hiding
   (defun spacemacs//helm-hide-minibuffer-maybe ()
     "Hide minibuffer in Helm session if we use the header line as input field."
     (when (with-helm-buffer helm-echo-input-in-header-line)
@@ -68,9 +72,9 @@
 
   ;; projectile integration
   (use-package helm-projectile
+    :ensure helm-ag
     :defer 1
     :config
-    (use-package helm-ag)
     (helm-projectile-on)
     (with-eval-after-load 'projectile
       (setq projectile-completion-system 'helm)))

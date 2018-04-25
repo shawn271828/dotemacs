@@ -60,9 +60,7 @@
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
   (setq powerline-default-separator 'box)
-  (setq powerline-image-apple-rgb sys/mac-x-p)
-  ;; (spaceline-helm-mode 1)
-  )
+  (setq powerline-image-apple-rgb sys/mac-x-p))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
