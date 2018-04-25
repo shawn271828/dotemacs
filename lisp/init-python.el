@@ -31,6 +31,8 @@
 
 (use-package python
   :ensure nil
+  :init (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
+  :bind (:map python-mode-map ("<f11>" . toggle-pylint-checker))
   :config
   ;; Disable readline based native completion
   (setq python-shell-completion-native-enable nil)
@@ -41,7 +43,13 @@
               (process-query-on-exit-flag (get-process "Python"))))
   ;; Setup flycheck pylint
   (setq flycheck-python-pylint-executable (concat my-anaconda-home "/bin/pylint"))
-
+  (defun toggle-pylint-checker ()
+    (interactive)
+    (if (flycheck-disabled-checker-p 'python-pylint)
+        (flycheck-disable-checker 'python-pylint t)
+      (flycheck-disable-checker 'python-pylint nil))
+    (flycheck-buffer))
+  
   ;; Conda environment management
   (use-package conda
     :defer 1
