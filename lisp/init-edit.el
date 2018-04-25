@@ -181,6 +181,8 @@
       (define-key m (kbd "C-<left>") 'paredit-forward-barf-sexp)
       (define-key m (kbd "C-<right>") 'paredit-forward-slurp-sexp)
       (define-key m (kbd "M-<left>") 'paredit-wrap-round)
+      (define-key m (kbd "M-(") 'paredit-wrap-angled)
+      (define-key m (kbd "M-(") 'paredit-wrap-round)
       (define-key m (kbd "M-[") 'paredit-wrap-square)
       (define-key m (kbd "M-{") 'paredit-wrap-curly)
       (define-key m (kbd "(") 'paredit-open-round)
@@ -202,7 +204,7 @@
   (define-minor-mode paredit-everywhere-mode
     "A cut-down version of paredit which can be used in non-lisp buffers."
     nil
-    " Par-"
+    "Par"
     paredit-everywhere-mode-map)
 
   (defun turn-off-paredit-everywhere-mode ()
