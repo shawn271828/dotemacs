@@ -333,6 +333,9 @@ _r_: rectangle
   :diminish super-save-mode
   :init (add-hook 'after-init-hook #'super-save-mode))
 
+;; Bookmark plus from github
+(require 'bookmark+)
+
 ;; Easy kill
 ;; (use-package easy-kill
 ;;   :bind ([remap kill-ring-save] . easy-kill))
