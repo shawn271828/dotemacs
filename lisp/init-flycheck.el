@@ -40,9 +40,9 @@
     ("p" flycheck-previous-error "previous error")))
 
 ;; Display Flycheck errors in GUI tooltips
-(use-package flycheck-pos-tip
-  :init (flycheck-pos-tip-mode 1)
-  :config (setq flycheck-pos-tip-timeout 15))
+;; (use-package flycheck-pos-tip
+;;   :init (flycheck-pos-tip-mode 1)
+;;   :config (setq flycheck-pos-tip-timeout 15))
 
 ;; Colorful Flycheck mode line
 (use-package flycheck-color-mode-line

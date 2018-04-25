@@ -31,7 +31,10 @@
 
 (use-package python
   :ensure nil
-  :init (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
+  :init
+  (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
+  (setq flycheck-python-pycodestyle-executable (concat my-anaconda-home "/bin/pycodestyle"))
+  (setq flycheck-python-pyflakes-executable (concat my-anaconda-home "/bin/pyflakes"))
   :config
   ;; Disable readline based native completion
   (setq python-shell-completion-native-enable nil)
@@ -41,28 +44,28 @@
                         'kill-buffer-and-window inferior-python-mode-map)
               (process-query-on-exit-flag (get-process "Python"))))
 
-  ;; Pyflakes
-  (flycheck-define-checker python-pyflakes
-    "Pyflakes"
-    :command ("pyflakes" source-inplace)
-    :error-patterns
-    ((error line-start (file-name) ":" line ":" (message) line-end))
-    :modes python-mode)
+  (with-eval-after-load 'flycheck
+    ;; Pyflakes
+    (flycheck-define-checker python-pyflakes
+      "Pyflakes"
+      :command ("pyflakes" source-inplace)
+      :error-patterns
+      ((error line-start (file-name) ":" line ":" (message) line-end))
+      :modes python-mode)
 
-  ;; Pycodestyle
-  (flycheck-define-checker python-pycodestyle
-    "Pycodestyle"
-    :command ("pycodestyle" source-inplace)
-    :error-patterns
-    ((error line-start (file-name) ":" line ":" column ":" (message) line-end))
-    :modes python-mode)
+    ;; Pycodestyle
+    (flycheck-define-checker python-pycodestyle
+      "Pycodestyle"
+      :command ("pycodestyle" source-inplace)
+      :error-patterns
+      ((error line-start (file-name) ":" line ":" column ":" (message) line-end))
+      :modes python-mode)
 
-  ;; Add to flycheck
-  (setq flycheck-python-pycodestyle-executable (concat my-anaconda-home "/bin/pycodestyle"))
-  (setq flycheck-python-pyflakes-executable (concat my-anaconda-home "/bin/pyflakes"))
-  (add-to-list 'flycheck-checkers 'python-pycodestyle)
-  (add-to-list 'flycheck-checkers 'python-pyflakes)
-  (flycheck-add-next-checker 'python-pyflakes '(t . python-pycodestyle)))
+    ;; Add to flycheck
+    (add-to-list 'flycheck-checkers 'python-pycodestyle)
+    (add-to-list 'flycheck-checkers 'python-pyflakes)
+    ;; Make them working together
+    (flycheck-add-next-checker 'python-pyflakes '(t . python-pycodestyle))))
 
 ;; Conda environment management
 (use-package conda
