@@ -197,7 +197,7 @@
       (define-key m (kbd "C-<up>") 'paredit-splice-sexp)
       m)
     "Keymap for `paredit-everywhere-mode'.")
-  
+
   ;; Define minor mode
   (define-minor-mode paredit-everywhere-mode
     "A cut-down version of paredit which can be used in non-lisp buffers."
