@@ -168,14 +168,53 @@
   :ensure nil
   :init (add-hook 'after-init-hook #'electric-pair-mode))
 
+(use-package paredit
+  :demand
+  :init
+  (add-hook 'prog-mode-hook #'paredit-everywhere-mode)
+  (add-hook 'css-mode #'paredit-everywhere-mode)
+  :config
+  (defvar paredit-everywhere-mode-map
+    (let ((m (make-sparse-keymap)))
+      ;; (define-key m (kbd "DEL") 'paredit-backward-delete)
+      ;; (define-key m (kbd "C-d") 'paredit-forward-delete)
+      (define-key m (kbd "C-<left>") 'paredit-forward-barf-sexp)
+      (define-key m (kbd "C-<right>") 'paredit-forward-slurp-sexp)
+      (define-key m (kbd "M-<left>") 'paredit-wrap-round)
+      (define-key m (kbd "M-[") 'paredit-wrap-square)
+      (define-key m (kbd "M-{") 'paredit-wrap-curly)
+      (define-key m (kbd "(") 'paredit-open-round)
+      (define-key m (kbd "[") 'paredit-open-square)
+      (define-key m (kbd "{") 'paredit-open-curly)
+      (define-key m (kbd "<") 'paredit-open-angled)
+      (define-key m (kbd "M-)") 'paredit-close-round)
+      (define-key m (kbd "M-]") 'paredit-close-square)
+      (define-key m (kbd "M-}") 'paredit-close-curly)
+      (define-key m (kbd "M->") 'paredit-close-angled)
+      (define-key m (kbd "M-\"") 'paredit-meta-doublequote)
+      (define-key m (kbd "M-S") 'paredit-split-sexp)
+      (define-key m (kbd "M-J") 'paredit-join-sexps)
+      (define-key m (kbd "C-<up>") 'paredit-splice-sexp)
+      m)
+    "Keymap for `paredit-everywhere-mode'.")
+  
+  ;; Define minor mode
+  (define-minor-mode paredit-everywhere-mode
+    "A cut-down version of paredit which can be used in non-lisp buffers."
+    nil
+    " Par-"
+    paredit-everywhere-mode-map)
+
+  (defun turn-off-paredit-everywhere-mode ()
+    "Disable `paredit-everywhere-mode'."
+    (paredit-everywhere-mode 0))
+
+  ;; Disable paredit-everywhere when full paredit is enabled
+  (add-hook 'paredit-mode-hook #'turn-off-paredit-everywhere-mode))
+
 ;; Expand region
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
-
-;; Rectange selections (disable due to incompatibility with undo)
-;; (cua-selection-mode t)
-;; (define-key cua--region-keymap (kbd "C-S-c") nil)
-;; (define-key cua--region-keymap (kbd "C-S-x") nil)
 
 ;; Multiple cursors
 (use-package multiple-cursors
