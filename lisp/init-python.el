@@ -32,7 +32,6 @@
 (use-package python
   :ensure nil
   :init (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
-  :bind (:map python-mode-map ("<f11>" . toggle-pylint-checker))
   :config
   ;; Disable readline based native completion
   (setq python-shell-completion-native-enable nil)
@@ -41,53 +40,69 @@
               (bind-key "C-c C-z"
                         'kill-buffer-and-window inferior-python-mode-map)
               (process-query-on-exit-flag (get-process "Python"))))
-  ;; Setup flycheck pylint
-  (setq flycheck-python-pylint-executable (concat my-anaconda-home "/bin/pylint"))
-  (defun toggle-pylint-checker ()
-    (interactive)
-    (if (flycheck-disabled-checker-p 'python-pylint)
-        (flycheck-disable-checker 'python-pylint t)
-      (flycheck-disable-checker 'python-pylint nil))
-    (flycheck-buffer))
-  
-  ;; Conda environment management
-  (use-package conda
-    :defer 1
-    :init
-    (setq conda-anaconda-home my-anaconda-home)
-    ;; Make spaceline show conda env as pyvenv (hack)
-    (defvaralias 'pyvenv-virtual-env-name 'conda-env-current-name)
-    (setq pyvenv-virtual-env "anaconda3")
-    :config
-    (setq conda-message-on-environment-switch nil)
 
-    ;; Use `.+' instead of `\\w+' as some char doesn't count as word
-    (defun new-conda--get-name-from-env-yml (filename)
-      (when filename
-        (let ((env-yml-contents (f-read-text filename)))
-          (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
-              (match-string 1 env-yml-contents)
-            ))))
-    (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml))
+  ;; Pyflakes
+  (flycheck-define-checker python-pyflakes
+    "Pyflakes"
+    :command ("pyflakes" source-inplace)
+    :error-patterns
+    ((error line-start (file-name) ":" line ":" (message) line-end))
+    :modes python-mode)
 
-  ;; Python completion and backend
-  (use-package anaconda-mode
-    :diminish anaconda-mode
-    :init (add-hook 'python-mode-hook
-                    '(lambda ()
-                       (progn
-                         (conda-env-activate-for-buffer)
-                         (setenv "PYTHONPATH"
-                                 (concat (projectile-project-root) ":"
-                                         python-shell-virtualenv-root "/lib/python3.6/site-packages"))
-                         (anaconda-mode)
-                         (anaconda-eldoc-mode)))))
+  ;; Pycodestyle
+  (flycheck-define-checker python-pycodestyle
+    "Pycodestyle"
+    :command ("pycodestyle" source-inplace)
+    :error-patterns
+    ((error line-start (file-name) ":" line ":" column ":" (message) line-end))
+    :modes python-mode)
 
-  (use-package company-anaconda
-    :defines company-backends
-    :init (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends))
+  ;; Add to flycheck
+  (setq flycheck-python-pycodestyle-executable (concat my-anaconda-home "/bin/pycodestyle"))
+  (setq flycheck-python-pyflakes-executable (concat my-anaconda-home "/bin/pyflakes"))
+  (add-to-list 'flycheck-checkers 'python-pycodestyle)
+  (add-to-list 'flycheck-checkers 'python-pyflakes)
+  (flycheck-add-next-checker 'python-pyflakes '(t . python-pycodestyle)))
 
-  (use-package yapfify))
+;; Conda environment management
+(use-package conda
+  :defer 1
+  :init
+  (setq conda-anaconda-home my-anaconda-home)
+  ;; Make spaceline show conda env as pyvenv (hack)
+  (defvaralias 'pyvenv-virtual-env-name 'conda-env-current-name)
+  (setq pyvenv-virtual-env "anaconda3")
+  :config
+  (setq conda-message-on-environment-switch nil)
+
+  ;; Use `.+' instead of `\\w+' as some char doesn't count as word
+  (defun new-conda--get-name-from-env-yml (filename)
+    (when filename
+      (let ((env-yml-contents (f-read-text filename)))
+        (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
+            (match-string 1 env-yml-contents)
+          ))))
+  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml))
+
+;; Python completion and backend
+(use-package anaconda-mode
+  :diminish anaconda-mode
+  :init (add-hook 'python-mode-hook
+                  '(lambda ()
+                     (progn
+                       (conda-env-activate-for-buffer)
+                       (setenv "PYTHONPATH"
+                               (concat (projectile-project-root) ":"
+                                       python-shell-virtualenv-root "/lib/python3.6/site-packages"))
+                       (anaconda-mode)
+                       (anaconda-eldoc-mode)))))
+
+(use-package company-anaconda
+  :defines company-backends
+  :init (with-eval-after-load 'company
+          (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))
+
+(use-package yapfify)
 
 (provide 'init-python)
 
