@@ -27,17 +27,12 @@
 ;;; Code:
 
 (use-package flycheck
-  :ensure hydra
+  :bind ("<f11>" . flycheck-list-errors)
   :init (add-hook 'prog-mode-hook #'global-flycheck-mode)
-  :bind ("C-c f" . hydra-flycheck/body)
   :config
   (setq flycheck-indication-mode 'left-fringe)
   (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (defhydra hydra-flycheck ()
-    "Flycheck"
-    ("n" flycheck-next-error "next error")
-    ("p" flycheck-previous-error "previous error")))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 ;; Display Flycheck errors in GUI tooltips
 ;; (use-package flycheck-pos-tip

@@ -92,13 +92,13 @@
   :diminish anaconda-mode
   :init (add-hook 'python-mode-hook
                   '(lambda ()
-                     (progn
-                       (conda-env-activate-for-buffer)
-                       (setenv "PYTHONPATH"
-                               (concat (projectile-project-root) ":"
-                                       python-shell-virtualenv-root "/lib/python3.6/site-packages"))
-                       (anaconda-mode)
-                       (anaconda-eldoc-mode)))))
+                     (setq python-indent-offset 4)
+                     (conda-env-activate-for-buffer)
+                     (setenv "PYTHONPATH"
+                             (concat (projectile-project-root) ":"
+                                     python-shell-virtualenv-root "/lib/python3.6/site-packages"))
+                     (anaconda-mode)
+                     (anaconda-eldoc-mode))))
 
 (use-package company-anaconda
   :defines company-backends
