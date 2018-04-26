@@ -90,15 +90,21 @@
 ;; Python completion and backend
 (use-package anaconda-mode
   :diminish anaconda-mode
+  :bind ("<f5>" . conda-activate)
   :init (add-hook 'python-mode-hook
                   '(lambda ()
                      (setq python-indent-offset 4)
-                     (conda-env-activate-for-buffer)
-                     (setenv "PYTHONPATH"
-                             (concat (projectile-project-root) ":"
-                                     python-shell-virtualenv-root "/lib/python3.6/site-packages"))
                      (anaconda-mode)
-                     (anaconda-eldoc-mode))))
+                     (anaconda-eldoc-mode)))
+  :config
+  (defun conda-activate ()
+    (interactive)
+    (setenv "PYTHONPATH"
+            (concat (projectile-project-root) ":"
+                    python-shell-virtualenv-root "/lib/python3.6/site-packages"))
+    (conda-env-activate-for-buffer)
+    (unless conda-project-env-name
+      (conda-env-activate))))
 
 (use-package company-anaconda
   :defines company-backends
