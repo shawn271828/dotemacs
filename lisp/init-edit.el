@@ -249,7 +249,9 @@ _r_: rectangle
   (setq mc/cmds-to-run-for-all
         '(mwim-beginning-of-code-or-line
           mwim-end-of-code-or-line
-          hungry-delete-backward))
+          hungry-delete-backward
+          hungry-delete-forward
+          keyboard-escape-quit))
 
   (setq mc/cmds-to-run-once
         '(counsel-M-x

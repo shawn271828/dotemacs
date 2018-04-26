@@ -30,25 +30,28 @@
   :diminish ivy-mode counsel-mode
   :bind (("C-s" . swiper)
          ("C-S-s" . swiper-all)
-         ("C-c C-r" . ivy-resume)
-         ("C-c c v" . ivy-push-view)
-         ("C-c c V" . ivy-pop-view)
+         ("C-c C-i" . ivy-resume)
+         ("C-c i v" . ivy-push-view)
+         ("C-c i V" . ivy-pop-view)
 
          :map counsel-mode-map
          ([remap swiper] . counsel-grep-or-swiper)
-         ([remap apropos-command] . counsel-apropos)
-         ([remap describe-function] . counsel-describe-function)
-         ([remap describe-variable] . counsel-describe-variable)
+         ("C-h a" . counsel-apropos)
+         ("<f1> a" . counsel-apropos)
+         ("C-h f" . counsel-describe-function)
+         ("<f1> f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)
+         ("<f1> v" . counsel-describe-variable)
          ("C-h u" . counsel-unicode-char) ; Insert unicode char
          ("<f1> u" . counsel-unicode-char)
-         ("C-c c r" . counsel-recentf)  ; Find recent files
-         ("C-c c f" . counsel-fzf)      ; Find files by fuzzy matching recursively
-         ("C-c c g" . counsel-git)      ; Find files in git repository
-         ("C-c c h" . counsel-command-history) ; Command history
-         ("C-c c m" . counsel-mark-ring)       ; Pop up marks
-         ("C-c c a" . counsel-ag)        ; Search current directory using ag
-         ("C-c c s" . counsel-rg)        ; Search current directory using rg
-         ("C-c c j" . counsel-git-grep)  ; Search current git repository
+         ("C-c i r" . counsel-recentf)  ; Find recent files
+         ("C-c i f" . counsel-fzf)      ; Find files by fuzzy matching recursively
+         ("C-c i g" . counsel-git)      ; Find files in git repository
+         ("C-c i h" . counsel-command-history) ; Command history
+         ("C-c i m" . counsel-mark-ring)       ; Pop up marks
+         ("C-c i a" . counsel-ag)        ; Search current directory using ag
+         ("C-c i s" . counsel-rg)        ; Search current directory using rg
+         ("C-c i j" . counsel-git-grep)  ; Search current git repository
 
          :map ivy-minibuffer-map
          ("C-w" . ivy-yank-word)
@@ -139,18 +142,18 @@
   ;; Stylesheet-selector-aware swiper
   (use-package counsel-css
     :bind (:map counsel-mode-map
-                ("C-c c c" . counsel-css))
+                ("C-c i c" . counsel-css))
     :init (add-hook 'css-mode-hook 'counsel-css-imenu-setup))
 
   ;; Display world clock using Ivy
   (use-package counsel-world-clock
     :bind (:map counsel-mode-map
-                ("C-c c k" . counsel-world-clock)))
+                ("C-c i k" . counsel-world-clock)))
 
   ;; Tramp ivy interface
   (use-package counsel-tramp
     :bind (:map counsel-mode-map
-                ("C-c c t" . counsel-tramp)))
+                ("C-c i t" . counsel-tramp)))
 
   ;; Ivy for GNU global
   (use-package counsel-gtags
