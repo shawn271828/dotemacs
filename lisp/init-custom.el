@@ -53,6 +53,14 @@
   "Set Anaconda home path."
   :type 'string)
 
+(defcustom my-preferred-theme 'zenburn
+  "Theme."
+  :type 'symbol)
+
+(defcustom my-themes-pool '(solarized-dark sanityinc-tomorrow-bright solarized-light)
+  "Themes pool."
+  :type 'list)
+
 ;; For Emacs devel
 ;; e.g. release is 24.5 or 25.1, while devel build is 26.0.90
 (when (= emacs-minor-version 0)
