@@ -78,7 +78,7 @@
 
 ;; Show native line numbers if possible
 (if (fboundp 'display-line-numbers-mode)
-    (add-hook 'after-init-hook #'display-line-numbers-mode)
+    (add-hook 'after-init-hook #'global-display-line-numbers-mode)
   (use-package nlinum
     :init (add-hook 'after-init-hook #'global-nlinum-mode)))
 
