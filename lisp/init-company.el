@@ -55,6 +55,7 @@
                 ("M-h" . company-quickhelp-manual-begin))
     :init (company-quickhelp-mode 1)
     :config
+    (use-package pos-tip :demand)
     ;; Essential hack for company-quickhelp working on Emacs 26.1rc
     (pos-tip-show "")
     (setq company-quickhelp-delay 0.5))

@@ -28,7 +28,7 @@
 
 ;; Windows management
 (use-package ace-window
-  :ensure hydra
+  :demand
   :init (add-hook 'after-init-hook #'winner-mode)
   :bind (("C-c w" . hydra-layout-manager/body)
          ("M-o" . ace-window))
@@ -36,6 +36,7 @@
   (use-package windmove :demand)
   (use-package winner :demand)
   (use-package transpose-frame :demand)
+  (use-package hydra)
   ;; Setup ace-window
   (setq aw-dispatch-always nil)
   (set-face-attribute 'aw-leading-char-face nil
