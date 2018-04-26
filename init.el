@@ -85,7 +85,7 @@
 (require 'init-vcs)
 
 ;; Restore
-(require 'init-restore)
+;; (require 'init-restore)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
