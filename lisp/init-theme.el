@@ -66,8 +66,10 @@ If THEME is given, switch to that theme."
                 (get 'shawn/rotate-theme 'state)
               0))
            ($index-after (% (+ $index-before 1) (length my-themes-pool)))
+           ($current-theme (nth $index-before my-themes-pool))
            ($next-theme (nth $index-after my-themes-pool)))
       (put 'shawn/rotate-theme 'state $index-after)
+      (disable-theme $current-theme)
       (load-theme $next-theme t)
       (message "Theme changed to %s" $next-theme))))
 
