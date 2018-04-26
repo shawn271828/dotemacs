@@ -59,7 +59,7 @@
   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
   :config
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'box)
+  (setq powerline-default-separator 'nil)
   (setq powerline-image-apple-rgb sys/mac-x-p))
 
 ;; Don't open a file in a new frame
@@ -77,10 +77,10 @@
 ;;          ("C-M-0" . (lambda () (interactive) (seethru 100)))))
 
 ;; Show native line numbers if possible
-(when (fboundp 'display-line-numbers-mode)
-  (use-package display-line-numbers
-    :ensure nil
-    :init (add-hook 'prog-mode-hook #'display-line-numbers-mode)))
+(if (fboundp 'display-line-numbers-mode)
+    (add-hook 'after-init-hook #'display-line-numbers-mode)
+  (use-package nlinum
+    :init (add-hook 'after-init-hook #'global-nlinum-mode)))
 
 ;; Prettify symbols
 (when (boundp 'global-prettify-symbols-mode)
