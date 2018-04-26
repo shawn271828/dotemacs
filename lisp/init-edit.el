@@ -213,7 +213,7 @@
 
 ;; Multiple cursors
 (use-package multiple-cursors
-  :ensure hydra
+  :init (use-package hydra)
   :bind ("C-c m" . hydra-multiple-cursors/body)
   :config
   (defhydra hydra-multiple-cursors (:hint nil)
