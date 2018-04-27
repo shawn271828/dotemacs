@@ -126,6 +126,7 @@
 
 ;; Dimmer
 (use-package dimmer
+  :demand
   :init
   ;; Do not dim helm and minibuffer
   (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*")

@@ -31,23 +31,6 @@
 
 (use-package color-theme-sanityinc-tomorrow)
 
-(use-package solarized-theme
-  :init
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-use-variable-pitch nil)
-  (setq x-underline-at-descent-line t)
-  (setq solarized-high-contrast-mode-line t)
-  (setq solarized-use-less-bold nil)
-  (setq solarized-use-more-italic t)
-  (setq solarized-emphasize-indicators nil)
-  (setq solarized-scale-org-headlines nil)
-  ;; Avoid all font-size changes
-  (setq solarized-height-minus-1 1.0)
-  (setq solarized-height-plus-1 1.0)
-  (setq solarized-height-plus-2 1.0)
-  (setq solarized-height-plus-3 1.0)
-  (setq solarized-height-plus-4 1.0))
-
 (defun index-of-theme (theme)
   "Get THEME index in pool."
   (- (length my-themes-pool)
