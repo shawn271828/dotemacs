@@ -71,6 +71,7 @@ If THEME is given, switch to that theme."
       (put 'shawn/rotate-theme 'state $index-after)
       (disable-theme $current-theme)
       (load-theme $next-theme t)
+      (setq beacon-color (face-attribute 'cursor :background))
       (message "Theme changed to %s" $next-theme))))
 
 (shawn/rotate-theme my-preferred-theme)
