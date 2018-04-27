@@ -70,6 +70,7 @@
 ;; Conda environment management
 (use-package conda
   :defer 1
+  :bind ("<f5>" . conda-activate)
   :init
   (setq conda-anaconda-home my-anaconda-home)
   ;; Make spaceline show conda env as pyvenv (hack)
@@ -85,18 +86,9 @@
         (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
             (match-string 1 env-yml-contents)
           ))))
-  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml))
+  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
 
-;; Python completion and backend
-(use-package anaconda-mode
-  :diminish anaconda-mode
-  :bind ("<f5>" . conda-activate)
-  :init (add-hook 'python-mode-hook
-                  '(lambda ()
-                     (setq python-indent-offset 4)
-                     (anaconda-mode)
-                     (anaconda-eldoc-mode)))
-  :config
+  ;; Activate conda automaticaaly if possible
   (defun conda-activate ()
     (interactive)
     (setenv "PYTHONPATH"
@@ -105,6 +97,15 @@
     (conda-env-activate-for-buffer)
     (unless conda-project-env-name
       (conda-env-activate))))
+
+;; Python completion and backend
+(use-package anaconda-mode
+  :diminish anaconda-mode
+  :init (add-hook 'python-mode-hook
+                  '(lambda ()
+                     (setq python-indent-offset 4)
+                     (anaconda-mode)
+                     (anaconda-eldoc-mode))))
 
 (use-package company-anaconda
   :defines company-backends

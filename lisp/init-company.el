@@ -50,15 +50,15 @@
         company-tooltip-align-annotations t)
 
   ;; Popup documentation for completion candidates
-  ;; (use-package company-quickhelp
-  ;;   :bind (:map company-active-map
-  ;;               ("M-h" . company-quickhelp-manual-begin))
-  ;;   :init (company-quickhelp-mode 1)
-  ;;   :config
-  ;;   (use-package pos-tip :demand)
-  ;;   ;; Essential hack for company-quickhelp working on Emacs 26.1rc
-  ;;   (pos-tip-show "")
-  ;;   (setq company-quickhelp-delay 0.5))
+  (use-package company-quickhelp
+    :bind (:map company-active-map
+                ("M-h" . company-quickhelp-manual-begin))
+    :init (company-quickhelp-mode 1)
+    :config
+    (use-package pos-tip :demand)
+    ;; Essential hack for company-quickhelp working on Emacs 26.1rc
+    (pos-tip-show "")
+    (setq company-quickhelp-delay 0.8))
 
   ;; Support yas in commpany
   ;; Note: Must be the last to involve all backends
