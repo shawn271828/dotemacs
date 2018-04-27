@@ -128,8 +128,6 @@
 (use-package dimmer
   :demand
   :init
-  ;; Do not dim helm and minibuffer
-  (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*")
   (add-hook 'after-init-hook 'dimmer-mode))
 
 (provide 'init-ui)
