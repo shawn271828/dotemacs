@@ -139,7 +139,7 @@
   :config
   ;; autosave the undo-tree history
   (setq undo-tree-history-directory-alist  `((".*" . ,my-backup-dir)))
-  (setq undo-tree-auto-save-history nil)
+  (setq undo-tree-auto-save-history t)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t))
 
@@ -197,7 +197,7 @@
   (define-minor-mode paredit-everywhere-mode
     "A cut-down version of paredit which can be used in non-lisp buffers."
     nil
-    "Par"
+    ""
     paredit-everywhere-mode-map)
 
   (defun turn-off-paredit-everywhere-mode ()

@@ -76,6 +76,8 @@
   (defvaralias 'pyvenv-virtual-env-name 'conda-env-current-name)
   (setq pyvenv-virtual-env "anaconda3")
   :config
+  (conda-env-initialize-interactive-shells)
+  (conda-env-initialize-eshell)
   (setq conda-message-on-environment-switch nil)
 
   ;; Use `.+' instead of `\\w+' as some char doesn't count as word
@@ -87,6 +89,12 @@
           ))))
   (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
 
+  ;; Non-sense of the original function, replace it.
+  (defun new-conda--get-path-prefix (env-dir)
+    (when (file-exists-p env-dir)
+      (concat env-dir "/bin")))
+  (advice-add ' conda--get-path-prefix :override #'new-conda--get-path-prefix)
+  
   ;; Activate conda automaticaaly if possible
   (defun conda-activate ()
     (interactive)

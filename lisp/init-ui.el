@@ -53,14 +53,19 @@
 ;;   :init (add-hook 'after-init-hook #'nyan-mode))
 
 ;; Modeline
-(use-package spaceline-config
-  :ensure spaceline
-  :diminish eldoc-mode
-  :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
-  :config
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-  (setq powerline-default-separator 'nil)
-  (setq powerline-image-apple-rgb sys/mac-x-p))
+;; (use-package spaceline-config
+;;   :ensure spaceline
+;;   :diminish eldoc-mode
+;;   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
+;;   :config
+;;   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
+;;   (setq powerline-default-separator 'nil)
+;;   (setq powerline-image-apple-rgb sys/mac-x-p))
+(use-package smart-mode-line
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/theme 'dark)
+  (add-hook 'after-init-hook #'sml/setup))
 
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
@@ -99,8 +104,7 @@
 (use-package fill-column-indicator
   :bind ("<f12>" . fci-mode)
   :config
-  (setq fci-rule-width 2)
-  (setq fci-rule-color "green"))
+  (setq fci-rule-width 2))
 
 ;; Fonts
 (use-package cnfonts
