@@ -41,7 +41,7 @@
   :config
   (setq company-tooltip-limit 10
         company-show-numbers t
-        company-idle-delay .2
+        company-idle-delay nil
         company-echo-delay 0
         company-minimum-prefix-length 2
         company-require-match nil
