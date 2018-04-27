@@ -31,10 +31,6 @@
 
 (use-package python
   :ensure nil
-  :init
-  (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
-  (setq flycheck-python-pycodestyle-executable (concat my-anaconda-home "/bin/pycodestyle"))
-  (setq flycheck-python-pyflakes-executable (concat my-anaconda-home "/bin/pyflakes"))
   :config
   ;; Disable readline based native completion
   (setq python-shell-completion-native-enable nil)
@@ -45,6 +41,9 @@
               (process-query-on-exit-flag (get-process "Python"))))
 
   (with-eval-after-load 'flycheck
+    (setq-default flycheck-disabled-checkers '(python-flake8 python-pylint python-pycompile))
+    (setq flycheck-python-pycodestyle-executable (concat my-anaconda-home "/bin/pycodestyle"))
+    (setq flycheck-python-pyflakes-executable (concat my-anaconda-home "/bin/pyflakes"))
     ;; Pyflakes
     (flycheck-define-checker python-pyflakes
       "Pyflakes"
