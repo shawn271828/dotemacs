@@ -69,7 +69,6 @@
 ;; Conda environment management
 (use-package conda
   :demand
-  :bind ("C-c <f5>" . conda-activate)
   :init
   (setq conda-anaconda-home my-anaconda-home)
   (add-hook 'python-mode-hook #'conda-env-mode)

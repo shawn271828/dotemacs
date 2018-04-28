@@ -30,7 +30,7 @@
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("C-c w" . hydra-layout-manager/body)
+  :bind (("<f2>" . hydra-layout-manager/body)
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
@@ -59,12 +59,12 @@
   ;; Layout hydra
   (defhydra hydra-layout-manager ()
     "Layout Manager"
-    ("h" hydra-move-splitter-left)
-    ("j" hydra-move-splitter-down)
-    ("k" hydra-move-splitter-up)
-    ("l" hydra-move-splitter-right)
-    ("<left>" winner-undo)
-    ("<right>" winner-redo)
+    ("<left>" hydra-move-splitter-left)
+    ("<down>" hydra-move-splitter-down)
+    ("<up>" hydra-move-splitter-up)
+    ("<right>" hydra-move-splitter-right)
+    ("M-<left>" winner-undo)
+    ("M-<right>" winner-redo)
     ("t" transpose-frame)
     ("f" flop-frame)
     ("F" flip-frame)
