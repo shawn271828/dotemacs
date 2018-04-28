@@ -48,26 +48,6 @@
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; Nyan cat
-;; (use-package nyan-mode
-;;   :init (add-hook 'after-init-hook #'nyan-mode))
-
-;; Modeline
-;; (use-package spaceline-config
-;;   :ensure spaceline
-;;   :diminish eldoc-mode
-;;   :init (add-hook 'after-init-hook 'spaceline-emacs-theme)
-;;   :config
-;;   (setq spaceline-highlight-face-func 'spaceline-highlight-face-modified)
-;;   (setq powerline-default-separator 'nil)
-;;   (setq powerline-image-apple-rgb sys/mac-x-p))
-(use-package smart-mode-line
-  :init
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'dark)
-  (add-hook 'after-init-hook #'sml/setup))
-
-;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
   (setq ns-pop-up-frames nil))
 

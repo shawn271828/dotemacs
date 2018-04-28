@@ -31,6 +31,16 @@
 
 (use-package color-theme-sanityinc-tomorrow)
 
+(use-package solarized-theme
+  :init
+  (setq solarized-distinct-fringe-background nil)
+  (setq solarized-use-variable-pitch t)
+  (setq solarized-high-contrast-mode-line nil)
+  (setq solarized-use-less-bold nil)
+  (setq solarized-use-more-italic nil)
+  (setq solarized-emphasize-indicators nil)
+  (setq solarized-scale-org-headlines t))
+
 (defun index-of-theme (theme)
   "Get THEME index in pool."
   (- (length my-themes-pool)
@@ -57,7 +67,15 @@ If THEME is given, switch to that theme."
       (setq beacon-color (face-attribute 'cursor :background))
       (message "Theme changed to %s" $next-theme))))
 
-(shawn/rotate-theme my-preferred-theme)
+(use-package smart-mode-line
+  :diminish eldoc-mode
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (add-hook 'after-init-hook
+            '(lambda ()
+               (shawn/rotate-theme my-preferred-theme)
+               (setq sml/theme 'respectful)
+               (sml/setup))))
 
 (global-set-key (kbd "C-<f12>") 'shawn/rotate-theme)
 
