@@ -68,13 +68,11 @@
 
 ;; Conda environment management
 (use-package conda
-  :defer 1
-  :bind ("<f5>" . conda-activate)
+  :demand
+  :bind ("C-c <f5>" . conda-activate)
   :init
   (setq conda-anaconda-home my-anaconda-home)
-  ;; Make spaceline show conda env as pyvenv (hack)
-  (defvaralias 'pyvenv-virtual-env-name 'conda-env-current-name)
-  (setq pyvenv-virtual-env "anaconda3")
+  (add-hook 'python-mode-hook #'conda-env-mode)
   :config
   (conda-env-initialize-interactive-shells)
   (conda-env-initialize-eshell)
@@ -103,14 +101,20 @@
                     python-shell-virtualenv-root "/lib/python3.6/site-packages"))
     (conda-env-activate-for-buffer)
     (unless conda-project-env-name
-      (conda-env-activate))))
+      (conda-env-activate)))
+
+  ;; Define a minor mode to work with mode line
+  (define-minor-mode conda-env-mode
+    "Toggle the display of current active conda environment."
+    :init-value nil
+    :lighter (:eval (format " [%s]" (or conda-env-current-name "?")))))
 
 ;; Python completion and backend
 (use-package anaconda-mode
   :diminish anaconda-mode
   :init (add-hook 'python-mode-hook
                   '(lambda ()
-                     (setq python-indent-offset 4)
+                     (setq-default python-indent-offset 4)
                      (anaconda-mode)
                      (anaconda-eldoc-mode))))
 
