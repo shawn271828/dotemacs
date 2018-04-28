@@ -332,6 +332,12 @@ _r_: rectangle
 
 ;; Bookmark plus from github
 (require 'bookmark+)
+(let ((bmkp-dir (expand-file-name ".bmkp" user-emacs-directory)))
+  (unless (file-exists-p bmkp-dir)
+    (mkdir bmkp-dir))
+  (setq bmkp-bmenu-commands-file (expand-file-name "emacs-bmk-bmenu-commands.el" bmkp-dir))
+  (setq bmkp-bmenu-state-file (expand-file-name "emacs-bmk-bmenu-state" bmkp-dir)))
+
 
 ;; Easy kill
 ;; (use-package easy-kill
