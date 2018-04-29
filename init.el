@@ -45,7 +45,7 @@
           (lambda ()
             "Restore defalut values after init"
             (setq file-name-handler-alist default-file-name-handler-alist)
-            (setq gc-cons-threshold (* 20 1024 1024))))
+            (setq gc-cons-threshold 800000)))
 
 ;; Prefers the newest version of a file
 (setq load-prefer-newer t)
