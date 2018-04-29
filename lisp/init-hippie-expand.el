@@ -28,14 +28,15 @@
 
 (use-package hippie-expand
   :ensure nil
-  :bind (("M-/" . hippie-expand))
-  :config
+  :init
   (setq hippie-expand-try-functions-list
-        '(try-complete-file-name-partially
-          try-complete-file-name
-          try-expand-dabbrev
+        '(try-expand-dabbrev
           try-expand-dabbrev-all-buffers
-          try-expand-dabbrev-from-kill)))
+          try-complete-file-name-partially
+          try-complete-file-name
+          ;; try-expand-dabbrev-from-kill
+          ))
+  :bind (("M-/" . hippie-expand)))
 
 (provide 'init-hippie-expand)
 
