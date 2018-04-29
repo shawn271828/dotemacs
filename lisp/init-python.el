@@ -117,10 +117,10 @@
                      (anaconda-mode)
                      (anaconda-eldoc-mode))))
 
-;; (use-package company-anaconda
-;;   :defines company-backends
-;;   :init (with-eval-after-load 'company
-;;           (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))
+(use-package company-anaconda
+  :defines company-backends
+  :init (with-eval-after-load 'company
+          (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))
 
 (use-package yapfify)
 

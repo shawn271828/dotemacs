@@ -80,7 +80,7 @@
 (require 'init-flycheck)
 (require 'init-projectile)
 (require 'init-hippie-expand)
-;; (require 'init-company)
+(require 'init-company)
 (require 'init-yasnippet)
 (require 'init-python)
 (require 'init-vcs)
