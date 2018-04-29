@@ -48,7 +48,12 @@
   :config
   (setq show-paren-when-point-inside-paren t)
   (setq show-paren-when-point-in-periphery t)
-  (setq show-paren-style 'parenthesis))
+  (setq show-paren-style 'parenthesis)
+  (set-face-attribute 'show-paren-match
+                      nil
+                      :foreground "red"
+                      :background nil
+                      :underline t))
 
 ;; Highlight indentions
 (use-package highlight-indent-guides
@@ -91,9 +96,9 @@
       (diff-hl-update))))
 
 ;; Rainbow mode for color codes
-(use-package rainbow-mode
-  :diminish rainbow-mode
-  :init (add-hook 'emacs-lisp-mode-hook #'rainbow-mode))
+;; (use-package rainbow-mode
+;;   :diminish rainbow-mode
+;;   :init (add-hook 'emacs-lisp-mode-hook #'rainbow-mode))
 
 ;; Visualize TAB, (HARD) SPACE, NEWLINE
 (use-package whitespace

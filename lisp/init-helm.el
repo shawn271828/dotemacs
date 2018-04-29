@@ -28,17 +28,18 @@
 
 (use-package helm
   :diminish helm-mode
-  :ensure helm-descbinds
   :init (helm-mode 1)
   :bind (("C-x b" . helm-mini)
-         ("C-h b" . helm-descbinds)
-         ("<f1> b" . helm-descbinds)
          ("C-h a" . helm-apropos)
          ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          :map helm-command-map
-         ("M-o" . helm-occur)
+         ;; use occur/moccur if not large files
+         ("1" . helm-do-ag-this-file)
+         ("2" . helm-do-ag-buffers)
+         :map helm-find-files-map
+         ("C-s" . helm-ff-run-grep-ag)
          :map isearch-mode-map
          ("M-o" . helm-occur-from-isearch))
   :config
@@ -50,11 +51,12 @@
         helm-autoresize-max-height            0
         helm-split-window-inside-p            t
         helm-move-to-line-cycle-in-source     nil
-        helm-scroll-amount                    12
+        helm-scroll-amount                    10
         helm-echo-input-in-header-line        t
-        helm-M-x-fuzzy-match                  nil
+        helm-M-x-fuzzy-match                  t
         helm-buffers-fuzzy-matching           nil
-        helm-recentf-fuzzy-match              nil)
+        helm-recentf-fuzzy-match              nil
+        helm-apropos-fuzzy-match              t)
   (with-eval-after-load 'spaceline-config
     (spaceline-helm-mode))
 
@@ -70,16 +72,28 @@
         (setq-local cursor-type nil))))
   (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
 
+  ;; helm-ag
+  (use-package helm-ag
+    :demand
+    :init
+    ;; For consistency, replace 'helm-grep-ag with 'helm-do-ag
+    (fset 'helm-grep-ag 'helm-do-ag))
+  
   ;; projectile integration
   (use-package helm-projectile
     :demand
     :config
-    (use-package helm-ag)
     (helm-projectile-on)
     (with-eval-after-load 'projectile
       (setq projectile-completion-system 'helm)))
 
-  ;; use wgrep from github
+  ;; helm-descbinds
+  (use-package helm-descbinds
+    :bind (("C-h b" . helm-descbinds)
+           ("<f1> b" . helm-descbinds)))
+  
+  ;; Use wgrep from github
+  ;; This is for occur/moccur buffer only
   (require 'wgrep-helm))
 
 (provide 'init-helm)
