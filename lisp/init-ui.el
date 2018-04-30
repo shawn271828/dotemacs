@@ -61,11 +61,9 @@
 ;;          ("C-M-9" . (lambda () (interactive) (seethru-relative 2)))
 ;;          ("C-M-0" . (lambda () (interactive) (seethru 100)))))
 
-;; Show native line numbers if possible
-(if (fboundp 'display-line-numbers-mode)
-    (add-hook 'after-init-hook #'global-display-line-numbers-mode)
-  (use-package nlinum
-    :init (add-hook 'after-init-hook #'global-nlinum-mode)))
+;; Show native line numbers if possible (Emacs 25 nlinum/linum is full of hack and bugs)
+(when (fboundp 'display-line-numbers-mode)
+  (add-hook 'after-init-hook #'global-display-line-numbers-mode))
 
 ;; Prettify symbols
 (when (boundp 'global-prettify-symbols-mode)

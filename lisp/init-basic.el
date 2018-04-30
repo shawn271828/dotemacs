@@ -39,6 +39,7 @@
   ;; make Mac's cmd key as meta
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'hyper)
+  (global-set-key (kbd "M-`") 'ns-next-frame)
   ;; !!! Very important for emacs-macport !!!
   (setq mac-pass-command-to-system nil))
 

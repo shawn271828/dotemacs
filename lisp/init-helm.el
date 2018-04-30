@@ -34,52 +34,85 @@
          ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
-         :map helm-command-map
-         ;; use occur/moccur if not large files
-         ("1" . helm-do-ag-this-file)
-         ("2" . helm-do-ag-buffers)
+         ([remap occur] . helm-occur)
          :map helm-find-files-map
          ("C-s" . helm-ff-run-grep-ag)
          :map isearch-mode-map
          ("M-o" . helm-occur-from-isearch))
   :config
+  ;; General settings
   (require 'helm-config)
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
-  (helm-autoresize-mode t)
-  (setq helm-autoresize-min-height            25
+  (setq helm-candidate-number-limit           100
+        helm-autoresize-min-height            25
         helm-autoresize-max-height            0
         helm-split-window-inside-p            t
         helm-move-to-line-cycle-in-source     nil
         helm-scroll-amount                    10
         helm-echo-input-in-header-line        t
-        helm-M-x-fuzzy-match                  t
-        helm-buffers-fuzzy-matching           nil
-        helm-recentf-fuzzy-match              nil
-        helm-apropos-fuzzy-match              t)
-  (with-eval-after-load 'spaceline-config
-    (spaceline-helm-mode))
+        helm-M-x-fuzzy-match                  nil
+        helm-buffers-fuzzy-matching           t
+        helm-recentf-fuzzy-match              t
+        helm-apropos-fuzzy-match              nil)
+  (helm-autoresize-mode 1)
 
-  ;; minibuffer hiding
-  (defun spacemacs//helm-hide-minibuffer-maybe ()
-    "Hide minibuffer in Helm session if we use the header line as input field."
-    (when (with-helm-buffer helm-echo-input-in-header-line)
-      (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-        (overlay-put ov 'window (selected-window))
-        (overlay-put ov 'face
-                     (let ((bg-color (face-background 'default nil)))
-                       `(:background ,bg-color :foreground ,bg-color)))
-        (setq-local cursor-type nil))))
-  (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
+  (frame-list)
+  ;; Display some helm sessions in a separate frame
+  ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
+  (setq helm-actions-inherit-frame-settings t)
+  (setq helm-display-buffer-reuse-frame t) ;Emacs 26+ regression
+  (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
-  ;; helm-ag
+  ;; Raise gc threshold during minibuffer mode (including helm)
+  (defun my-minibuffer-setup-hook ()
+    (setq gc-cons-threshold (* 128 1024 1024)))
+
+  (defun my-minibuffer-exit-hook ()
+    (setq gc-cons-threshold 800000))
+  
+  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+  ;; Eshell
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (eshell-cmpl-initialize)
+              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (define-key eshell-mode-map
+                (kbd "M-p")
+                'helm-eshell-history)))
+
+  ;; Various shell completion
+  (use-package pcomplete-extension)
+
+  ;; Minibuffer hiding
+  (add-hook 'helm-minibuffer-set-up-hook #'helm-hide-minibuffer-maybe)
+  ;; (defun spacemacs//helm-hide-minibuffer-maybe ()
+  ;;   "Hide minibuffer in Helm session if we use the header line as input field."
+  ;;   (when (with-helm-buffer helm-echo-input-in-header-line)
+  ;;     (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+  ;;       (overlay-put ov 'window (selected-window))
+  ;;       (overlay-put ov 'face
+  ;;                    (let ((bg-color (face-background 'default nil)))
+  ;;                      `(:background ,bg-color :foreground ,bg-color)))
+  ;;       (setq-local cursor-type nil))))
+  ;; (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
+
+  ;; Helm-ag
   (use-package helm-ag
     :demand
+    :bind (("M-s M-o" . helm-do-ag-this-file)
+           ("M-s s" . helm-do-ag-buffers)
+           ("M-s M-s" . helm-do-ag-buffers))
     :init
     ;; For consistency, replace 'helm-grep-ag with 'helm-do-ag
     (fset 'helm-grep-ag 'helm-do-ag))
   
-  ;; projectile integration
+  ;; Projectile integration
   (use-package helm-projectile
     :demand
     :config
@@ -87,13 +120,12 @@
     (with-eval-after-load 'projectile
       (setq projectile-completion-system 'helm)))
 
-  ;; helm-descbinds
+  ;; Helm-descbinds
   (use-package helm-descbinds
     :bind (("C-h b" . helm-descbinds)
            ("<f1> b" . helm-descbinds)))
   
-  ;; Use wgrep from github
-  ;; This is for occur/moccur buffer only
+  ;; Use wgrep from github to enable wgrep from helm-occur
   (require 'wgrep-helm))
 
 (provide 'init-helm)
