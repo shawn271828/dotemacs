@@ -30,10 +30,6 @@
   (require 'init-const)
   (require 'init-custom))
 
-;; Start maximised (cross-platf)
-(use-package maxframe
-  :init (add-hook 'window-setup-hook #'maximize-frame t))
-
 ;; Title
 (setq frame-title-format
       '("GNU Emacs " emacs-version "@" user-login-name " : "
@@ -41,6 +37,9 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 (setq icon-title-format frame-title-format)
+
+;; Maximize frame
+(add-hook 'after-init-hook #'toggle-frame-maximized)
 
 ;; Menu/Tool/Scroll bars
 (unless sys/mac-x-p (menu-bar-mode -1))

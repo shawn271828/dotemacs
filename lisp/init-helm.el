@@ -57,11 +57,11 @@
         helm-apropos-fuzzy-match              nil)
   (helm-autoresize-mode 1)
 
-  (frame-list)
   ;; Display some helm sessions in a separate frame
   ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
   (setq helm-actions-inherit-frame-settings t)
-  (setq helm-display-buffer-reuse-frame t) ;Emacs 26+ regression
+  (setq helm-use-undecorated-frame-option t)
+  ;; (setq helm-display-buffer-reuse-frame t) ;Emacs 26+ regression (fixed)
   (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
   ;; Raise gc threshold during minibuffer mode (including helm)
