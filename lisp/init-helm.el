@@ -120,8 +120,8 @@
     :bind (("M-s M-o" . helm-do-ag-this-file)
            ("M-s s" . helm-do-ag)
            ("M-s S" . helm-ag)
-           ("M-s r" . helm-do-ag-buffers)
-           ("M-s R" . helm-ag-buffers))
+           ("M-s a" . helm-do-ag-buffers)
+           ("M-s A" . helm-ag-buffers))
     :config
     (fset 'helm-grep-ag 'helm-do-ag)
     (my-make-commands-in-frame '(helm-do-ag
