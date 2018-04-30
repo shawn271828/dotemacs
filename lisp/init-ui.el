@@ -68,14 +68,15 @@
 (when (boundp 'global-prettify-symbols-mode)
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
-;; Cursor beacon
-(use-package beacon
-  :diminish beacon
-  :init (add-hook 'after-init-hook #'beacon-mode)
-  :config
-  (setq-default beacon-lighter "")
-  (setq-default beacon-size 20)
-  (setq-default beacon-color (face-attribute 'cursor :background)))
+;; Cursor beacon (only work well on Emacs 26 for macos)
+(when (>= emacs-major-version 26)
+  (use-package beacon
+    :diminish beacon
+    :init (add-hook 'after-init-hook #'beacon-mode)
+    :config
+    (setq-default beacon-lighter "")
+    (setq-default beacon-size 20)
+    (setq-default beacon-color (face-attribute 'cursor :background))))
 
 ;; Fill column indication
 (use-package fill-column-indicator
