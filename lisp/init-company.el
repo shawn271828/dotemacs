@@ -31,7 +31,6 @@
   :init (add-hook 'after-init-hook #'global-company-mode)
   :bind (("M-/" . company-complete)
          :map company-active-map
-         ("M-/" . company-other-backend)
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
          :map company-search-map
@@ -40,7 +39,7 @@
   :config
   (setq company-tooltip-limit 10
         company-show-numbers t
-        company-idle-delay 0.1
+        company-idle-delay 0.5
         company-echo-delay 0
         company-minimum-prefix-length 2
         company-require-match nil

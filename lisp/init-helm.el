@@ -44,6 +44,7 @@
   (require 'helm-config)
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
+  (helm-autoresize-mode 1)
   (setq helm-candidate-number-limit           100
         helm-autoresize-min-height            25
         helm-autoresize-max-height            0
@@ -51,22 +52,33 @@
         helm-move-to-line-cycle-in-source     nil
         helm-scroll-amount                    10
         helm-echo-input-in-header-line        t
+        helm-display-header-line              nil
         helm-M-x-fuzzy-match                  nil
         helm-buffers-fuzzy-matching           t
         helm-recentf-fuzzy-match              t
         helm-apropos-fuzzy-match              nil)
-  (helm-autoresize-mode 1)
 
   ;; Display some helm sessions in a separate frame
   ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
   (setq helm-actions-inherit-frame-settings t)
-  (setq helm-use-undecorated-frame-option t)
-  ;; (setq helm-display-buffer-reuse-frame t) ;Emacs 26+ regression (fixed)
-  (setq helm-display-function #'helm-display-buffer-in-own-frame)
+  (setq helm-display-buffer-reuse-frame t)
+  ;; (setq helm-display-function #'helm-default-display-buffer)
+  ;; (setq helm-display-function #'helm-display-buffer-in-own-frame)
+
+  (defun my-make-commands-in-frame (commands-list)
+    "Make command in COMMANDS-LIST show in separate frame."
+    (dolist (command commands-list)
+      (add-to-list 'helm-commands-using-frame command)))
+
+  (my-make-commands-in-frame '(completion-at-point
+                               helm-occur
+                               helm-occur-from-isearch
+                               helm-M-x
+                               helm-apropos))
 
   ;; Raise gc threshold during minibuffer mode (including helm)
   (defun my-minibuffer-setup-hook ()
-    (setq gc-cons-threshold (* 128 1024 1024)))
+    (setq gc-cons-threshold (* 20 1024 1024)))
 
   (defun my-minibuffer-exit-hook ()
     (setq gc-cons-threshold 800000))
@@ -106,12 +118,31 @@
   (use-package helm-ag
     :demand
     :bind (("M-s M-o" . helm-do-ag-this-file)
-           ("M-s s" . helm-do-ag-buffers)
-           ("M-s M-s" . helm-do-ag-buffers))
-    :init
-    ;; For consistency, replace 'helm-grep-ag with 'helm-do-ag
-    (fset 'helm-grep-ag 'helm-do-ag))
+           ("M-s s" . helm-do-ag)
+           ("M-s S" . helm-ag)
+           ("M-s r" . helm-do-ag-buffers)
+           ("M-s R" . helm-ag-buffers))
+    :config
+    (fset 'helm-grep-ag 'helm-do-ag)
+    (my-make-commands-in-frame '(helm-do-ag
+                                 helm-do-ag-buffers
+                                 helm-do-ag-this-file
+                                 helm-ag
+                                 helm-ag-buffers)))
+
   
+  ;; Company integration
+  (use-package helm-company
+    :demand
+    :config
+    (with-eval-after-load 'company
+      (define-key company-mode-map (kbd "M-/") 'helm-company)
+      (my-make-commands-in-frame '(helm-company))
+      ;; Workaround strange company complete pop up after helm-company cancel
+      (defun my-hack-to-helm-company ()
+        (company-cancel))
+      (advice-add 'helm-company :after 'my-hack-to-helm-company)))
+
   ;; Projectile integration
   (use-package helm-projectile
     :demand
