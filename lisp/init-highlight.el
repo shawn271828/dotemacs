@@ -49,11 +49,11 @@
   (setq show-paren-when-point-inside-paren t)
   (setq show-paren-when-point-in-periphery t)
   (setq show-paren-style 'parenthesis)
-  (set-face-attribute 'show-paren-match
-                      nil
-                      :foreground "red"
+  (face-spec-set 'show-paren-match
+                 '((t :foreground "red"
                       :background nil
                       :underline t))
+                 nil))
 
 ;; Highlight indentions
 (use-package highlight-indent-guides
