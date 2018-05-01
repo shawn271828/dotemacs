@@ -74,7 +74,7 @@ If THEME is given, switch to that theme."
   (add-hook 'after-init-hook
             '(lambda ()
                (shawn/rotate-theme my-preferred-theme)
-               (setq sml/theme 'respectful)
+               (setq sml/theme 'dark)
                (sml/setup))))
 
 (global-set-key (kbd "C-<f12>") 'shawn/rotate-theme)
