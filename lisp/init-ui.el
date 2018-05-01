@@ -120,8 +120,8 @@
 (use-package imenu-list
   :bind ("C-'" . #'imenu-list-smart-toggle)
   :config
-  (setq imenu-list-position 'left)
-  (setq imenu-list-size 0.2))
+  (setq imenu-list-position 'right)
+  (setq imenu-list-size 0.25))
 
 (provide 'init-ui)
 
