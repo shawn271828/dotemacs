@@ -64,17 +64,17 @@
 (use-package saveplace
   :init (add-hook 'after-init-hook #'save-place-mode))
 
-(use-package savehist
-  :init
-  (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
-        history-length 1000
-        savehist-additional-variables '(mark-ring
-                                        global-mark-ring
-                                        search-ring
-                                        regexp-search-ring
-                                        extended-command-history)
-        savehist-autosave-interval 60)
-  (add-hook 'after-init-hook #'savehist-mode))
+;; (use-package savehist
+;;   :init
+;;   (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
+;;         history-length 1000
+;;         savehist-additional-variables '(mark-ring
+;;                                         global-mark-ring
+;;                                         search-ring
+;;                                         regexp-search-ring
+;;                                         extended-command-history)
+;;         savehist-autosave-interval 60)
+;;   (add-hook 'after-init-hook #'savehist-mode))
 
 (use-package recentf
   :ensure nil
@@ -85,9 +85,9 @@
   (add-to-list 'recentf-exclude '("/tmp/" "/ssh:")))
 
 ;; Start server
-(use-package server
-  :ensure nil
-  :init (add-hook 'after-init-hook #'server-mode))
+;; (use-package server
+;;   :ensure nil
+;;   :init (add-hook 'after-init-hook #'server-mode))
 
 (provide 'init-basic)
 

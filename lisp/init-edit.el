@@ -103,29 +103,28 @@
   (setq auto-revert-verbose nil))
 
 ;; Jump to things in Emacs tree-style
-(use-package avy
-  :bind (("C-'" . avy-goto-char-timer)
-         ([remap goto-line] . avy-goto-line))
-  :init (add-hook 'after-init-hook #'avy-setup-default)
-  :config
-  (setq avy-background t)
-  (setq avy-style 'at-full)
-  (setq avy-all-windows nil)
-  (setq avy-timeout-seconds 0.5))
+;; (use-package avy
+;;   :bind (("C-'" . avy-goto-char-timer)
+;;          ([remap goto-line] . avy-goto-line))
+;;   :init (add-hook 'after-init-hook #'avy-setup-default)
+;;   :config
+;;   (setq avy-background t)
+;;   (setq avy-style 'at-full)
+;;   (setq avy-all-windows nil)
+;;   (setq avy-timeout-seconds 0.5))
 
 ;; Show number of matches in mode-line while searching
-;; (use-package anzu
-;;   :diminish anzu-mode
-;;   :bind (([remap query-replace] . anzu-query-replace)
-;;          ([remap query-replace-regexp] . anzu-query-replace-regexp)
-;;          :map isearch-mode-map
-;;          ([remap isearch-query-replace] . anzu-isearch-query-replace)
-;;          ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-;;   :init (add-hook 'after-init-hook #'global-anzu-mode)
-;;   :config
-;;   (setq anzu-replace-to-string-separator
-;;         (if (char-displayable-p ?→) " → " " -> "))
-;;   (setq anzu-cons-mode-line-p nil))
+(use-package anzu
+  :diminish anzu-mode
+  :bind (([remap query-replace] . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp)
+         :map isearch-mode-map
+         ([remap isearch-query-replace] . anzu-isearch-query-replace)
+         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
+  :init (add-hook 'after-init-hook #'global-anzu-mode)
+  :config
+  (setq anzu-replace-to-string-separator
+        (if (char-displayable-p ?→) " → " " -> ")))
 
 ;; Move to the beginning/end of line or code
 (use-package mwim
