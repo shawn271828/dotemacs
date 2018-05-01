@@ -122,6 +122,7 @@
   :init (with-eval-after-load 'company
           (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))
 
+;; Code formatter
 (use-package yapfify)
 
 (provide 'init-python)
