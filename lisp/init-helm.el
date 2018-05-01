@@ -34,6 +34,7 @@
          ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
          ([remap occur] . helm-occur)
          :map helm-find-files-map
          ("C-s" . helm-ff-run-grep-ag)
@@ -57,6 +58,11 @@
         helm-buffers-fuzzy-matching           t
         helm-recentf-fuzzy-match              t
         helm-apropos-fuzzy-match              nil)
+
+  ;; Beautify candidate separator
+  (with-eval-after-load 'page-break-lines
+    (setq helm-candidate-separator "\f")
+    (push 'helm-major-mode page-break-lines-modes))
 
   ;; Display some helm sessions in a separate frame
   ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'

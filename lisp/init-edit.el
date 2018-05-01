@@ -150,17 +150,10 @@
   (add-hook 'prog-mode-hook #'subword-mode)
   (add-hook 'minibuffer-setup-hook #'subword-mode))
 
-;; Browse kill ring
-(use-package browse-kill-ring
-  :bind ("M-y" . browse-kill-ring)
-  :config
-  (setq browse-kill-ring-separator "\f"))
-
 ;; Page break lines
 (use-package page-break-lines
   :diminish page-break-lines-mode
-  :init (add-hook 'after-init-hook 'global-page-break-lines-mode)
-  :config (push 'browse-kill-ring-mode page-break-lines-modes))
+  :init (add-hook 'after-init-hook 'global-page-break-lines-mode))
 
 ;; Make pairs balance
 (use-package elec-pair
