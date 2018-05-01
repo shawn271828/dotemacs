@@ -62,8 +62,10 @@
   ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
   (setq helm-actions-inherit-frame-settings t)
   (setq helm-display-buffer-reuse-frame t)
+  (setq helm-display-buffer-width 72)
+  (setq helm-display-buffer-height 20)
   ;; (setq helm-display-function #'helm-default-display-buffer)
-  ;; (setq helm-display-function #'helm-display-buffer-in-own-frame)
+  (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
   (defun my-make-commands-in-frame (commands-list)
     "Make command in COMMANDS-LIST show in separate frame."
@@ -130,7 +132,6 @@
                                  helm-ag
                                  helm-ag-buffers)))
 
-  
   ;; Company integration
   (use-package helm-company
     :demand
