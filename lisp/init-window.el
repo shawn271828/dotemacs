@@ -27,6 +27,13 @@
 ;;; Code:
 
 ;; Windows management
+(use-package winner
+  :bind (("M-<left>" . winner-undo)
+         ("M-<right>" . winner-redo))
+  :config
+  (unbind-key "C-c <left>" winner-mode-map)
+  (unbind-key "C-c <right>" winner-mode-map))
+
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
@@ -34,7 +41,6 @@
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
-  (use-package winner :demand)
   (use-package transpose-frame :demand)
   (use-package hydra)
   ;; Setup ace-window
@@ -63,8 +69,6 @@
     ("<down>" hydra-move-splitter-down)
     ("<up>" hydra-move-splitter-up)
     ("<right>" hydra-move-splitter-right)
-    ("M-<left>" winner-undo)
-    ("M-<right>" winner-redo)
     ("t" transpose-frame)
     ("f" flop-frame)
     ("F" flip-frame)
