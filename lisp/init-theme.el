@@ -41,6 +41,8 @@
   (setq solarized-emphasize-indicators nil)
   (setq solarized-scale-org-headlines t))
 
+(use-package leuven-theme)
+
 (defun index-of-theme (theme)
   "Get THEME index in pool."
   (- (length my-themes-pool)
@@ -74,7 +76,7 @@ If THEME is given, switch to that theme."
   (add-hook 'after-init-hook
             '(lambda ()
                (shawn/rotate-theme my-preferred-theme)
-               (setq sml/theme 'dark)
+               (setq sml/theme 'respectful)
                (sml/setup))))
 
 (global-set-key (kbd "C-<f12>") 'shawn/rotate-theme)
