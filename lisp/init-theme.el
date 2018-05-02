@@ -72,6 +72,7 @@
 ;; My tweaked solarzied dark theme
 (use-package solarized-theme
   :load-path "site-lisp/solarized-emacs"
+  :ensure dash
   :demand
   :config
   (setq solarized-distinct-fringe-background t)

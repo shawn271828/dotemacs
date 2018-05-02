@@ -165,7 +165,8 @@
   
   ;; Use wgrep from github to enable wgrep from helm-occur
   (use-package wgrep
-    :load-path "site-lisp/wgrep"))
+    :load-path "site-lisp/wgrep"
+    :demand))
 
 (provide 'init-helm)
 

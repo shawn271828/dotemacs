@@ -325,6 +325,7 @@ _r_: rectangle
 ;; Bookmark plus from github
 (use-package bookmark+
   :load-path "site-lisp/bookmark-plus"
+  :demand
   :config
   (let ((bmkp-dir (expand-file-name ".bmkp" user-emacs-directory)))
     (unless (file-exists-p bmkp-dir)
