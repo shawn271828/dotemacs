@@ -55,8 +55,8 @@
         helm-echo-input-in-header-line        t
         helm-display-header-line              nil
         helm-M-x-fuzzy-match                  nil
-        helm-buffers-fuzzy-matching           t
-        helm-recentf-fuzzy-match              t
+        helm-buffers-fuzzy-matching           nil
+        helm-recentf-fuzzy-match              nil
         helm-apropos-fuzzy-match              nil)
 
   ;; Beautify candidate separator

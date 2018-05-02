@@ -287,7 +287,7 @@ _r_: rectangle
   ;; https://github.com/Malabarba/aggressive-indent-mode/issues/73
   (add-hook 'find-file-hook
             (lambda ()
-              (if (> (buffer-size) (* 3000 80))
+              (if (> (buffer-size) (* 100 1024))
                   (aggressive-indent-mode -1))))
   :config
   ;; Disable in some modes
