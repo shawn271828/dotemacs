@@ -70,8 +70,10 @@
 ;;       (message "Theme changed to %s" $next-theme))))
 
 ;; My tweaked solarzied dark theme
-(require 'solarized-theme)
-(with-eval-after-load 'solarized-dark-theme
+(use-package solarized-theme
+  :load-path "site-lisp/solarized-emacs"
+  :demand
+  :config
   (setq solarized-distinct-fringe-background t)
   (setq solarized-use-variable-pitch t)
   (setq solarized-high-contrast-mode-line nil)
@@ -81,15 +83,15 @@
   (setq solarized-scale-org-headlines t)
   (load-theme 'solarized-dark t))
 
-  (use-package smart-mode-line
-    :diminish eldoc-mode
-    :init
-    (setq sml/no-confirm-load-theme t)
-    (add-hook 'after-init-hook
-              '(lambda ()
-                 ;; (shawn/rotate-theme my-preferred-theme)
-                 (setq sml/theme 'respectful)
-                 (sml/setup))))
+(use-package smart-mode-line
+  :diminish eldoc-mode
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (add-hook 'after-init-hook
+            '(lambda ()
+               ;; (shawn/rotate-theme my-preferred-theme)
+               (setq sml/theme 'respectful)
+               (sml/setup))))
 
 ;; (global-set-key (kbd "C-<f12>") 'shawn/rotate-theme)
 

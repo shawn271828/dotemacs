@@ -52,9 +52,6 @@
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/wgrep" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/bookmark-plus" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/solarized-emacs" user-emacs-directory))
 
 ;; Constants
 (require 'init-const)

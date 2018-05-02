@@ -164,7 +164,8 @@
            ("<f1> b" . helm-descbinds)))
   
   ;; Use wgrep from github to enable wgrep from helm-occur
-  (require 'wgrep-helm))
+  (use-package wgrep
+    :load-path "site-lisp/wgrep"))
 
 (provide 'init-helm)
 
