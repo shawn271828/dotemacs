@@ -287,7 +287,7 @@ _r_: rectangle
   ;; https://github.com/Malabarba/aggressive-indent-mode/issues/73
   (add-hook 'find-file-hook
             (lambda ()
-              (if (> (buffer-size) (* 100 1024))
+              (if (> (buffer-size) (* 50 1024))
                   (aggressive-indent-mode -1))))
   :config
   ;; Disable in some modes
@@ -335,10 +335,12 @@ _r_: rectangle
 
 ;; Avy
 (use-package avy
-  :ensure t
+  :demand
   :bind (([remap goto-line] . avy-goto-line)
          :map isearch-mode-map
-         ("C-j" . avy-isearch)))
+         ("C-j" . avy-isearch))
+  :config
+  (setq avy-case-fold-search nil))
 
 (provide 'init-edit)
 
