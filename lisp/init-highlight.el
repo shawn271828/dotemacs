@@ -68,6 +68,9 @@
 (use-package rainbow-delimiters
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+;; Rainbow mode
+(use-package rainbow-mode)
+
 ;; Highlight uncommitted changes
 (use-package diff-hl
   :bind (:map diff-hl-command-map
