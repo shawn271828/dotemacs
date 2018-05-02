@@ -330,10 +330,12 @@ _r_: rectangle
   (setq bmkp-bmenu-commands-file (expand-file-name "emacs-bmk-bmenu-commands.el" bmkp-dir))
   (setq bmkp-bmenu-state-file (expand-file-name "emacs-bmk-bmenu-state" bmkp-dir)))
 
-
-;; Easy kill
-;; (use-package easy-kill
-;;   :bind ([remap kill-ring-save] . easy-kill))
+;; Avy
+(use-package avy
+  :ensure t
+  :bind (([remap goto-line] . avy-goto-line)
+         :map isearch-mode-map
+         ("C-j" . avy-isearch)))
 
 (provide 'init-edit)
 
