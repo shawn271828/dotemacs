@@ -102,17 +102,6 @@
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil))
 
-;; Jump to things in Emacs tree-style
-;; (use-package avy
-;;   :bind (("C-'" . avy-goto-char-timer)
-;;          ([remap goto-line] . avy-goto-line))
-;;   :init (add-hook 'after-init-hook #'avy-setup-default)
-;;   :config
-;;   (setq avy-background t)
-;;   (setq avy-style 'at-full)
-;;   (setq avy-all-windows nil)
-;;   (setq avy-timeout-seconds 0.5))
-
 ;; Show number of matches in mode-line while searching
 (use-package anzu
   :diminish anzu-mode
@@ -333,14 +322,36 @@ _r_: rectangle
     (setq bmkp-bmenu-commands-file (expand-file-name "emacs-bmk-bmenu-commands.el" bmkp-dir))
     (setq bmkp-bmenu-state-file (expand-file-name "emacs-bmk-bmenu-state" bmkp-dir))))
 
-;; Avy
+;; Jump to things in Emacs tree-style
 (use-package avy
   :demand
-  :bind (([remap goto-line] . avy-goto-line)
+  :bind (("C-c j" . avy-resume)
+         ([remap goto-line] . avy-goto-line)
          :map isearch-mode-map
          ("C-j" . avy-isearch))
   :config
-  (setq avy-case-fold-search nil))
+  (setq  avy-case-fold-search nil
+         avy-all-windows      nil
+         avy-background       nil)
+
+  ;; Install avy with modifier
+  (defun install-avy-with-modifier (modifier avy-func)
+    "Bind any key with MODIFIER to AVY-FUNC."
+    (defun my-universal-key-handler ()
+      (interactive)
+      (let* ((event     last-input-event)
+             (modifiers (event-modifiers event))
+             (basic     (event-basic-type event))
+             (char      (if (memq 'shift modifiers)
+                            (upcase  basic)
+                          basic)))
+        (apply avy-func (list char))))
+
+    (cl-loop for key-char from 33 to 126
+             do (let ((key (format "%s%s" modifier (string key-char))))
+                  (global-set-key (kbd key) 'my-universal-key-handler))))
+
+  (install-avy-with-modifier "H-" 'avy-goto-char))
 
 (provide 'init-edit)
 

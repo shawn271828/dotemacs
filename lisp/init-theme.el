@@ -44,9 +44,9 @@
   (setq solarized-scale-org-headlines t))
 
 ;; My tweaked zenburn theme
-(use-package zenburn-theme
-  :load-path "site-lisp/zenburn-emacs"
-  :demand)
+;; (use-package zenburn-theme
+;;   :load-path "site-lisp/zenburn-emacs"
+;;   :demand)
 
 ;; Theme switcher
 (defun index-of-theme (theme)
