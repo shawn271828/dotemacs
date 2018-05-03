@@ -206,10 +206,13 @@ _A_: regexp       _P_: backward   _S_: reverse region
 _n_: forward      _M-n_: skip     _i_: insert number
 _p_: backward     _M-p_: skip     _I_: insert string
 _r_: rectangle
+_l_: lines
+_m_: smart
 "
     ("a" mc/mark-all-like-this :exit t)
     ("A" mc/mark-all-in-region-regexp :exit t)
     ("l" mc/edit-lines :exit t)
+    ("m" mc/mark-all-dwim)
     ("n" mc/mark-next-like-this)
     ("N" mc/skip-to-next-like-this)
     ("M-n" mc/unmark-next-like-this)
@@ -325,8 +328,8 @@ _r_: rectangle
 ;; Jump to things in Emacs tree-style
 (use-package avy
   :demand
-  :bind (("C-c j" . avy-resume)
-         ([remap goto-line] . avy-goto-line)
+  :chords (("jj" . avy-goto-word-1))
+  :bind (([remap goto-line] . avy-goto-line)
          :map isearch-mode-map
          ("C-j" . avy-isearch))
   :config
@@ -355,8 +358,11 @@ _r_: rectangle
                do (let ((key (format "%s%s" modifier (string key-char))))
                     (global-set-key (kbd key) handler)))))
 
-  (my-install-avy-with-modifier "H-" #'avy-goto-char-in-line)
-  (my-install-avy-with-modifier "M-H-" #'avy-goto-word-1))
+  (my-install-avy-with-modifier "H-" #'avy-goto-char-in-line))
+
+;; Key chords (should already be enabled in init-package.el)
+(use-package key-chord
+  :chords (("JJ" . mode-line-other-buffer)))
 
 (provide 'init-edit)
 

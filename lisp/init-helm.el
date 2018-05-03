@@ -29,13 +29,14 @@
 (use-package helm
   :diminish helm-mode
   :init (helm-mode 1)
+  :chords (("jk" . helm-mini))
   :bind (("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
          ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
-         ("C-c SPC" . helm-all-mark-rings)
+         ("C-c SPC" . helm-mark-ring)
          ([remap occur] . helm-occur)
          :map helm-find-files-map
          ("C-s" . helm-ff-run-grep-ag)

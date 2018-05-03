@@ -79,6 +79,7 @@
 (use-package diminish)
 (use-package bind-key)
 (use-package use-package-chords
+  :demand
   :config (key-chord-mode 1))
 
 (provide 'init-package)
