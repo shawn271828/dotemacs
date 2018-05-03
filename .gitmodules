@@ -7,6 +7,3 @@
 [submodule "site-lisp/solarized-emacs"]
 	path = site-lisp/solarized-emacs
 	url = https://github.com/Shawn271828/solarized-emacs.git
-[submodule "site-lisp/zenburn-emacs"]
-	path = site-lisp/zenburn-emacs
-	url = https://github.com/bbatsov/zenburn-emacs.git
