@@ -334,10 +334,12 @@ _r_: rectangle
          avy-all-windows      nil
          avy-background       nil)
 
+  (add-to-list 'avy-dispatch-alist '(?w . avy-action-copy))
+
   ;; Install avy with modifier
-  (defun install-avy-with-modifier (modifier avy-func)
-    "Bind any key with MODIFIER to AVY-FUNC."
-    (defun my-universal-key-handler ()
+  (defun my-make-universal-key-handler (func)
+    "Make a univeral key handler with FUNC."
+    (lambda ()
       (interactive)
       (let* ((event     last-input-event)
              (modifiers (event-modifiers event))
@@ -345,13 +347,16 @@ _r_: rectangle
              (char      (if (memq 'shift modifiers)
                             (upcase  basic)
                           basic)))
-        (apply avy-func (list char))))
+        (apply func (list char)))))
 
-    (cl-loop for key-char from 33 to 126
-             do (let ((key (format "%s%s" modifier (string key-char))))
-                  (global-set-key (kbd key) 'my-universal-key-handler))))
+  (defun my-install-avy-with-modifier (modifier avy-func)
+    (let ((handler (my-make-universal-key-handler avy-func)))
+      (cl-loop for key-char from 33 to 126
+               do (let ((key (format "%s%s" modifier (string key-char))))
+                    (global-set-key (kbd key) handler)))))
 
-  (install-avy-with-modifier "H-" 'avy-goto-char))
+  (my-install-avy-with-modifier "H-" #'avy-goto-char-in-line)
+  (my-install-avy-with-modifier "M-H-" #'avy-goto-word-1))
 
 (provide 'init-edit)
 

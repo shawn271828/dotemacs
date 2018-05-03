@@ -35,6 +35,7 @@
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
+         ("C-c SPC" . helm-all-mark-rings)
          ([remap occur] . helm-occur)
          :map helm-find-files-map
          ("C-s" . helm-ff-run-grep-ag)
