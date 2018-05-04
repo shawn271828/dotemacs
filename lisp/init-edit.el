@@ -150,14 +150,10 @@
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
          ("C-<up>" . sp-unwrap-sexp)
-         ("C-<down>" . sp-sp-rewrap-sexp)
+         ("C-<down>" . sp-rewrap-sexp)
          ("C-M-k" . sp-kill-hybrid-sexp)
          ("C-M-a" . sp-beginning-of-sexp)
-         ("C-M-e" . sp-end-of-sexp)
-         ("C-M-f" . sp-forward-sexp)
-         ("C-M-b" . sp-backward-sexp)
-         ("C-M-n" . sp-down-sexp)
-         ("C-M-p" . sp-up-sexp))
+         ("C-M-e" . sp-end-of-sexp))
   :config
   (require 'smartparens-config))
 
