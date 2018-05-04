@@ -29,7 +29,6 @@
 (use-package helm
   :diminish helm-mode
   :init (helm-mode 1)
-  :chords (("jk" . helm-mini))
   :bind (("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
          ("<f1> a" . helm-apropos)

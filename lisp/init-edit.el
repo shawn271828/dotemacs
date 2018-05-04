@@ -146,12 +146,18 @@
 
 ;; Make pairs balance
 (use-package smartparens
-  :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
+  :init (add-hook 'after-init-hook #'smartparens-global-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
          ("C-<up>" . sp-unwrap-sexp)
-         ("C-<down>" . sp-change-inner)
-         ("C-<return>" . sp-rewrap-sexp))
+         ("C-<down>" . sp-kill-hybrid-sexp)
+         ("C-<return>" . sp-rewrap-sexp)
+         ("C-M-a" . sp-beginning-of-sexp)
+         ("C-M-e" . sp-end-of-sexp)
+         ("C-M-f" . sp-forward-sexp)
+         ("C-M-b" . sp-backward-sexp)
+         ("C-M-n" . sp-down-sexp)
+         ("C-M-p" . sp-up-sexp))
   :config
   (require 'smartparens-config))
 
