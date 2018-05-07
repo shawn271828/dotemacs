@@ -157,49 +157,6 @@
   :config
   (require 'smartparens-config))
 
-;; (use-package elec-pair
-;;   :ensure nil
-;;   :init (add-hook 'after-init-hook #'electric-pair-mode))
-
-;; (use-package paredit
-;;   :demand
-;;   :init
-;;   (add-hook 'prog-mode-hook #'paredit-everywhere-mode)
-;;   (add-hook 'css-mode #'paredit-everywhere-mode)
-;;   :config
-;;   (defvar paredit-everywhere-mode-map
-;;     (let ((m (make-sparse-keymap)))
-;;       ;; (define-key m (kbd "DEL") 'paredit-backward-delete)
-;;       ;; (define-key m (kbd "C-d") 'paredit-forward-delete)
-;;       (define-key m (kbd "C-<left>") 'paredit-forward-barf-sexp)
-;;       (define-key m (kbd "C-<right>") 'paredit-forward-slurp-sexp)
-;;       (define-key m (kbd "M-(") 'paredit-wrap-round)
-;;       (define-key m (kbd "M-[") 'paredit-wrap-square)
-;;       (define-key m (kbd "M-{") 'paredit-wrap-curly)
-;;       (define-key m (kbd "M-)") 'paredit-close-round)
-;;       (define-key m (kbd "M-]") 'paredit-close-square)
-;;       (define-key m (kbd "M-}") 'paredit-close-curly)
-;;       (define-key m (kbd "M-\"") 'paredit-meta-doublequote)
-;;       (define-key m (kbd "M-S") 'paredit-split-sexp)
-;;       (define-key m (kbd "M-J") 'paredit-join-sexps)
-;;       (define-key m (kbd "C-<up>") 'paredit-splice-sexp)
-;;       m)
-;;     "Keymap for `paredit-everywhere-mode'.")
-
-;;   ;; Define minor mode
-;;   (define-minor-mode paredit-everywhere-mode
-;;     "A cut-down version of paredit which can be used in non-lisp buffers."
-;;     nil
-;;     ""
-;;     paredit-everywhere-mode-map)
-
-;;   (defun turn-off-paredit-everywhere-mode ()
-;;     "Disable `paredit-everywhere-mode'."
-;;     (paredit-everywhere-mode 0))
-
-;;   ;; Disable paredit-everywhere when full paredit is enabled
-;;   (add-hook 'paredit-mode-hook #'turn-off-paredit-everywhere-mode))
-
 ;; Expand region
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
@@ -349,30 +306,9 @@ _m_: smart
          avy-all-windows      nil
          avy-background       nil)
 
-  (add-to-list 'avy-dispatch-alist '(?w . avy-action-copy))
+  (add-to-list 'avy-dispatch-alist '(?w . avy-action-copy)))
 
-  ;; Install avy with modifier
-  (defun my-make-universal-key-handler (func)
-    "Make a univeral key handler with FUNC."
-    (lambda ()
-      (interactive)
-      (let* ((event     last-input-event)
-             (modifiers (event-modifiers event))
-             (basic     (event-basic-type event))
-             (char      (if (memq 'shift modifiers)
-                            (upcase  basic)
-                          basic)))
-        (apply func (list char)))))
-
-  (defun my-install-avy-with-modifier (modifier avy-func)
-    (let ((handler (my-make-universal-key-handler avy-func)))
-      (cl-loop for key-char from 33 to 126
-               do (let ((key (format "%s%s" modifier (string key-char))))
-                    (global-set-key (kbd key) handler)))))
-
-  (my-install-avy-with-modifier "H-" #'avy-goto-char-in-line))
-
-;; Key chords (should already be enabled in init-package.el)
+;; Other key chords (should already be enabled in init-package.el)
 (use-package key-chord
   :chords (("JJ" . mode-line-other-buffer)))
 
