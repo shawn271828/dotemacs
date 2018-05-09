@@ -146,6 +146,7 @@
 
 ;; Make pairs balance
 (use-package smartparens
+  :diminish
   :init (add-hook 'after-init-hook #'smartparens-global-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
@@ -252,7 +253,7 @@ _m_: smart
                   (aggressive-indent-mode -1))))
   :config
   ;; Disable in some modes
-  (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode))
+  (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode))
     (push mode aggressive-indent-excluded-modes))
 
   ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift (where semicolon `;' matters)
