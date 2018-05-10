@@ -82,6 +82,7 @@
 (require 'init-yasnippet)
 (require 'init-python)
 (require 'init-vcs)
+(require 'init-org)
 
 ;; Restore
 ;; (require 'init-restore)

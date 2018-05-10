@@ -39,14 +39,13 @@
   :config
   (setq company-tooltip-limit 10
         company-show-numbers t
-        company-idle-delay 0.5
+        company-idle-delay 0
         company-echo-delay 0
         company-minimum-prefix-length 2
         company-require-match nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil
-        company-tooltip-align-annotations t)
-
+        company-tooltip-align-annotations t) 
   ;; Popup documentation for completion candidates
   ;; (use-package company-quickhelp
   ;;   :bind (:map company-active-map

@@ -28,7 +28,7 @@
 
 (use-package flycheck
   :bind ("<f11>" . flycheck-list-errors)
-  :init (add-hook 'prog-mode-hook #'global-flycheck-mode)
+  :init (add-hook 'prog-mode-hook #'flycheck-mode)
   :config
   (setq flycheck-indication-mode 'left-fringe)
   (setq flycheck-emacs-lisp-load-path 'inherit)
