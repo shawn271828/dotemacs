@@ -29,8 +29,6 @@
 (use-package org
   :ensure nil
   :bind (("C-c a" . org-agenda)
-         ("C-c B" . org-switchb)
-         :map org-mode-map
          ("C-c l" . org-store-link))
   :init
   (add-hook 'org-mode-hook (lambda ()
@@ -38,6 +36,7 @@
                              (diminish 'org-indent-mode)))
   :config
   (setq org-agenda-files '("~/org"))
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords
         '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")))
   (setq org-log-done 'time)
