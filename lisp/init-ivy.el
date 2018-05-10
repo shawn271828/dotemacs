@@ -133,7 +133,9 @@
                                    'ivy-rich-switch-buffer-transformer)))
 
   ;; Use wgrep from github
-  (require 'wgrep)
+  (use-package wgrep
+    :load-path "site-lisp/wgrep"
+    :demand)
 
   ;; Ivy integration for Projectile
   (use-package counsel-projectile
