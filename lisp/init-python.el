@@ -66,48 +66,6 @@
     ;; Make them working together
     (flycheck-add-next-checker 'python-pyflakes '(t . python-pycodestyle))))
 
-;; Conda environment management
-(use-package conda
-  :demand
-  :init
-  (setq conda-anaconda-home my-anaconda-home)
-  (add-hook 'python-mode-hook #'conda-env-mode)
-  :config
-  (conda-env-initialize-interactive-shells)
-  (conda-env-initialize-eshell)
-  (setq conda-message-on-environment-switch nil)
-
-  ;; Use `.+' instead of `\\w+' as some char doesn't count as word
-  (defun new-conda--get-name-from-env-yml (filename)
-    (when filename
-      (let ((env-yml-contents (f-read-text filename)))
-        (if (string-match "name:[ ]*\\(.+\\) *$" env-yml-contents)
-            (match-string 1 env-yml-contents)
-          ))))
-  (advice-add 'conda--get-name-from-env-yml :override #'new-conda--get-name-from-env-yml)
-
-  ;; Non-sense of the original function, replace it.
-  (defun new-conda--get-path-prefix (env-dir)
-    (when (file-exists-p env-dir)
-      (concat env-dir "/bin")))
-  (advice-add ' conda--get-path-prefix :override #'new-conda--get-path-prefix)
-  
-  ;; Activate conda automaticaaly if possible
-  (defun conda-activate ()
-    (interactive)
-    (setenv "PYTHONPATH"
-            (concat (projectile-project-root) ":"
-                    python-shell-virtualenv-root "/lib/python3.6/site-packages"))
-    (conda-env-activate-for-buffer)
-    (unless conda-project-env-name
-      (conda-env-activate)))
-
-  ;; Define a minor mode to work with mode line
-  (define-minor-mode conda-env-mode
-    "Toggle the display of current active conda environment."
-    :init-value nil
-    :lighter (:eval (format " [%s]" (or conda-env-current-name "?")))))
-
 ;; Python completion and backend
 (use-package anaconda-mode
   :diminish anaconda-mode
@@ -119,8 +77,11 @@
 
 (use-package company-anaconda
   :defines company-backends
-  :init (with-eval-after-load 'company
-          (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))
+  :init (add-hook 'python-mode-hook
+                  (lambda ()
+                    (with-eval-after-load 'company
+                      (make-local-variable 'company-backends)
+                      (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))))
 
 ;; Code formatter
 (use-package yapfify)
