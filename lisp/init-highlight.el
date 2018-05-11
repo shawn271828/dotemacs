@@ -92,11 +92,7 @@
 
   ;; Integration with magit and psvn
   (with-eval-after-load 'magit
-    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
-
-  (with-eval-after-load 'psvn
-    (defadvice svn-status-update-modeline (after svn-update-diff-hl activate)
-      (diff-hl-update))))
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
 ;; Rainbow mode for color codes
 ;; (use-package rainbow-mode
