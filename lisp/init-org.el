@@ -47,22 +47,16 @@
   (unless (fboundp 'list-calendar-holidays)
     (defalias 'list-calendar-holidays 'calendar-list-holidays))
 
+  ;; IPython
+  (use-package ob-ipython)
+
   ;; Babel
   (setq org-confirm-babel-evaluate nil)
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
   (defvar-local load-language-list '((emacs-lisp . t)
-                                     (perl . t)
-                                     (python . t)
-                                     (ruby . t)
+                                     (ipython . t)
                                      (plantuml . t)))
-  (use-package ob-go
-    :init
-    (if (executable-find "go")
-        (cl-pushnew '(go . t) load-language-list)))
-  (use-package ob-ipython
-    :init
-    (if (executable-find "jupyter")
-        (cl-pushnew '(ipython . t) load-language-list)))
 
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-list)
@@ -87,62 +81,7 @@
             (bind-key "P" 'org-pomodoro org-agenda-mode-map)))
 
   ;; Visually summarize progress
-  (use-package org-dashboard)
-
-  (with-eval-after-load 'hydra
-    (defhydra hydra-org-template (:color blue :hint nil)
-      "
-_c_enter  qu_o_te     _e_macs-lisp    _L_aTeX:
-_l_atex   _E_xample   p_y_thon        _i_ndex:
-_a_scii   _v_erse     ip_Y_thon       _I_NCLUDE:
-_s_rc     _g_o        _r_uby          _H_TML:
-_h_tml    _S_HELL     _p_erl          _A_SCII:
-^ ^       ^ ^         _P_erl tangled  plant_u_ml
-"
-      ("s" (hot-expand "<s"))
-      ("E" (hot-expand "<e"))
-      ("o" (hot-expand "<q"))
-      ("v" (hot-expand "<v"))
-      ("c" (hot-expand "<c"))
-      ("l" (hot-expand "<l"))
-      ("h" (hot-expand "<h"))
-      ("a" (hot-expand "<a"))
-      ("L" (hot-expand "<L"))
-      ("i" (hot-expand "<i"))
-      ("e" (hot-expand "<s" "emacs-lisp"))
-      ("y" (hot-expand "<s" "python :results output"))
-      ("Y" (hot-expand "<s" "ipython :session :exports both :results raw drawer\n$0"))
-      ("g" (hot-expand "<s" "go :imports '\(\"fmt\"\)"))
-      ("p" (hot-expand "<s" "perl"))
-      ("r" (hot-expand "<s" "ruby"))
-      ("S" (hot-expand "<s" "sh"))
-      ("u" (hot-expand "<s" "plantuml :file CHANGE.png"))
-      ("P" (progn
-             (insert "#+HEADERS: :results output :exports both :shebang \"#!/usr/bin/env perl\"\n")
-             (hot-expand "<s" "perl")))
-      ("I" (hot-expand "<I"))
-      ("H" (hot-expand "<H"))
-      ("A" (hot-expand "<A"))
-      ("<" self-insert-command "ins")
-      ("q" nil "quit"))
-
-    (defun hot-expand (str &optional mod)
-      "Expand org template."
-      (let (text)
-        (when (region-active-p)
-          (setq text (buffer-substring (region-beginning) (region-end)))
-          (delete-region (region-beginning) (region-end)))
-        (insert str)
-        (org-try-structure-completion)
-        (when mod (insert mod) (forward-line))
-        (when text (insert text))))
-
-    (bind-key "<"
-              (lambda () (interactive)
-                (if (or (region-active-p) (looking-back "^"))
-                    (hydra-org-template/body)
-                  (self-insert-command 1)))
-              org-mode-map)))
+  (use-package org-dashboard))
 
 (provide 'init-org)
 
