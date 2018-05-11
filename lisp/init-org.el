@@ -48,11 +48,13 @@
     (defalias 'list-calendar-holidays 'calendar-list-holidays))
 
   ;; IPython
-  (use-package ob-ipython)
+  (use-package ob-ipython
+    :init
+    ;; For display inline images
+    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
 
   ;; Babel
   (setq org-confirm-babel-evaluate nil)
-  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
   (defvar-local load-language-list '((emacs-lisp . t)
                                      (ipython . t)
