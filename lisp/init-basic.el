@@ -50,15 +50,7 @@
     (setq exec-path-from-shell-check-startup-files nil)
     (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
     (setq exec-path-from-shell-arguments '("-l"))
-    (exec-path-from-shell-initialize)
-    ;; use gnu coreutils and findutils
-    (setenv "PATH" (concat
-                    "/usr/local/opt/findutils/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:" (getenv "PATH")))
-    (setenv "MANPATH" (concat
-                       "/usr/local/opt/findutils/libexec/gnuman:/usr/local/opt/coreutils/libexec/gnuman:" (getenv "MANPATH"))))
-  (setenv "LC_CTYPE" "UTF-8")
-  (setenv "LC_ALL" "en_US.UTF-8")
-  (setenv "LANG" "en_US.UTF-8"))
+    (exec-path-from-shell-initialize)))
 
 ;; History
 (use-package saveplace
