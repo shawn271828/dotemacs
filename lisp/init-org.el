@@ -27,7 +27,8 @@
 ;;; Code:
 
 (use-package org
-  :ensure nil
+  :pin org
+  :ensure org-plus-contrib
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
   :init

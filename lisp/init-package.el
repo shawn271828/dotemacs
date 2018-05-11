@@ -53,10 +53,12 @@
                            ("melpa" . "http://melpa.org/packages/"))))
  ((eq my-package-archives 'emacs-china)
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                           ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+                           ("melpa" . "http://elpa.emacs-china.org/melpa/")
+                           ("org" . "http://elpa.emacs-china.org/org/"))))
  ((eq my-package-archives 'tuna)
   (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))))
+                           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                           ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))))
 
 ;; Initialize packages
 (setq package-enable-at-startup nil)    ; To prevent initialising twice
