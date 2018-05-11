@@ -1,9 +1,0 @@
-[submodule "site-lisp/wgrep"]
-	path = site-lisp/wgrep
-	url = https://github.com/mhayashi1120/Emacs-wgrep.git
-[submodule "site-lisp/bookmark-plus"]
-	path = site-lisp/bookmark-plus
-	url = https://github.com/emacsmirror/bookmark-plus.git
-[submodule "site-lisp/solarized-emacs"]
-	path = site-lisp/solarized-emacs
-	url = https://github.com/Shawn271828/solarized-emacs.git
