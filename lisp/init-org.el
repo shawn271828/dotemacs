@@ -54,11 +54,15 @@
     ;; For display inline images
     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
 
+  ;; Restclient
+  (use-package ob-restclient)
+
   ;; Babel
   (setq org-confirm-babel-evaluate nil)
 
   (defvar-local load-language-list '((emacs-lisp . t)
                                      (ipython . t)
+                                     (restclient . t)
                                      (ditaa . t)
                                      (plantuml . t)))
 
@@ -85,7 +89,11 @@
             (bind-key "P" 'org-pomodoro org-agenda-mode-map)))
 
   ;; Visually summarize progress
-  (use-package org-dashboard))
+  (use-package org-dashboard)
+
+  ;; Bullets
+  (use-package org-bullets
+    :init (add-hook 'org-mode-hook 'org-bullets-mode)))
 
 (provide 'init-org)
 

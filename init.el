@@ -85,6 +85,8 @@
 (require 'init-python)
 (require 'init-vcs)
 (require 'init-org)
+(require 'init-restclient)
+(require 'init-plantuml)
 
 ;; Restore
 ;; (require 'init-restore)
