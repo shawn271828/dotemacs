@@ -43,16 +43,14 @@
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (add-to-list 'org-export-backends 'md)
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
   ;; FIXME org-agenda-execute-calendar-command uses deprecated list-calendar-holidays
   (unless (fboundp 'list-calendar-holidays)
     (defalias 'list-calendar-holidays 'calendar-list-holidays))
 
   ;; IPython
-  (use-package ob-ipython
-    :init
-    ;; For display inline images
-    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
+  (use-package ob-ipython)
 
   ;; Restclient
   (use-package ob-restclient)
