@@ -27,8 +27,7 @@
 ;;; Code:
 
 (use-package org
-  :pin org
-  :ensure org-plus-contrib
+  :load-path "site-lisp/org-mode/lisp"
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
   :init

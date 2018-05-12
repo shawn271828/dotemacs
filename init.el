@@ -52,6 +52,8 @@
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp/org-mode/lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp/org-mode/contrib/lisp" user-emacs-directory) t)
 
 ;; Constants
 (require 'init-const)
