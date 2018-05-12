@@ -307,7 +307,29 @@ _m_: smart
          avy-all-windows      nil
          avy-background       nil)
 
-  (add-to-list 'avy-dispatch-alist '(?w . avy-action-copy)))
+  (defun my-avy-action-copy-line (pt)
+    "Copy to end of line starting on PT."
+    (save-excursion
+      (let (str)
+        (goto-char pt)
+        (end-of-line)
+        (setq str (buffer-substring pt (point)))
+        (kill-new str)
+        (message "Copied: %s" str)))
+    (let ((dat (ring-ref avy-ring 0)))
+      (select-frame-set-input-focus
+       (window-frame (cdr dat)))
+      (select-window (cdr dat))
+      (goto-char (car dat))))
+
+  (defun my-avy-action-yank-line (pt)
+    "Yank end of line starting at PT at the current point."
+    (my-avy-action-copy-line pt)
+    (yank)
+    t)
+
+  (add-to-list 'avy-dispatch-alist '(?N . my-avy-action-copy-line))
+  (add-to-list 'avy-dispatch-alist '(?Y . my-avy-action-yank-line)))
 
 ;; Other key chords (should already be enabled in init-package.el)
 (use-package key-chord
