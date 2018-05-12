@@ -1,9 +1,9 @@
-;; init-plantuml.el --- Initialize scala configurations.	-*- lexical-binding: t -*-
+;; init-graphviz.el --- Initialize scala configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             plantuml configurations.
+;;             graphviz configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,13 +26,10 @@
 ;;
 ;;; Code:
 
-(use-package plantuml-mode
-  :config
-  (setq plantuml-jar-path "/usr/local/Cellar/plantuml/1.2018.2/libexec/plantuml.jar")
-  (with-eval-after-load 'org
-    (setq org-plantuml-jar-path plantuml-jar-path)))
+(use-package graphviz-dot-mode
+  :init (with-eval-after-load 'org (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))))
 
-(provide 'init-plantuml)
+(provide 'init-graphviz)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-plantuml.el ends here
+;;; init-graphviz.el ends here

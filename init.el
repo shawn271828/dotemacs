@@ -87,6 +87,7 @@
 (require 'init-org)
 (require 'init-restclient)
 (require 'init-plantuml)
+(require 'init-graphviz)
 
 ;; Restore
 ;; (require 'init-restore)
