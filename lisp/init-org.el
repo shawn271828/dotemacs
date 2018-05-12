@@ -60,6 +60,7 @@
 
   (defvar-local load-language-list '((emacs-lisp . t)
                                      (ipython . t)
+                                     (ditaa . t)
                                      (plantuml . t)))
 
   (org-babel-do-load-languages 'org-babel-load-languages
