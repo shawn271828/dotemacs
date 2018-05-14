@@ -44,8 +44,7 @@
   (setq solarized-scale-org-headlines t))
 
 ;; Leuven theme
-(use-package leuven-theme
-  :demand)
+(use-package leuven-theme)
 
 ;; Theme switcher
 (defun index-of-theme (theme)
