@@ -66,19 +66,23 @@
     (setq helm-candidate-separator "\f")
     (push 'helm-major-mode page-break-lines-modes))
 
-  ;; Display some helm sessions in a separate frame
-  ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
-  (setq helm-actions-inherit-frame-settings t)
-  (setq helm-display-buffer-reuse-frame t)
-  (setq helm-display-buffer-width 72)
-  (setq helm-display-buffer-height 20)
-  ;; (setq helm-display-function #'helm-default-display-buffer)
-  (setq helm-display-function #'helm-display-buffer-in-own-frame)
+  (defvar my-helm-in-frame t)
+
+  (when my-helm-in-frame
+    ;; Display some helm sessions in a separate frame
+    ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
+    (setq helm-actions-inherit-frame-settings t)
+    (setq helm-display-buffer-reuse-frame t)
+    (setq helm-display-buffer-width 72)
+    (setq helm-display-buffer-height 20)
+    ;; (setq helm-display-function #'helm-default-display-buffer)
+    (setq helm-display-function #'helm-display-buffer-in-own-frame))
 
   (defun my-make-commands-in-frame (commands-list)
     "Make command in COMMANDS-LIST show in separate frame."
-    (dolist (command commands-list)
-      (add-to-list 'helm-commands-using-frame command)))
+    (when my-helm-in-frame
+      (dolist (command commands-list)
+        (add-to-list 'helm-commands-using-frame command))))
 
   (my-make-commands-in-frame '(completion-at-point
                                helm-occur
