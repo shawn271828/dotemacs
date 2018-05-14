@@ -45,7 +45,6 @@
 
 ;; Leuven theme
 (use-package leuven-theme
-  :load-path "site-lisp/leuven-theme"
   :demand)
 
 ;; Theme switcher
@@ -72,18 +71,18 @@ If THEME is given, switch to that theme."
       (put 'shawn/rotate-theme 'state $index-after)
       (disable-theme $current-theme)
       (load-theme $next-theme t)
-      (setq beacon-color (face-attribute 'cursor :background))
       (message "Theme changed to %s" $next-theme))))
 
 (use-package smart-mode-line
   :diminish eldoc-mode
+  :demand
   :init
   (setq sml/no-confirm-load-theme t)
-  (add-hook 'after-init-hook
-            '(lambda ()
-               (shawn/rotate-theme my-preferred-theme)
-               (setq sml/theme 'respectful)
-               (sml/setup))))
+  (setq sml/theme 'respectful)
+  :config
+  (sml/setup))
+
+(shawn/rotate-theme my-preferred-theme)
 
 (global-set-key (kbd "C-<f12>") 'shawn/rotate-theme)
 

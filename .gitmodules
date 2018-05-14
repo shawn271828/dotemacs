@@ -7,6 +7,3 @@
 [submodule "site-lisp/wgrep"]
 	path = site-lisp/wgrep
 	url = https://github.com/shuo-tan/Emacs-wgrep.git
-[submodule "site-lisp/leuven-theme"]
-	path = site-lisp/leuven-theme
-	url = https://github.com/shuo-tan/emacs-leuven-theme.git
