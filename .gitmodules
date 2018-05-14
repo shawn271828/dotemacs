@@ -7,3 +7,6 @@
 [submodule "site-lisp/wgrep"]
 	path = site-lisp/wgrep
 	url = https://github.com/shuo-tan/Emacs-wgrep.git
+[submodule "site-lisp/ox-rst"]
+	path = site-lisp/ox-rst
+	url = https://github.com/shuo-tan/ox-rst.git

@@ -55,6 +55,11 @@
   ;; Restclient
   (use-package ob-restclient)
 
+  ;; rst
+  (use-package ox-rst
+    :load-path "site-lisp/ox-rst"
+    :init (add-hook 'org-export-backends 'rst))
+
   ;; Babel
   (setq org-confirm-babel-evaluate nil)
 
