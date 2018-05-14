@@ -43,10 +43,10 @@
   (setq solarized-emphasize-indicators nil)
   (setq solarized-scale-org-headlines t))
 
-;; My tweaked zenburn theme
-;; (use-package zenburn-theme
-;;   :load-path "site-lisp/zenburn-emacs"
-;;   :demand)
+;; Leuven theme
+(use-package leuven-theme
+  :load-path "site-lisp/leuven-theme"
+  :demand)
 
 ;; Theme switcher
 (defun index-of-theme (theme)
