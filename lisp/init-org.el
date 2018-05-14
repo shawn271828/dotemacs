@@ -75,6 +75,7 @@
 
   ;; Presentation
   (use-package org-tree-slide
+    :bind (("<f5>" . org-tree-slide-mode))
     :config
     (add-hook 'org-tree-slide-play-hook
               (lambda ()
@@ -86,14 +87,6 @@
                 (text-scale-set 0)
                 (org-remove-inline-images)
                 (read-only-mode -1))))
-
-  ;; Pomodoro
-  (use-package org-pomodoro
-    :init (with-eval-after-load 'org-agenda
-            (bind-key "P" 'org-pomodoro org-agenda-mode-map)))
-
-  ;; Visually summarize progress
-  (use-package org-dashboard)
 
   ;; Bullets
   (use-package org-bullets
