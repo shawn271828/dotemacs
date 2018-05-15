@@ -36,6 +36,7 @@
                              (diminish 'org-indent-mode)))
   :config
   (setq org-html-head-include-default-style nil)
+  (setq org-html-htmlize-output-type nil)
   (setq org-agenda-files '("~/code/myorgs"))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords
