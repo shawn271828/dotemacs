@@ -35,12 +35,13 @@
                              (org-indent-mode 1)
                              (diminish 'org-indent-mode)))
   :config
+  (setq org-html-inline-images t)
   (setq org-html-head-include-default-style nil)
+  ;; (setq org-export-headline-levels 6)
   (setq org-html-htmlize-output-type nil)
-  (setq org-agenda-files '("~/code/myorgs"))
+  (setq org-agenda-files '("~/code/org"))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")))
   (setq org-log-done 'time)
   (setq org-src-fontify-natively t)
   (add-to-list 'org-export-backends 'md)
@@ -69,6 +70,7 @@
                                      (restclient . t)
                                      (ditaa . t)
                                      (dot . t)
+                                     (sh . t)
                                      (plantuml . t)))
 
   (org-babel-do-load-languages 'org-babel-load-languages
@@ -90,8 +92,31 @@
                 (read-only-mode -1))))
 
   ;; Bullets
-  (use-package org-bullets
-    :init (add-hook 'org-mode-hook 'org-bullets-mode)))
+  ;; (use-package org-bullets
+  ;;   :init (add-hook 'org-mode-hook 'org-bullets-mode))
+
+  ;; Publishing
+  ;; https://orgmode.org/org.html#Publishing-options
+  ;; https://orgmode.org/org.html#Sources-and-destinations
+  (setq org-publish-project-alist
+        '(("orgfiles"
+           :base-directory "~/code/org"
+           :base-extension "org"
+           :publishing-directory "~/code/blog/org"
+           :publishing-function org-html-publish-to-html
+           :htmlized-source nil
+           :section-numbers nil
+           :with-toc t
+           :html-preamble nil
+           :html-postamble nil)
+          ("images"
+          :base-directory "~/code/org/images"
+          :base-extension "jpg\\|gif\\|png"
+          :publishing-directory "~/code/blog/org/images"
+          :publishing-function org-publish-attachment)
+          ("website" :components ("orgfiles" "images"))
+
+          (""))))
 
 (provide 'init-org)
 
