@@ -61,6 +61,10 @@
   "Themes pool."
   :type 'list)
 
+(defcustom my-helm-in-frame 'nil
+  "Helm in separateframe"
+  :type 'bool)
+
 ;; For Emacs devel
 ;; e.g. release is 24.5 or 25.1, while devel build is 26.0.90
 (when (= emacs-minor-version 0)

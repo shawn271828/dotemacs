@@ -26,6 +26,9 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'init-custom))
+
 (use-package helm
   :diminish helm-mode
   :init (helm-mode 1)
@@ -65,8 +68,6 @@
   (with-eval-after-load 'page-break-lines
     (setq helm-candidate-separator "\f")
     (push 'helm-major-mode page-break-lines-modes))
-
-  (defvar my-helm-in-frame t)
 
   (when my-helm-in-frame
     ;; Display some helm sessions in a separate frame

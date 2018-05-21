@@ -10,5 +10,6 @@
 ;; (setq my-package-archives 'emacs-china)   ; Package repo: melpa, emacs-china or tuna
 ;; (setq my-preferred-theme 'solarized-dark) ; Theme
 ;; (setq my-themes-pool '(solarized-dark sanityinc-tomorrow-bright solarized-light)) ; Switchable themes
+;; (setq my-helm-frame nil)
 
 ;;; custom-example.el ends here
