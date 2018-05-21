@@ -28,9 +28,7 @@
 
 (use-package company
   :diminish company-mode
-  :init
-  (add-hook 'after-init-hook #'global-company-mode)
-  (unbind-key "RET" company-active-map)
+  :init (add-hook 'after-init-hook #'global-company-mode)
   :bind (("M-/" . company-complete)
          :map company-active-map
          ("<tab>" . company-complete-selection)
@@ -40,6 +38,7 @@
          ("C-p" . company-select-previous)
          ("C-n" . company-select-next))
   :config
+  (unbind-key (kbd "RET") company-active-map)
   (setq company-tooltip-limit 10
         company-show-numbers t
         company-idle-delay 0
