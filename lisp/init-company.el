@@ -28,9 +28,12 @@
 
 (use-package company
   :diminish company-mode
-  :init (add-hook 'after-init-hook #'global-company-mode)
+  :init
+  (add-hook 'after-init-hook #'global-company-mode)
+  (unbind-key "RET" company-active-map)
   :bind (("M-/" . company-complete)
          :map company-active-map
+         ("<tab>" . company-complete-selection)
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
          :map company-search-map

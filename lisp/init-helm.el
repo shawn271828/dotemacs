@@ -41,6 +41,10 @@
          ("C-c SPC" . helm-mark-ring)
          ("C-c C-SPC". helm-global-mark-ring)
          ([remap occur] . helm-occur)
+         :map helm-map
+         ("<tab>" . helm-execute-persistent-action)
+         ("C-i" . helm-execute-persistent-action)
+         ("C-z" . helm-select-action)
          :map helm-find-files-map
          ("C-s" . helm-ff-run-grep-ag)
          :map isearch-mode-map
