@@ -153,6 +153,7 @@
          ("C-<up>" . sp-unwrap-sexp)
          ("C-<down>" . sp-rewrap-sexp)
          ("C-M-k" . sp-kill-hybrid-sexp)
+         ("C-M-<backspace>" . sp-backward-kill-sexp)
          ("C-M-a" . sp-beginning-of-sexp)
          ("C-M-e" . sp-end-of-sexp))
   :config

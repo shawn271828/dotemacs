@@ -38,7 +38,8 @@
          ("C-p" . company-select-previous)
          ("C-n" . company-select-next))
   :config
-  (unbind-key (kbd "RET") company-active-map)
+  (define-key company-active-map (kbd "RET") nil)
+  (define-key company-active-map [return] nil)
   (setq company-tooltip-limit 10
         company-show-numbers t
         company-idle-delay 0
