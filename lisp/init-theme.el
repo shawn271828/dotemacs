@@ -30,18 +30,18 @@
   (require 'init-custom))
 
 ;; My tweaked solarzied dark theme
-(use-package solarized-theme
-  :load-path "site-lisp/solarized-emacs"
-  :demand
-  :ensure dash
-  :config
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-use-variable-pitch t)
-  (setq solarized-high-contrast-mode-line nil)
-  (setq solarized-use-less-bold nil)
-  (setq solarized-use-more-italic t)
-  (setq solarized-emphasize-indicators nil)
-  (setq solarized-scale-org-headlines t))
+;; (use-package solarized-theme
+;;   :load-path "site-lisp/solarized-emacs"
+;;   :demand
+;;   :ensure dash
+;;   :config
+;;   (setq solarized-distinct-fringe-background t)
+;;   (setq solarized-use-variable-pitch t)
+;;   (setq solarized-high-contrast-mode-line nil)
+;;   (setq solarized-use-less-bold nil)
+;;   (setq solarized-use-more-italic t)
+;;   (setq solarized-emphasize-indicators nil)
+;;   (setq solarized-scale-org-headlines t))
 
 ;; Leuven theme
 (use-package leuven-theme)

@@ -1,6 +1,3 @@
-[submodule "site-lisp/solarized-emacs"]
-	path = site-lisp/solarized-emacs
-	url = https://github.com/shuo-tan/solarized-emacs.git
 [submodule "site-lisp/bookmark-plus"]
 	path = site-lisp/bookmark-plus
 	url = https://github.com/shuo-tan/bookmark-plus.git
