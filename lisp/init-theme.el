@@ -46,6 +46,9 @@
 ;; Leuven theme
 (use-package leuven-theme)
 
+;; Tomorrow theme
+(use-package color-theme-sanityinc-tomorrow)
+
 ;; Theme switcher
 (defun index-of-theme (theme)
   "Get THEME index in pool."
