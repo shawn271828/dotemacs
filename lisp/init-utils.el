@@ -36,7 +36,7 @@
   (setq which-key-side-window-location 'bottom)
   (setq which-key-side-window-max-width 0.33)
   (setq which-key-side-window-max-height 0.4)
-  (setq which-key-idle-delay 1)
+  (setq which-key-idle-delay .8)
   (setq which-key-max-description-length 40)
   (setq which-key-add-column-padding 0)
   (setq which-key-max-display-columns nil)
@@ -57,7 +57,7 @@
 
 (use-package htmlize)
 (use-package memory-usage)
-(use-package uptimes)
+(use-package esup)
 (use-package open-junk-file
   :config
   (setq open-junk-file-format (concat user-emacs-directory "junk/%Y/%m/%d-%H%M%S.")))
