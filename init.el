@@ -83,6 +83,7 @@
 (require 'init-company)
 (require 'init-yasnippet)
 (require 'init-python)
+(require 'init-scala)
 (require 'init-vcs)
 (require 'init-org)
 (require 'init-restclient)
