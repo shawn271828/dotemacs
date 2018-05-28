@@ -35,16 +35,26 @@
 (use-package sbt-mode)
 
 (use-package scala-mode
-  :interpreter
-  ("scala" . scala-mode)
+  :interpreter ("scala" . scala-mode)
+  :bind ("RET" . scala-mode-newline-comments)
   :config
+  ;; New line hack
+  (defun scala-mode-newline-comments ()
+    "Custom newline appropriate for `scala-mode'."
+    ;; shouldn't this be in a post-insert hook?
+    (interactive)
+    (newline-and-indent)
+    (scala-indent:insert-asterisk-on-multiline-comment))
+
   ;; For complex scala files
   (setq max-lisp-eval-depth 50000)
   (setq max-specpdl-size 5000)
-  (add-hook 'scala-mode
-            (lambda ()
-              (setq prettify-symbols-alist scala-prettify-symbols-alist)
-              (prettify-symbols-mode))))
+
+  ;; Prettify scala symbol
+  (add-hook 'scala-mode-hook
+            (lambda () (setq prettify-symbols-alist
+                        (append '(("Boolean" . ?Ɓ))
+                                scala-prettify-symbols-alist)))))
 
 (provide 'init-scala)
 

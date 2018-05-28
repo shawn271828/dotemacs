@@ -29,6 +29,10 @@
 (eval-when-compile
   (require 'init-const))
 
+;; Encoding syste
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+
 ;; Explicitly set the prefered coding systems to avoid annoying prompt
 ;; from emacs (especially on Microsoft Windows)
 (prefer-coding-system 'utf-8)
@@ -147,17 +151,16 @@
 ;; Make pairs balance
 (use-package smartparens
   :diminish
-  :init (add-hook 'after-init-hook #'smartparens-global-mode)
+  :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
          ("C-<up>" . sp-unwrap-sexp)
-         ("C-<down>" . sp-rewrap-sexp)
-         ("C-M-k" . sp-kill-hybrid-sexp)
-         ("C-M-<backspace>" . sp-backward-kill-sexp)
-         ("C-M-a" . sp-beginning-of-sexp)
-         ("C-M-e" . sp-end-of-sexp))
+         ("C-<down>" . sp-rewrap-sexp))
   :config
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  (sp-pair "(" ")" :wrap "M-(")
+  (sp-pair "[" "]" :wrap "M-[")
+  (sp-pair "{" "}" :wrap "M-{"))
 
 ;; Expand region
 (use-package expand-region

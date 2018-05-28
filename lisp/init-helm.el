@@ -38,8 +38,8 @@
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
-         ("C-c SPC" . helm-mark-ring)
-         ("C-c C-SPC". helm-global-mark-ring)
+         ("C-c SPC" . helm-global-mark-ring)
+         ("M-j" . helm-imenu)
          ([remap occur] . helm-occur)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
