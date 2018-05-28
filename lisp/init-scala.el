@@ -29,7 +29,8 @@
 (eval-when-compile
   (require 'init-custom))
 
-(use-package ensime)
+(use-package ensime
+  :init (setq ensime-startup-notification nil))
 
 (use-package sbt-mode)
 

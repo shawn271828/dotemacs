@@ -39,7 +39,7 @@
   (setq org-html-head-include-default-style nil)
   ;; (setq org-export-headline-levels 6)
   (setq org-html-htmlize-output-type nil)
-  (setq org-agenda-files '("~/code/org"))
+  (setq org-agenda-files '("~/Documents/org"))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")))
   (setq org-log-done 'time)
@@ -70,7 +70,6 @@
                                      (restclient . t)
                                      (ditaa . t)
                                      (dot . t)
-                                     (sh . t)
                                      (plantuml . t)))
 
   (org-babel-do-load-languages 'org-babel-load-languages
@@ -100,7 +99,7 @@
   ;; https://orgmode.org/org.html#Sources-and-destinations
   (setq org-publish-project-alist
         '(("orgfiles"
-           :base-directory "~/code/org"
+           :base-directory "~/Documents/org"
            :base-extension "org"
            :publishing-directory "~/code/blog/org"
            :publishing-function org-html-publish-to-html
@@ -110,10 +109,10 @@
            :html-preamble nil
            :html-postamble nil)
           ("images"
-          :base-directory "~/code/org/images"
-          :base-extension "jpg\\|gif\\|png"
-          :publishing-directory "~/code/blog/org/images"
-          :publishing-function org-publish-attachment)
+           :base-directory "~/Documents/org/images"
+           :base-extension "jpg\\|gif\\|png"
+           :publishing-directory "~/code/blog/org/images"
+           :publishing-function org-publish-attachment)
           ("website" :components ("orgfiles" "images"))
 
           (""))))
