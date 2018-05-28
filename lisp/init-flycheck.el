@@ -26,6 +26,9 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'init-const))
+
 (use-package flycheck
   :bind ("<f11>" . flycheck-list-errors)
   :init (add-hook 'prog-mode-hook #'flycheck-mode)
@@ -34,10 +37,11 @@
   (setq flycheck-emacs-lisp-load-path 'inherit)
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
-;; Display Flycheck errors in GUI tooltips
-;; (use-package flycheck-pos-tip
-;;   :init (flycheck-pos-tip-mode 1)
-;;   :config (setq flycheck-pos-tip-timeout 15))
+;; Display Flycheck errors in GUI tooltips (only when Emacs 26+)
+(when (>= emacs-major-version 26)
+  (use-package flycheck-pos-tip
+    :init (flycheck-pos-tip-mode 1)
+    :config (setq flycheck-pos-tip-timeout 15)))
 
 ;; Colorful Flycheck mode line
 (use-package flycheck-color-mode-line

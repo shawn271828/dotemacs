@@ -26,6 +26,9 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'init-const))
+
 (use-package company
   :diminish company-mode
   :init (add-hook 'after-init-hook #'global-company-mode)
@@ -48,17 +51,19 @@
         company-require-match nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil
-        company-tooltip-align-annotations t) 
-  ;; Popup documentation for completion candidates
-  ;; (use-package company-quickhelp
-  ;;   :bind (:map company-active-map
-  ;;               ("M-h" . company-quickhelp-manual-begin))
-  ;;   :init (company-quickhelp-mode 1)
-  ;;   :config
-  ;;   (use-package pos-tip :demand)
-  ;;   ;; Essential hack for company-quickhelp working on Emacs 26.1rc
-  ;;   (pos-tip-show "")
-  ;;   (setq company-quickhelp-delay 0.8))
+        company-tooltip-align-annotations t)
+
+  ;; Popup documentation for completion candidates (only when Emacs 26+)
+  (when (>= emacs-major-version 26)
+    (use-package company-quickhelp
+      :bind (:map company-active-map
+                  ("M-h" . company-quickhelp-manual-begin))
+      :init (company-quickhelp-mode 1)
+      :config
+      (use-package pos-tip :demand)
+      ;; Essential hack for company-quickhelp working on Emacs 26.1rc
+      (pos-tip-show "")
+      (setq company-quickhelp-delay 0.8)))
 
   ;; Support yas in commpany
   ;; Note: Must be the last to involve all backends
