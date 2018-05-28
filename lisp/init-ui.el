@@ -113,10 +113,6 @@
 ;;   (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
 ;;   (add-hook 'after-init-hook 'dimmer-mode))
 
-(use-package neotree
-  :bind ("<f8>" . neotree-toggle)
-  :config (setq neo-smart-open t))
-
 (use-package imenu-list
   :bind ("C-'" . #'imenu-list-smart-toggle)
   :config
