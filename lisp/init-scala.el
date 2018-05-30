@@ -48,7 +48,12 @@
 
   ;; For complex scala files
   (setq max-lisp-eval-depth 50000)
-  (setq max-specpdl-size 5000))
+  (setq max-specpdl-size 5000)
+
+  ;; Scalariform
+  (use-package scalariform
+    :load-path "site-lisp/scalariform"
+    :demand))
 
 (provide 'init-scala)
 
