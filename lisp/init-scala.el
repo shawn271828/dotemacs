@@ -48,13 +48,7 @@
 
   ;; For complex scala files
   (setq max-lisp-eval-depth 50000)
-  (setq max-specpdl-size 5000)
-
-  ;; Prettify scala symbol
-  (add-hook 'scala-mode-hook
-            (lambda () (setq prettify-symbols-alist
-                        (append '(("Boolean" . ?Ɓ))
-                                scala-prettify-symbols-alist)))))
+  (setq max-specpdl-size 5000))
 
 (provide 'init-scala)
 
