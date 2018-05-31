@@ -38,7 +38,6 @@
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
-         ("C-c SPC" . helm-global-mark-ring)
          ("M-j" . helm-imenu)
          ([remap occur] . helm-occur)
          :map helm-map

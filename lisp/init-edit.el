@@ -339,6 +339,14 @@ _m_: smart
 (use-package key-chord
   :chords (("JJ" . mode-line-other-buffer)))
 
+(use-package goto-chg
+  :commands goto-last-change
+  ;; complementary to
+  ;; C-x r m / C-x r l
+  ;; and C-<space> C-<space> / C-u C-<space>
+  :bind (("C-c <left>" . goto-last-change)
+         ("C-c <right>" . goto-last-change-reverse)))
+
 (provide 'init-edit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
