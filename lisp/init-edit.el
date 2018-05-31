@@ -154,8 +154,9 @@
   :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
-         ("C-<up>" . sp-unwrap-sexp)
-         ("C-<down>" . sp-rewrap-sexp))
+         ("C-<up>" . sp-raise-sexp)
+         ("C-<down>" . sp-split-sexp)
+         ("C-<return>" . sp-rewrap-sexp))
   :config
   (require 'smartparens-config)
   (sp-pair "(" ")" :wrap "M-(")
