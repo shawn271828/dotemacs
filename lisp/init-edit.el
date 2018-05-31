@@ -130,8 +130,8 @@
   :init (add-hook 'after-init-hook #'global-undo-tree-mode)
   :config
   ;; autosave the undo-tree history
-  (setq undo-tree-history-directory-alist  `((".*" . ,my-backup-dir)))
-  (setq undo-tree-auto-save-history t)
+  ;; (setq undo-tree-history-directory-alist  `((".*" . ,my-backup-dir)))
+  ;; (setq undo-tree-auto-save-history t)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t))
 
