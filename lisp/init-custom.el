@@ -53,7 +53,7 @@
   "Set Anaconda home path."
   :type 'string)
 
-(defcustom my-preferred-theme 'zenburn
+(defcustom my-preferred-theme 'sanityinc-tomorrow-eighties
   "Theme."
   :type 'symbol)
 
