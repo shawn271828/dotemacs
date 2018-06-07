@@ -154,7 +154,7 @@
   :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
-         ("C-<up>" . sp-raise-sexp)
+         ("C-<up>" . sp-splice-sexp)
          ("C-<down>" . sp-split-sexp)
          ("C-<return>" . sp-rewrap-sexp))
   :config
@@ -345,8 +345,8 @@ _m_: smart
   ;; complementary to
   ;; C-x r m / C-x r l
   ;; and C-<space> C-<space> / C-u C-<space>
-  :bind (("C-c <left>" . goto-last-change)
-         ("C-c <right>" . goto-last-change-reverse)))
+  :bind (("H-<left>" . goto-last-change)
+         ("H-<right>" . goto-last-change-reverse)))
 
 (provide 'init-edit)
 

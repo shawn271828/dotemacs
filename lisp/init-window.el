@@ -27,12 +27,7 @@
 ;;; Code:
 
 ;; Windows management
-(use-package winner
-  :bind (("M-<left>" . winner-undo)
-         ("M-<right>" . winner-redo))
-  :config
-  (unbind-key "C-c <left>" winner-mode-map)
-  (unbind-key "C-c <right>" winner-mode-map))
+(use-package winner)
 
 (use-package ace-window
   :demand
