@@ -46,6 +46,12 @@
 (use-package hindent
   :init (add-hook 'haskell-mode-hook 'hindent-mode))
 
+(use-package dhall-mode)
+
+(use-package yaml-mode
+  :bind (:map yaml-mode-map
+              ("C-m" . newline-and-indent)))
+
 (provide 'init-haskell)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
