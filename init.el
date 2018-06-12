@@ -88,7 +88,8 @@
 (require 'init-org)
 (require 'init-restclient)
 (require 'init-plantuml)
-(require 'init-graphviz)
+;; (require 'init-graphviz)
+(require 'init-haskell)
 
 ;; Restore
 ;; (require 'init-restore)

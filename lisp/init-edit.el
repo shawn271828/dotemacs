@@ -232,7 +232,7 @@ _m_: smart
                   (aggressive-indent-mode -1))))
   :config
   ;; Disable in some modes
-  (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode))
+  (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode haskell-mode))
     (push mode aggressive-indent-excluded-modes))
 
   ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift (where semicolon `;' matters)
