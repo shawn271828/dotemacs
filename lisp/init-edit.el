@@ -205,34 +205,8 @@ _m_: smart
     ("q" nil "quit"))
 
   ;; MC customizations
-  (setq mc/cmds-to-run-for-all
-        '(mwim-beginning-of-code-or-line
-          mwim-end-of-code-or-line
-          hungry-delete-backward
-          hungry-delete-forward
-          keyboard-escape-quit))
-
-  (setq mc/cmds-to-run-once
-        '(counsel-M-x
-          hydra--digit-argument
-          hydra-multiple-cursors/body
-          hydra-multiple-cursors/mc/edit-lines
-          hydra-multiple-cursors/mc/edit-lines-and-exit
-          hydra-multiple-cursors/mc/insert-letters
-          hydra-multiple-cursors/mc/insert-numbers
-          hydra-multiple-cursors/mc/insert-numbers-and-exit
-          hydra-multiple-cursors/mc/mark-all-dwim
-          hydra-multiple-cursors/mc/mark-all-dwim-and-exit
-          hydra-multiple-cursors/mc/mark-all-like-this-and-exit
-          hydra-multiple-cursors/mc/mark-next-like-this
-          hydra-multiple-cursors/mc/mark-previous-like-this
-          hydra-multiple-cursors/mc/skip-to-next-like-this
-          hydra-multiple-cursors/mc/skip-to-previous-like-this
-          hydra-multiple-cursors/mc/unmark-next-like-this
-          hydra-multiple-cursors/mc/unmark-previous-like-this
-          hydra-multiple-cursors/nil
-          hydra-multiple-cursors/set-rectangular-region-anchor
-          swiper-mc)))
+  (setq mc/always-run-for-all t)
+  (setq mc/always-repeat-command t))
 
 ;; Comment
 (use-package comment-dwim-2

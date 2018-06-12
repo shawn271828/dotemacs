@@ -10,6 +10,7 @@
 ;; (setq my-package-archives 'emacs-china)   ; Package repo: melpa, emacs-china or tuna
 ;; (setq my-preferred-theme 'sanityinc-tomorrow-eighties) ; Theme
 ;; (setq my-themes-pool '(sanityinc-tomorrow-eighties leuven)) ; Switchable themes
+;; (setq my-anaconda-home "path/to/anaconda")
 ;; (setq my-helm-frame nil)
 
 ;;; custom-example.el ends here
