@@ -30,12 +30,15 @@
   :init
   (add-hook 'haskell-mode-hook 'eldoc-mode)
   (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
-  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template))
+  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+  :bind
+  (("C-c g" . hoogle)
+   ("C-o" . open-line)))
 
 (use-package intero
   :demand
+  :init (add-hook 'haskell-mode-hook 'intero-mode)
   :config
-  (intero-global-mode)
   (with-eval-after-load 'flycheck
     (flycheck-add-next-checker 'intero
                                '(warning . haskell-hlint))))
