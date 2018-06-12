@@ -90,6 +90,7 @@
 (require 'init-plantuml)
 ;; (require 'init-graphviz)
 (require 'init-haskell)
+(require 'init-clike)
 
 ;; Restore
 ;; (require 'init-restore)
