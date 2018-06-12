@@ -75,9 +75,9 @@
   (add-to-list 'recentf-exclude '("/tmp/" "/ssh:")))
 
 ;; Start server
-;; (use-package server
-;;   :ensure nil
-;;   :init (add-hook 'after-init-hook #'server-mode))
+(use-package server
+  :ensure nil
+  :init (add-hook 'after-init-hook #'server-mode))
 
 (provide 'init-basic)
 
