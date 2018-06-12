@@ -34,7 +34,11 @@
 
 (use-package intero
   :demand
-  :config (intero-global-mode))
+  :config
+  (intero-global-mode)
+  (with-eval-after-load 'flycheck
+    (flycheck-add-next-checker 'intero
+                               '(warning . haskell-hlint))))
 
 (use-package hindent
   :init (add-hook 'haskell-mode-hook 'hindent-mode))
