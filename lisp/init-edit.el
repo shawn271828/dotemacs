@@ -219,33 +219,33 @@ _m_: smart
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
 ;; Minor mode to aggressively keep your code always indented
-(use-package aggressive-indent
-  :diminish aggressive-indent-mode
-  :init
-  (add-hook 'after-init-hook #'global-aggressive-indent-mode)
+;; (use-package aggressive-indent
+;;   :diminish aggressive-indent-mode
+;;   :init
+;;   (add-hook 'after-init-hook #'global-aggressive-indent-mode)
 
-  ;; FIXME: Disable in big files due to the performance issues
-  ;; https://github.com/Malabarba/aggressive-indent-mode/issues/73
-  (add-hook 'find-file-hook
-            (lambda ()
-              (if (> (buffer-size) (* 50 1024))
-                  (aggressive-indent-mode -1))))
-  :config
-  ;; Disable in some modes
-  (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode haskell-mode))
-    (push mode aggressive-indent-excluded-modes))
+;;   ;; FIXME: Disable in big files due to the performance issues
+;;   ;; https://github.com/Malabarba/aggressive-indent-mode/issues/73
+;;   (add-hook 'find-file-hook
+;;             (lambda ()
+;;               (if (> (buffer-size) (* 50 1024))
+;;                   (aggressive-indent-mode -1))))
+;;   :config
+;;   ;; Disable in some modes
+;;   (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode haskell-mode))
+;;     (push mode aggressive-indent-excluded-modes))
 
-  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift (where semicolon `;' matters)
-  (add-to-list
-   'aggressive-indent-dont-indent-if
-   '(and (or (derived-mode-p 'c-mode)
-             (derived-mode-p 'c++-mode)
-             (derived-mode-p 'csharp-mode)
-             (derived-mode-p 'java-mode)
-             (derived-mode-p 'go-mode)
-             (derived-mode-p 'swift-mode))
-         (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
-                             (thing-at-point 'line))))))
+;;   ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift (where semicolon `;' matters)
+;;   (add-to-list
+;;    'aggressive-indent-dont-indent-if
+;;    '(and (or (derived-mode-p 'c-mode)
+;;              (derived-mode-p 'c++-mode)
+;;              (derived-mode-p 'csharp-mode)
+;;              (derived-mode-p 'java-mode)
+;;              (derived-mode-p 'go-mode)
+;;              (derived-mode-p 'swift-mode))
+;;          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
+;;                              (thing-at-point 'line))))))
 
 ;; Better than zap-up-to-char
 (use-package zop-to-char
