@@ -31,6 +31,7 @@
   (add-hook 'haskell-mode-hook 'eldoc-mode)
   (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+  (setq haskell-stylish-on-save t)
   :bind
   (("C-c g" . hoogle)
    ("C-o" . open-line)))
