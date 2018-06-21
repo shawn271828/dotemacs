@@ -70,6 +70,7 @@
                                      (restclient . t)
                                      (ditaa . t)
                                      (dot . t)
+                                     (shell . t)
                                      (plantuml . t)))
 
   (org-babel-do-load-languages 'org-babel-load-languages

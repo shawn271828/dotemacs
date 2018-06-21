@@ -202,11 +202,7 @@ _m_: smart
     ("<mouse-1>" mc/add-cursor-on-click)
     ("<down-mouse-1>" ignore)
     ("<drag-mouse-1>" ignore)
-    ("q" nil "quit"))
-
-  ;; MC customizations
-  (setq mc/always-run-for-all t)
-  (setq mc/always-repeat-command t))
+    ("q" nil "quit")))
 
 ;; Comment
 (use-package comment-dwim-2
