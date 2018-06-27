@@ -36,7 +36,8 @@
 
 (use-package scala-mode
   :interpreter ("scala" . scala-mode)
-  :bind ("RET" . scala-mode-newline-comments)
+  :bind (:map scala-mode-map
+              ("RET" . scala-mode-newline-comments))
   :config
   ;; New line hack
   (defun scala-mode-newline-comments ()
