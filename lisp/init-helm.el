@@ -153,7 +153,7 @@
     :demand
     :config
     (with-eval-after-load 'company
-      (define-key company-mode-map (kbd "M-/") 'helm-company)
+      (define-key company-mode-map (kbd "H-/") 'helm-company)
       (my-make-commands-in-frame '(helm-company))
       ;; Workaround strange company complete pop up after helm-company cancel
       (defun my-hack-to-helm-company ()

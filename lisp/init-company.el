@@ -32,8 +32,7 @@
 (use-package company
   :diminish company-mode
   :init (add-hook 'after-init-hook #'global-company-mode)
-  :bind (("M-/" . company-complete)
-         :map company-active-map
+  :bind (:map company-active-map
          ("<tab>" . company-complete-selection)
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
@@ -45,9 +44,9 @@
   (define-key company-active-map [return] nil)
   (setq company-tooltip-limit 10
         company-show-numbers t
-        company-idle-delay 0
+        company-idle-delay 0.1
         company-echo-delay 0
-        company-minimum-prefix-length 3
+        company-minimum-prefix-length 2
         company-require-match nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil

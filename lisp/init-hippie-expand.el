@@ -36,7 +36,7 @@
           try-complete-file-name
           ;; try-expand-dabbrev-from-kill
           ))
-  :bind (("H-/" . hippie-expand)))
+  :bind (("M-/" . hippie-expand)))
 
 (provide 'init-hippie-expand)
 
