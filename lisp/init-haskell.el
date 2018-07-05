@@ -38,7 +38,10 @@
 
 (use-package intero
   :demand
-  :init (add-hook 'haskell-mode-hook 'intero-mode)
+  :init
+  (add-hook 'haskell-mode-hook 'intero-mode)
+  (add-hook 'intero-repl-mode-hook
+            (lambda () (company-mode 0)))
   :config
   (with-eval-after-load 'flycheck
     (flycheck-add-next-checker 'intero
