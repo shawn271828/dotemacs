@@ -39,7 +39,8 @@
   (setq org-html-head-include-default-style nil)
   ;; (setq org-export-headline-levels 6)
   (setq org-html-htmlize-output-type nil)
-  (setq org-agenda-files '("~/Documents/org"))
+  (setq org-html-validation-link nil)
+  (setq org-agenda-files '("~/v/org"))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")))
   (setq org-log-done 'time)
@@ -100,9 +101,9 @@
   ;; https://orgmode.org/org.html#Sources-and-destinations
   (setq org-publish-project-alist
         '(("orgfiles"
-           :base-directory "~/Documents/org"
+           :base-directory "~/v/org"
            :base-extension "org"
-           :publishing-directory "~/code/blog/org"
+           :publishing-directory "~/v/code/blog/org"
            :publishing-function org-html-publish-to-html
            :htmlized-source nil
            :section-numbers nil
@@ -110,7 +111,7 @@
            :html-preamble nil
            :html-postamble nil)
           ("images"
-           :base-directory "~/Documents/org/images"
+           :base-directory "~/v/org/images"
            :base-extension "jpg\\|gif\\|png"
            :publishing-directory "~/code/blog/org/images"
            :publishing-function org-publish-attachment)
