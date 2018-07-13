@@ -149,16 +149,16 @@
                                  helm-ag-buffers)))
 
   ;; Company integration
-  (use-package helm-company
-    :demand
-    :config
-    (with-eval-after-load 'company
-      (define-key company-mode-map (kbd "H-/") 'helm-company)
-      (my-make-commands-in-frame '(helm-company))
-      ;; Workaround strange company complete pop up after helm-company cancel
-      (defun my-hack-to-helm-company ()
-        (company-cancel))
-      (advice-add 'helm-company :after 'my-hack-to-helm-company)))
+  ;; (use-package helm-company
+  ;;   :demand
+  ;;   :config
+  ;;   (with-eval-after-load 'company
+  ;;     (define-key company-mode-map (kbd "H-/") 'helm-company)
+  ;;     (my-make-commands-in-frame '(helm-company))
+  ;;     ;; Workaround strange company complete pop up after helm-company cancel
+  ;;     (defun my-hack-to-helm-company ()
+  ;;       (company-cancel))
+  ;;     (advice-add 'helm-company :after 'my-hack-to-helm-company)))
 
   ;; Projectile integration
   (use-package helm-projectile

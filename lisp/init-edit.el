@@ -273,8 +273,7 @@ _m_: smart
 ;; Jump to things in Emacs tree-style
 (use-package avy
   :demand
-  :bind (("C-'" . avy-goto-word-1)
-         ([remap goto-line] . avy-goto-line)
+  :bind (([remap goto-line] . avy-goto-line)
          :map isearch-mode-map
          ("C-j" . avy-isearch))
   :config
@@ -304,7 +303,28 @@ _m_: smart
     t)
 
   (add-to-list 'avy-dispatch-alist '(?N . my-avy-action-copy-line))
-  (add-to-list 'avy-dispatch-alist '(?Y . my-avy-action-yank-line)))
+  (add-to-list 'avy-dispatch-alist '(?Y . my-avy-action-yank-line))
+
+  ;; Install avy with modifier
+  (defun my-make-universal-key-handler (func)
+    "Make a univeral key handler with FUNC."
+    (lambda ()
+      (interactive)
+      (let* ((event     last-input-event)
+             (modifiers (event-modifiers event))
+             (basic     (event-basic-type event))
+             (char      (if (memq 'shift modifiers)
+                            (upcase  basic)
+                          basic)))
+        (apply func (list char)))))
+
+  (defun my-install-avy-with-modifier (modifier avy-func)
+    (let ((handler (my-make-universal-key-handler avy-func)))
+      (cl-loop for key-char from 33 to 126
+               do (let ((key (format "%s%s" modifier (string key-char))))
+                    (global-set-key (kbd key) handler)))))
+
+  (my-install-avy-with-modifier "H-" #'avy-goto-word-1))
 
 ;; Other key chords (should already be enabled in init-package.el)
 (use-package key-chord
