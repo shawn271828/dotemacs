@@ -273,7 +273,8 @@ _m_: smart
 ;; Jump to things in Emacs tree-style
 (use-package avy
   :demand
-  :bind (([remap goto-line] . avy-goto-line)
+  :bind (("C-'" . avy-goto-word-1)
+         ([remap goto-line] . avy-goto-line)
          :map isearch-mode-map
          ("C-j" . avy-isearch))
   :config
