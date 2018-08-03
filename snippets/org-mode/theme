@@ -2,6 +2,7 @@
 # name: theme
 # key: <t
 # --
+#+OPTIONS: author:nil date:nil
 #+SETUPFILE: ~/.emacs.d/org/setup/highlightjs
 #+SETUPFILE: ~/.emacs.d/org/setup/${1:minimal}
 #+HTML_HEAD: <link rel="stylesheet" href="https://shuo-tan.github.io/themes/hl/styles/${2:googlecode}.css" />

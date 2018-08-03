@@ -61,6 +61,8 @@
                ediff-window-setup-function 'ediff-setup-windows-plain
                indent-tabs-mode nil
                tab-width 4
+	           c-basic-offset 4
+               python-guess-indent nil
                mouse-yank-at-point t
                save-interprogram-paste-before-kill t
                scroll-preserve-screen-position 'always
