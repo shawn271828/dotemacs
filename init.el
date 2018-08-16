@@ -91,6 +91,7 @@
 (require 'init-graphviz)
 (require 'init-haskell)
 (require 'init-clike)
+(require 'init-web)
 
 ;; Restore
 ;; (require 'init-restore)
