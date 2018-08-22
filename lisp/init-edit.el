@@ -341,6 +341,9 @@ _m_: smart
   :bind (("H-<left>" . goto-last-change)
          ("H-<right>" . goto-last-change-reverse)))
 
+(use-package vimish-fold
+  :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
+
 (provide 'init-edit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
