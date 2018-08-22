@@ -56,13 +56,11 @@
                  nil))
 
 ;; Highlight indentions
-(use-package highlight-indent-guides
-  :diminish highlight-indent-guides-mode
-  :init (add-hook 'prog-mode-hook #'highlight-indent-guides-mode)
+(use-package indent-guide
+  :diminish indent-guide-mode
+  :bind (("<f12>" . indent-guide-mode))
   :config
-  (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-character ?\|)
-  (setq highlight-indent-guides-auto-enabled t))
+  (setq indent-guide-char "|"))
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters

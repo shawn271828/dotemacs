@@ -80,7 +80,7 @@
 
 ;; Fill column indication
 (use-package fill-column-indicator
-  :bind ("<f12>" . fci-mode)
+  :bind ("H-<f12>" . fci-mode)
   :config
   (setq fci-rule-width 2))
 

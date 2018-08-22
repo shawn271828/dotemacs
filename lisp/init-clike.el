@@ -40,7 +40,8 @@
   (add-hook 'c-mode-common-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                (helm-gtags-mode))))
+                (helm-gtags-mode)
+				(setq indent-tabs-mode t))))
   :bind (:map helm-gtags-mode-map
               ("M-." . helm-gtags-find-tag)
               ("M-," . helm-gtags-pop-stack)

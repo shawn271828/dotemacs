@@ -67,21 +67,21 @@
     (flycheck-add-next-checker 'python-pyflakes '(t . python-pycodestyle))))
 
 ;; Python completion and backend
-(use-package anaconda-mode
-  :diminish anaconda-mode
-  :init (add-hook 'python-mode-hook
-                  '(lambda ()
-                     (setq-default python-indent-offset 4)
-                     (anaconda-mode)
-                     (anaconda-eldoc-mode))))
+;; (use-package anaconda-mode
+;;   :diminish anaconda-mode
+;;   :init (add-hook 'python-mode-hook
+;;                   '(lambda ()
+;;                      (setq-default python-indent-offset 4)
+;;                      (anaconda-mode)
+;;                      (anaconda-eldoc-mode))))
 
-(use-package company-anaconda
-  :defines company-backends
-  :init (add-hook 'python-mode-hook
-                  (lambda ()
-                    (with-eval-after-load 'company
-                      (make-local-variable 'company-backends)
-                      (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))))
+;; (use-package company-anaconda
+;;   :defines company-backends
+;;   :init (add-hook 'python-mode-hook
+;;                   (lambda ()
+;;                     (with-eval-after-load 'company
+;;                       (make-local-variable 'company-backends)
+;;                       (cl-pushnew (company-backend-with-yas 'company-anaconda) company-backends)))))
 
 ;; Code formatter
 (use-package yapfify)
