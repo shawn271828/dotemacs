@@ -59,6 +59,8 @@
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode)
   :config
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-basic-offset 2)
   (use-package js2-refactor
     :diminish js2-refactor-mode
     :init (add-hook 'js2-mode-hook #'js2-refactor-mode)
@@ -94,7 +96,11 @@
         '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
           t
           :placeOpenBraceOnNewLineForFunctions
-          nil))
+          nil
+          :tabSize
+          2
+          :indentSize
+          2))
 
   (with-eval-after-load 'company
     (cl-pushnew (company-backend-with-yas 'company-tide) company-backends)))
@@ -106,6 +112,9 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
+  (setq web-mode-style-padding 0)
+  (setq web-mode-script-padding 0)
+  (setq web-mode-enable-auto-pairing nil)
 
   ;; Complete for web,html,emmet,jade,slim modes
   (with-eval-after-load 'company
