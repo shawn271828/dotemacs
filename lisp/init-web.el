@@ -161,6 +161,19 @@
 (use-package haml-mode)
 (use-package php-mode)
 
+;; Elm
+(use-package elm-mode
+  :mode "\\.elm$"
+  :defines company-backends
+  :init (add-hook 'elm-mode-hook
+                  (lambda ()
+                    (with-eval-after-load 'company
+                      (make-local-variable 'company-backends)
+                      (cl-pushnew (company-backend-with-yas 'company-elm) company-backends))))
+  :config
+  (setq elm-format-elm-version "0.19")
+  (setq elm-format-on-save t))
+
 (provide 'init-web)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
