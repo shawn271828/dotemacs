@@ -45,7 +45,7 @@
   :bind (:map helm-gtags-mode-map
               ("M-." . helm-gtags-find-tag)
               ("M-," . helm-gtags-pop-stack)
-              ("M-r" . helm-gtags-find-rtag)))
+              ("M-?" . helm-gtags-find-rtag)))
 
 (provide 'init-clike)
 

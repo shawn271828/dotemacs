@@ -171,6 +171,7 @@
                       (make-local-variable 'company-backends)
                       (cl-pushnew (company-backend-with-yas 'company-elm) company-backends))))
   :config
+  (setq elm-package-json "elm.json")
   (setq elm-format-elm-version "0.19")
   (setq elm-format-on-save t))
 
