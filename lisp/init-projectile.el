@@ -35,7 +35,8 @@
   :config
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name))))
   (setq projectile-sort-order 'recentf)
-  (setq projectile-use-git-grep t))
+  (setq projectile-use-git-grep t)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'init-projectile)
 
