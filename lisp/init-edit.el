@@ -344,6 +344,25 @@ _m_: smart
 (use-package vimish-fold
   :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
 
+(use-package neotree
+  :bind (("<f8>" . neotree-project-dir))
+  :config
+  (setq neo-window-width 33)
+  (with-eval-after-load 'projectile
+    (setq projectile-switch-project-action 'neotree-projectile-action)
+    (defun neotree-project-dir ()
+      "Open NeoTree using the git root."
+      (interactive)
+      (let ((project-dir (projectile-project-root))
+            (file-name (buffer-file-name)))
+        (neotree-toggle)
+        (if project-dir
+            (if (neo-global--window-exists-p)
+                (progn
+                  (neotree-dir project-dir)
+                  (neotree-find file-name)))
+          (message "Could not find git project root."))))))
+
 (provide 'init-edit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
