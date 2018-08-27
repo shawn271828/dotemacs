@@ -109,12 +109,22 @@
 (use-package web-mode
   :mode "\\.\\(vue\\|phtml\\|php|[gj]sp\\|as[cp]x\\|erb\\|djhtml\\|html?\\|hbs\\|ejs\\|jade\\|swig\\|tm?pl\\)$"
   :config
+  ;; For smartparens
+  (setq web-mode-enable-auto-pairing nil)
+  (with-eval-after-load 'smartparens
+    (defun sp-web-mode-is-code-context (id action context)
+      (and (eq action 'insert)
+           (not (or (get-text-property (point) 'part-side)
+                    (get-text-property (point) 'block-side)))))
+    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
+  
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-style-padding 0)
   (setq web-mode-script-padding 0)
-  (setq web-mode-enable-auto-pairing nil)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
 
   ;; Complete for web,html,emmet,jade,slim modes
   (with-eval-after-load 'company
