@@ -71,39 +71,39 @@
   :config (use-package mocha-snippets))
 
 ;; Major mode for CoffeeScript code
-(use-package coffee-mode
-  :config (setq coffee-tab-width 2))
+;; (use-package coffee-mode
+;;   :config (setq coffee-tab-width 2))
 
 ;; Typescript Interactive Development Environment
-(use-package tide
-  :diminish tide-mode
-  :init
-  (defun setup-tide-mode ()
-    "Setup tide mode."
-    (interactive)
-    (tide-setup)
-    (eldoc-mode 1)
-    (tide-hl-identifier-mode 1))
+;; (use-package tide
+;;   :diminish tide-mode
+;;   :init
+;;   (defun setup-tide-mode ()
+;;     "Setup tide mode."
+;;     (interactive)
+;;     (tide-setup)
+;;     (eldoc-mode 1)
+;;     (tide-hl-identifier-mode 1))
 
-  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+;;   (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-  (with-eval-after-load 'js2-mode
-    (add-hook 'js2-mode-hook #'setup-tide-mode))
+;;   (with-eval-after-load 'js2-mode
+;;     (add-hook 'js2-mode-hook #'setup-tide-mode))
 
-  (add-hook 'before-save-hook #'tide-format-before-save)
-  :config
-  (setq tide-format-options
-        '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
-          t
-          :placeOpenBraceOnNewLineForFunctions
-          nil
-          :tabSize
-          2
-          :indentSize
-          2))
+;;   (add-hook 'before-save-hook #'tide-format-before-save)
+;;   :config
+;;   (setq tide-format-options
+;;         '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
+;;           t
+;;           :placeOpenBraceOnNewLineForFunctions
+;;           nil
+;;           :tabSize
+;;           2
+;;           :indentSize
+;;           2))
 
-  (with-eval-after-load 'company
-    (cl-pushnew (company-backend-with-yas 'company-tide) company-backends)))
+;;   (with-eval-after-load 'company
+;;     (cl-pushnew (company-backend-with-yas 'company-tide) company-backends)))
 
 ;; Major mode for editing web templates
 (use-package web-mode
@@ -121,8 +121,6 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-  (setq web-mode-style-padding 0)
-  (setq web-mode-script-padding 0)
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-current-column-highlight t)
 
@@ -131,27 +129,26 @@
     (use-package company-web
       :init
       (cl-pushnew (company-backend-with-yas 'company-web-html) company-backends)
-      (cl-pushnew (company-backend-with-yas 'company-web-jade) company-backends)
-      (cl-pushnew (company-backend-with-yas 'company-web-slim) company-backends))))
+      (cl-pushnew (company-backend-with-yas 'company-css) company-backends))))
 
 ;; Live browser JavaScript, CSS, and HTML interaction
-(use-package skewer-mode
-  :diminish skewer-mode
-  :init
-  (with-eval-after-load 'js2-mode
-    (add-hook 'js2-mode-hook #'skewer-mode))
-  (with-eval-after-load 'css-mode
-    (add-hook 'css-mode-hook #'skewer-css-mode))
-  (with-eval-after-load 'web-mode
-    (add-hook 'web-mode-hook #'skewer-html-mode))
-  (with-eval-after-load 'sgml-mode
-    (add-hook 'html-mode-hook #'skewer-html-mode))
+;; (use-package skewer-mode
+;;   :diminish skewer-mode
+;;   :init
+;;   (with-eval-after-load 'js2-mode
+;;     (add-hook 'js2-mode-hook #'skewer-mode))
+;;   (with-eval-after-load 'css-mode
+;;     (add-hook 'css-mode-hook #'skewer-css-mode))
+;;   (with-eval-after-load 'web-mode
+;;     (add-hook 'web-mode-hook #'skewer-html-mode))
+;;   (with-eval-after-load 'sgml-mode
+;;     (add-hook 'html-mode-hook #'skewer-html-mode))
 
-  ;; diminish
-  (with-eval-after-load 'skewer-css
-    (diminish 'skewer-css-mode))
-  (with-eval-after-load 'skewer-html
-    (diminish 'skewer-html-mode)))
+;;   ;; diminish
+;;   (with-eval-after-load 'skewer-css
+;;     (diminish 'skewer-css-mode))
+;;   (with-eval-after-load 'skewer-html
+;;     (diminish 'skewer-html-mode)))
 
 ;; Format HTML, CSS and JavaScript/JSON by js-beautify
 (use-package web-beautify
@@ -168,8 +165,8 @@
   ;; Set indent size to 2
   (setq web-beautify-args '("-s" "2" "-f" "-")))
 
-(use-package haml-mode)
-(use-package php-mode)
+;; (use-package haml-mode)
+;; (use-package php-mode)
 
 ;; Elm
 (use-package elm-mode

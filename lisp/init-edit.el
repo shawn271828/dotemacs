@@ -347,7 +347,8 @@ _m_: smart
 (use-package neotree
   :bind (("<f8>" . neotree-project-dir))
   :config
-  (setq neo-window-width 33)
+  (setq neo-window-width 40)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (with-eval-after-load 'projectile
     (setq projectile-switch-project-action 'neotree-projectile-action)
     (defun neotree-project-dir ()
@@ -362,6 +363,8 @@ _m_: smart
                   (neotree-dir project-dir)
                   (neotree-find file-name)))
           (message "Could not find git project root."))))))
+
+(use-package all-the-icons)
 
 (provide 'init-edit)
 
