@@ -163,7 +163,40 @@
   (require 'smartparens-config)
   (sp-pair "(" ")" :wrap "M-(")
   (sp-pair "[" "]" :wrap "M-[")
-  (sp-pair "{" "}" :wrap "M-{"))
+  (sp-pair "{" "}" :wrap "M-{")
+
+  (defun sp-web-mode-is-code-context (id action context)
+      (and (eq action 'insert)
+           (not (or (get-text-property (point) 'part-side)
+                    (get-text-property (point) 'block-side)))))
+  (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
+  
+  (defun shawn-enter-and-indent-sexp (&rest _ignored)
+    "Insert an extra newline after point, and reindent."
+    (newline)
+    (indent-according-to-mode)
+    (forward-line -1)
+    (indent-according-to-mode))
+
+  (dolist (mode '(c-mode c++-mode css-mode objc-mode java-mode
+                         js2-mode json-mode
+                         python-mode sh-mode web-mode))
+    (sp-local-pair mode "{" nil :post-handlers
+                   '((shawn-enter-and-indent-sexp "RET")
+                     (shawn-enter-and-indent-sexp "<return>"))))
+
+  (dolist (mode '(js2-mode json-mode python-mode web-mode))
+    (sp-local-pair mode "[" nil :post-handlers
+                   '((shawn-enter-and-indent-sexp "RET")
+                     (shawn-enter-and-indent-sexp "<return>"))))
+
+  (dolist (mode '(python-mode))
+    (sp-local-pair mode "(" nil :post-handlers
+                   '((shawn-enter-and-indent-sexp "RET")
+                     (shawn-enter-and-indent-sexp "<return>")))
+    (sp-local-pair mode "\"\"\"" "\"\"\"" :post-handlers
+                   '((shawn-enter-and-indent-sexp "RET")
+                     (shawn-enter-and-indent-sexp "<return>")))))
 
 ;; Expand region
 (use-package expand-region
@@ -172,7 +205,7 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :init (use-package hydra)
-  :bind ("C-c m" . hydra-multiple-cursors/body)
+  :bind ("C-c M" . hydra-multiple-cursors/body)
   :config
   (defhydra hydra-multiple-cursors (:hint nil)
     "
@@ -216,35 +249,6 @@ _m_: smart
   :init (add-hook 'after-init-hook #'global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
-;; Minor mode to aggressively keep your code always indented
-;; (use-package aggressive-indent
-;;   :diminish aggressive-indent-mode
-;;   :init
-;;   (add-hook 'after-init-hook #'global-aggressive-indent-mode)
-
-;;   ;; FIXME: Disable in big files due to the performance issues
-;;   ;; https://github.com/Malabarba/aggressive-indent-mode/issues/73
-;;   (add-hook 'find-file-hook
-;;             (lambda ()
-;;               (if (> (buffer-size) (* 50 1024))
-;;                   (aggressive-indent-mode -1))))
-;;   :config
-;;   ;; Disable in some modes
-;;   (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode python-mode scala-mode haskell-mode))
-;;     (push mode aggressive-indent-excluded-modes))
-
-;;   ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift (where semicolon `;' matters)
-;;   (add-to-list
-;;    'aggressive-indent-dont-indent-if
-;;    '(and (or (derived-mode-p 'c-mode)
-;;              (derived-mode-p 'c++-mode)
-;;              (derived-mode-p 'csharp-mode)
-;;              (derived-mode-p 'java-mode)
-;;              (derived-mode-p 'go-mode)
-;;              (derived-mode-p 'swift-mode))
-;;          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
-;;                              (thing-at-point 'line))))))
-
 ;; Better than zap-up-to-char
 (use-package zop-to-char
   :bind (("M-z" . zop-up-to-char)
@@ -260,17 +264,6 @@ _m_: smart
 (use-package super-save
   :diminish super-save-mode
   :init (add-hook 'after-init-hook #'super-save-mode))
-
-;; Bookmark plus from github
-;; (use-package bookmark+
-;;   :load-path "site-lisp/bookmark-plus"
-;;   :demand
-;;   :config
-;;   (let ((bmkp-dir (expand-file-name ".bmkp" user-emacs-directory)))
-;;     (unless (file-exists-p bmkp-dir)
-;;       (mkdir bmkp-dir))
-;;     (setq bmkp-bmenu-commands-file (expand-file-name "emacs-bmk-bmenu-commands.el" bmkp-dir))
-;;     (setq bmkp-bmenu-state-file (expand-file-name "emacs-bmk-bmenu-state" bmkp-dir))))
 
 ;; Jump to things in Emacs tree-style
 (use-package avy

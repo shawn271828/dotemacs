@@ -70,54 +70,12 @@
 (use-package mocha
   :config (use-package mocha-snippets))
 
-;; Major mode for CoffeeScript code
-;; (use-package coffee-mode
-;;   :config (setq coffee-tab-width 2))
-
-;; Typescript Interactive Development Environment
-;; (use-package tide
-;;   :diminish tide-mode
-;;   :init
-;;   (defun setup-tide-mode ()
-;;     "Setup tide mode."
-;;     (interactive)
-;;     (tide-setup)
-;;     (eldoc-mode 1)
-;;     (tide-hl-identifier-mode 1))
-
-;;   (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-;;   (with-eval-after-load 'js2-mode
-;;     (add-hook 'js2-mode-hook #'setup-tide-mode))
-
-;;   (add-hook 'before-save-hook #'tide-format-before-save)
-;;   :config
-;;   (setq tide-format-options
-;;         '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
-;;           t
-;;           :placeOpenBraceOnNewLineForFunctions
-;;           nil
-;;           :tabSize
-;;           2
-;;           :indentSize
-;;           2))
-
-;;   (with-eval-after-load 'company
-;;     (cl-pushnew (company-backend-with-yas 'company-tide) company-backends)))
-
 ;; Major mode for editing web templates
 (use-package web-mode
   :mode "\\.\\(vue\\|phtml\\|php|[gj]sp\\|as[cp]x\\|erb\\|djhtml\\|html?\\|hbs\\|ejs\\|jade\\|swig\\|tm?pl\\)$"
   :config
-  ;; For smartparens
+  ;; Leave auto-paring for smartparens
   (setq web-mode-enable-auto-pairing nil)
-  (with-eval-after-load 'smartparens
-    (defun sp-web-mode-is-code-context (id action context)
-      (and (eq action 'insert)
-           (not (or (get-text-property (point) 'part-side)
-                    (get-text-property (point) 'block-side)))))
-    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
-  
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
@@ -131,25 +89,6 @@
       (cl-pushnew (company-backend-with-yas 'company-web-html) company-backends)
       (cl-pushnew (company-backend-with-yas 'company-css) company-backends))))
 
-;; Live browser JavaScript, CSS, and HTML interaction
-;; (use-package skewer-mode
-;;   :diminish skewer-mode
-;;   :init
-;;   (with-eval-after-load 'js2-mode
-;;     (add-hook 'js2-mode-hook #'skewer-mode))
-;;   (with-eval-after-load 'css-mode
-;;     (add-hook 'css-mode-hook #'skewer-css-mode))
-;;   (with-eval-after-load 'web-mode
-;;     (add-hook 'web-mode-hook #'skewer-html-mode))
-;;   (with-eval-after-load 'sgml-mode
-;;     (add-hook 'html-mode-hook #'skewer-html-mode))
-
-;;   ;; diminish
-;;   (with-eval-after-load 'skewer-css
-;;     (diminish 'skewer-css-mode))
-;;   (with-eval-after-load 'skewer-html
-;;     (diminish 'skewer-html-mode)))
-
 ;; Format HTML, CSS and JavaScript/JSON by js-beautify
 (use-package web-beautify
   :init
@@ -161,26 +100,23 @@
     (bind-key "C-c C-b" 'web-beautify-html html-mode-map))
   (with-eval-after-load 'css-mode
     (bind-key "C-c C-b" 'web-beautify-css css-mode-map))
+  (with-eval-after-load 'web-mode
+    (bind-key "C-c C-b" 'web-beautify-html web-mode-map))
+  
   :config
   ;; Set indent size to 2
   (setq web-beautify-args '("-s" "2" "-f" "-")))
 
-;; (use-package haml-mode)
-;; (use-package php-mode)
-
-;; Elm
-(use-package elm-mode
-  :mode "\\.elm$"
-  :defines company-backends
-  :init (add-hook 'elm-mode-hook
-                  (lambda ()
-                    (with-eval-after-load 'company
-                      (make-local-variable 'company-backends)
-                      (cl-pushnew (company-backend-with-yas 'company-elm) company-backends))))
+;; Emmet
+(use-package emmet-mode
+  :init
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
   :config
-  (setq elm-package-json "elm.json")
-  (setq elm-format-elm-version "0.19")
-  (setq elm-format-on-save t))
+  ;; (setq emmet-move-cursor-between-quotes t)
+  
+  )
 
 (provide 'init-web)
 

@@ -92,6 +92,7 @@
 (require 'init-haskell)
 (require 'init-clike)
 (require 'init-web)
+(require 'init-elm)
 
 ;; Restore
 ;; (require 'init-restore)

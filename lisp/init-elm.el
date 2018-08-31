@@ -1,9 +1,9 @@
-;; init-haskell.el --- Initialize haskell configurations.	-*- lexical-binding: t -*-
+;; init-elm.el --- Initialize elm configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Haskell configurations.
+;;             Elm configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,34 +26,21 @@
 ;;
 ;;; Code:
 
-(use-package haskell-mode
-  :init
-  (add-hook 'haskell-mode-hook 'eldoc-mode)
-  (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
-  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
-  (setq haskell-stylish-on-save t))
-
-(use-package intero
-  :demand
-  :init
-  (add-hook 'haskell-mode-hook 'intero-mode)
-  (add-hook 'intero-repl-mode-hook
-            (lambda () (company-mode 0)))
+;; Elm
+(use-package elm-mode
+  :mode "\\.elm$"
+  :defines company-backends
+  :init (add-hook 'elm-mode-hook
+                  (lambda ()
+                    (with-eval-after-load 'company
+                      (make-local-variable 'company-backends)
+                      (cl-pushnew (company-backend-with-yas 'company-elm) company-backends))))
   :config
-  (with-eval-after-load 'flycheck
-    (flycheck-add-next-checker 'intero
-                               '(warning . haskell-hlint))))
+  (setq elm-package-json "elm.json")
+  (setq elm-format-elm-version "0.19")
+  (setq elm-format-on-save t))
 
-(use-package hindent
-  :init (add-hook 'haskell-mode-hook 'hindent-mode))
-
-(use-package dhall-mode)
-
-(use-package yaml-mode
-  :bind (:map yaml-mode-map
-              ("C-m" . newline-and-indent)))
-
-(provide 'init-haskell)
+(provide 'init-elm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-haskell.el ends here
+;;; init-elm.el ends here
