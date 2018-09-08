@@ -79,7 +79,7 @@
 
   ;; Presentation
   (use-package org-tree-slide
-    :bind (("<f5>" . org-tree-slide-mode))
+    :bind (("<f6>" . org-tree-slide-mode))
     :config
     (add-hook 'org-tree-slide-play-hook
               (lambda ()

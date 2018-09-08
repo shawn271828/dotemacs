@@ -130,11 +130,11 @@
 ;;                                   ("read-book" . 8))))
 
 ;; Dimmer
-;; (use-package dimmer
-;;   :demand
-;;   :init
-;;   (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
-;;   (add-hook 'after-init-hook 'dimmer-mode))
+(use-package dimmer
+  :demand
+  :init
+  (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
+  (add-hook 'after-init-hook 'dimmer-mode))
 
 (provide 'init-ui)
 

@@ -11,6 +11,6 @@
 ;; (setq my-preferred-theme 'sanityinc-tomorrow-eighties) ; Theme
 ;; (setq my-themes-pool '(sanityinc-tomorrow-eighties leuven)) ; Switchable themes
 ;; (setq my-anaconda-home "path/to/anaconda")
-;; (setq my-helm-frame nil)
+;; (setq my-helm-in-frame nil)
 
 ;;; custom-example.el ends here

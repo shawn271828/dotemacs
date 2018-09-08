@@ -5,6 +5,7 @@
       '(
         hydra-multiple-cursors/mc/edit-lines-and-exit
         hydra-multiple-cursors/mc/sort-regions-and-exit
+        indent-for-tab-command
         mwim-beginning-of-code-or-line
         mwim-end-of-code-or-line
         sp-backward-delete-char
@@ -22,5 +23,9 @@
         hydra-multiple-cursors/mc/add-cursor-on-click
         hydra-multiple-cursors/mc/mark-all-like-this-and-exit
         hydra-multiple-cursors/mc/mark-next-like-this
+        hydra-multiple-cursors/mc/mark-previous-like-this
+        hydra-multiple-cursors/mc/skip-to-next-like-this
+        hydra-multiple-cursors/mc/skip-to-previous-like-this
+        hydra-multiple-cursors/mc/unmark-next-like-this
         hydra-multiple-cursors/nil
         ))

@@ -27,7 +27,10 @@
 ;;; Code:
 
 (use-package restclient
-  :mode ("\\.rest\\'" . restclient-mode))
+  :mode ("\\.rest\\'" . restclient-mode)
+  :config
+  (setq tab-width 2)
+  (setq indent-tabs-mode nil))
 
 (provide 'init-restclient)
 

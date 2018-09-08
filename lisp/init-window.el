@@ -29,10 +29,11 @@
 ;; Windows management
 (use-package winner)
 
+;; Ace window
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("<f2>" . hydra-layout-manager/body)
+  :bind (("<f5>" . hydra-layout-manager/body)
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
@@ -104,6 +105,13 @@
           (windmove-find-other-window 'up))
         (shrink-window arg)
       (enlarge-window arg))))
+
+;; Golden Ratio
+;; (use-package golden-ratio
+;;   :init (add-hook 'after-init-hook #'golden-ratio-mode)
+;;   :config
+;;   (with-eval-after-load 'ace-window
+;;     (add-to-list 'golden-ratio-extra-commands 'ace-window)))
 
 (provide 'init-window)
 
