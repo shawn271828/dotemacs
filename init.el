@@ -68,7 +68,6 @@
 (require 'init-basic)
 (require 'init-utils)
 
-;; Visual and editing
 (require 'init-ui)
 (require 'init-theme)
 (require 'init-edit)
@@ -83,7 +82,7 @@
 (require 'init-company)
 (require 'init-yasnippet)
 (require 'init-python)
-(require 'init-scala)
+;; (require 'init-scala)
 (require 'init-vcs)
 (require 'init-org)
 (require 'init-restclient)

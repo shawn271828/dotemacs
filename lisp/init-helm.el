@@ -142,6 +142,7 @@
            ("M-s A" . helm-ag-buffers))
     :config
     (fset 'helm-grep-ag 'helm-do-ag)
+    ;; (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
     (my-make-commands-in-frame '(helm-do-ag
                                  helm-do-ag-buffers
                                  helm-do-ag-this-file
