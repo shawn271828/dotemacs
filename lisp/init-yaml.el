@@ -1,9 +1,9 @@
-;; init-haskell.el --- Initialize haskell configurations.	-*- lexical-binding: t -*-
+;; init-yaml.el --- Initialize yaml configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Haskell configurations.
+;;             Yaml configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,31 +26,12 @@
 ;;
 ;;; Code:
 
-(use-package haskell-mode
-  :init
-  (add-hook 'haskell-mode-hook 'eldoc-mode)
-  (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
-  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
-  (setq haskell-stylish-on-save t)
+(use-package yaml-mode
   :config
   (with-eval-after-load 'smartparens
-    (add-to-list 'sp-no-reindent-after-kill-modes 'haskell-mode)))
+    (add-to-list 'sp-no-reindent-after-kill-modes 'yaml-mode)))
 
-(use-package intero
-  :demand
-  :init
-  (add-hook 'haskell-mode-hook 'intero-mode)
-  (add-hook 'intero-repl-mode-hook
-            (lambda () (company-mode 0)))
-  :config
-  (with-eval-after-load 'flycheck
-    (flycheck-add-next-checker 'intero
-                               '(warning . haskell-hlint))))
-
-(use-package hindent
-  :init (add-hook 'haskell-mode-hook 'hindent-mode))
-
-(provide 'init-haskell)
+(provide 'init-yaml)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-haskell.el ends here
+;;; init-yaml.el ends here

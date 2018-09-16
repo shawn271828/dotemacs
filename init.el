@@ -92,7 +92,7 @@
 (require 'init-clike)
 (require 'init-web)
 (require 'init-elm)
-
+(require 'init-yaml)
 ;; Restore
 ;; (require 'init-restore)
 
