@@ -27,7 +27,8 @@
 ;;; Code:
 
 (use-package yasnippet
-  :diminish (yas-minor-mode . "YAS")
+  :diminish yas-global-mode
+  :diminish yas-minor-mode
   :init (add-hook 'after-init-hook #'yas-global-mode)
   :bind ("C-M-/" . yas-insert-snippet)
   :config (use-package yasnippet-snippets))

@@ -39,7 +39,6 @@
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("M-j" . helm-imenu)
-         ([remap occur] . helm-occur)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
@@ -135,11 +134,10 @@
   ;; Helm-ag
   (use-package helm-ag
     :demand
-    :bind (("M-s M-o" . helm-do-ag-this-file)
+    :bind (("M-s o" . helm-do-ag-this-file)
            ("M-s s" . helm-do-ag)
-           ("M-s S" . helm-ag)
            ("M-s a" . helm-do-ag-buffers)
-           ("M-s A" . helm-ag-buffers))
+           ("M-s M-o" . helm-occur))
     :config
     (fset 'helm-grep-ag 'helm-do-ag)
     ;; (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")

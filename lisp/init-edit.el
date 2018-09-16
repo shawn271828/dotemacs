@@ -166,6 +166,7 @@
   (sp-pair "{" "}" :wrap "M-{")
 
   (add-to-list 'sp-no-reindent-after-kill-modes 'yaml-mode)
+  (add-to-list 'sp-no-reindent-after-kill-modes 'haskell-mode)
 
   (defun sp-web-mode-is-code-context (id action context)
       (and (eq action 'insert)
