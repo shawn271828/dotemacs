@@ -56,7 +56,7 @@
   (setq helm-candidate-number-limit           100
         helm-autoresize-min-height            25
         helm-autoresize-max-height            0
-        helm-split-window-inside-p            t
+        helm-split-window-inside-p            nil
         helm-move-to-line-cycle-in-source     nil
         helm-scroll-amount                    10
         helm-echo-input-in-header-line        t
