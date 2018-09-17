@@ -47,6 +47,11 @@
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
+(use-package nyan-mode
+  :init (add-hook 'after-init-hook #'nyan-mode)
+  :config
+  (setq nyan-bar-length 32))
+
 (when (boundp 'ns-pop-up-frames)
   (setq ns-pop-up-frames nil))
 
