@@ -37,7 +37,7 @@
     (add-to-list 'sp-no-reindent-after-kill-modes 'haskell-mode)))
 
 (use-package intero
-  :demand
+  :diminish
   :init
   (add-hook 'haskell-mode-hook 'intero-mode)
   (add-hook 'intero-repl-mode-hook
@@ -48,6 +48,7 @@
                                '(warning . haskell-hlint))))
 
 (use-package hindent
+  :diminish
   :init (add-hook 'haskell-mode-hook 'hindent-mode))
 
 (provide 'init-haskell)
