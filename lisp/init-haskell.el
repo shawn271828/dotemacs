@@ -27,6 +27,8 @@
 ;;; Code:
 
 (use-package haskell-mode
+  :bind (:map haskell-mode-map
+              ("C-c g" . hoogle))
   :init
   (add-hook 'haskell-mode-hook 'eldoc-mode)
   (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
