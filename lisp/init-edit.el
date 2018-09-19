@@ -158,7 +158,10 @@
          ("C-<left>" . sp-forward-barf-sexp)
          ("C-<up>" . sp-splice-sexp)
          ("C-<down>" . sp-split-sexp)
-         ("C-<return>" . sp-rewrap-sexp))
+         ("C-<return>" . sp-rewrap-sexp)
+         :map smartparens-strict-mode-map
+         ([remap kill-region] . nil)
+         ([remap delete-region] . nil))
   :config
   (require 'smartparens-config)
   (sp-pair "(" ")" :wrap "M-(")
