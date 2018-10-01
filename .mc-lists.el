@@ -3,9 +3,8 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-        hydra-multiple-cursors/mc/edit-lines-and-exit
-        hydra-multiple-cursors/mc/sort-regions-and-exit
         indent-for-tab-command
+        kill-region
         mwim-beginning-of-code-or-line
         mwim-end-of-code-or-line
         sp-backward-delete-char
