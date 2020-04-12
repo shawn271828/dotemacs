@@ -47,10 +47,10 @@
 (and (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (and (bound-and-true-p horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-(use-package nyan-mode
-  :init (add-hook 'after-init-hook #'nyan-mode)
-  :config
-  (setq nyan-bar-length 32))
+;; (use-package nyan-mode
+;;  :init (add-hook 'after-init-hook #'nyan-mode)
+;;  :config
+;;  (setq nyan-bar-length 32))
 
 (when (boundp 'ns-pop-up-frames)
   (setq ns-pop-up-frames nil))
@@ -74,14 +74,14 @@
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
 ;; Cursor beacon (only work well on Emacs 26 for macos)
-(when (>= emacs-major-version 26)
-  (use-package beacon
-    :diminish beacon
-    :init (add-hook 'after-init-hook #'beacon-mode)
-    :config
-    (setq-default beacon-lighter "")
-    (setq-default beacon-size 20)
-    (setq-default beacon-color (face-attribute 'cursor :background))))
+;; (when (>= emacs-major-version 26)
+;;  (use-package beacon
+;;    :diminish beacon
+;;    :init (add-hook 'after-init-hook #'beacon-mode)
+;;    :config
+;;    (setq-default beacon-lighter "")
+;;    (setq-default beacon-size 10)
+;;    (setq-default beacon-color (face-attribute 'cursor :background))))
 
 ;; Fill column indication
 (use-package fill-column-indicator
@@ -100,18 +100,19 @@
 ;; <https://github.com/tumashu/cnfonts>
 (set-face-attribute
  'default nil
- :font (font-spec :name "-*-Operator Mono-normal-normal-normal-*-*-*-*-*-m-*-iso10646-1"
-                  :weight 'light
+ :font (font-spec :name "-SRC-Hack-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+                  :weight 'normal
                   :slant 'normal
                   :size 15.0))
-(dolist (charset '(kana han cjk-misc bopomofo))
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   charset
-   (font-spec :name "-*-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
-              :weight 'light
-              :slant 'normal
-              :size 15.0)))
+;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;   (set-fontset-font
+;;    (frame-parameter nil 'font)
+;;    charset
+;;    (font-spec :name "-DAMA-Ubuntu Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+;;               :weight 'normal
+;;               :slant 'normal
+;;               :size 13.5)))
+
 ;; (use-package cnfonts
 ;;   :init (add-hook 'after-init-hook #'cnfonts-enable)
 ;;   :bind (("C-M--" . cnfonts-decrease-fontsize)
@@ -125,16 +126,16 @@
 ;;   ;; `cnfonts' has issue on Emacs 26
 ;;   (balance-windows)
 
-;;   (setq cnfonts-use-cache t)
-;;   (setq cnfonts-profiles
-;;         '("program1" "program2" "program3" "org-mode" "read-book"))
-;;   (setq cnfonts--profiles-steps '(("program1" . 4)
-;;                                   ("program2" . 5)
-;;                                   ("program3" . 3)
-;;                                   ("org-mode" . 6)
-;;                                   ("read-book" . 8))))
+;;    (setq cnfonts-use-cache t)
+;;    (setq cnfonts-profiles
+;;          '("program1" "program2" "program3" "org-mode" "read-book"))
+;;    (setq cnfonts--profiles-steps '(("program1" . 4)
+;;                                    ("program2" . 5)
+;;                                    ("program3" . 3)
+;;                                    ("org-mode" . 6)
+;;                                    ("read-book" . 8))))
 
-;; Dimmer
+;; dimmer
 (use-package dimmer
   :demand
   :init

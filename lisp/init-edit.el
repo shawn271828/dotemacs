@@ -61,7 +61,7 @@
                ediff-window-setup-function 'ediff-setup-windows-plain
                indent-tabs-mode nil
                tab-width 4
-	           c-basic-offset 4
+               c-basic-offset 4
                python-guess-indent nil
                mouse-yank-at-point t
                save-interprogram-paste-before-kill t
@@ -72,12 +72,19 @@
                truncate-partial-width-windows nil
                visible-bell nil
                echo-keystrokes 1
+               scroll-conservatively 100
                fill-column 79)
 
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
 (delete-selection-mode t)
+
+;; Exceptions for makefile mode
+(add-hook 'makefile-mode-hook
+	  (lambda ()
+	    (setq tab-width 8)
+	    (setq indent-tabs-mode t)))
 
 ;; Place all backup and auto save files in one dir
 ;; and create it if not exists.
@@ -362,7 +369,7 @@ _m_: smart
                   (neotree-find file-name)))
           (message "Could not find git project root."))))))
 
-(use-package all-the-icons)
+;; (use-package all-the-icons)
 
 (provide 'init-edit)
 

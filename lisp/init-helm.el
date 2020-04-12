@@ -54,7 +54,7 @@
   (global-unset-key (kbd "C-x c"))
   (helm-autoresize-mode 1)
   (setq helm-candidate-number-limit           100
-        helm-autoresize-min-height            25
+        helm-autoresize-min-height            35
         helm-autoresize-max-height            0
         helm-split-window-inside-p            t
         helm-move-to-line-cycle-in-source     nil

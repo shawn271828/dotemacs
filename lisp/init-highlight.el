@@ -50,7 +50,7 @@
   (setq show-paren-when-point-in-periphery t)
   (setq show-paren-style 'parenthesis)
   (face-spec-set 'show-paren-match
-                 '((t :foreground "red"
+                 '((t :foreground nil
                       :background nil
                       :underline t))
                  nil))
