@@ -86,6 +86,11 @@
 	    (setq tab-width 8)
 	    (setq indent-tabs-mode t)))
 
+;; Use ld-mode for better indentation when editing GNU linker script
+(use-package ld-mode
+  :load-path "site-lisp/ld-mode"
+  :demand)
+
 ;; Place all backup and auto save files in one dir
 ;; and create it if not exists.
 (unless (file-exists-p my-backup-dir)
