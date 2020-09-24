@@ -36,8 +36,8 @@
   :diminish symbol-overlay-mode
   :bind (("M-i" . symbol-overlay-put)
          :map symbol-overlay-map
-         ("M-n" . symbol-overlay-switch-forward)
-         ("M-p" . symbol-overlay-switch-backward)
+         ;; ("M-n" . symbol-overlay-switch-forward)
+         ;; ("M-p" . symbol-overlay-switch-backward)
          ("M-q" . symbol-overlay-remove-all))
   :init (add-hook 'prog-mode-hook #'symbol-overlay-mode))
 
@@ -69,43 +69,23 @@
 ;; Rainbow mode
 (use-package rainbow-mode)
 
-;; Highlight uncommitted changes
-(use-package diff-hl
-  :bind (:map diff-hl-command-map
-              ("SPC" . diff-hl-mark-hunk))
-  :init
-  (add-hook 'after-init-hook #'global-diff-hl-mode)
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
-  :config
-  (diff-hl-flydiff-mode 1)
-
-  ;; Fall back to the display margin, if the fringe is unavailable
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode 1))
-
-  ;; Avoid restoring `diff-hl-margin-mode'
-  (with-eval-after-load 'desktop
-    (add-to-list 'desktop-minor-mode-table
-                 '(diff-hl-margin-mode nil)))
-
-  ;; Integration with magit and psvn
-  (with-eval-after-load 'magit
-    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
-
-;; Rainbow mode for color codes
-;; (use-package rainbow-mode
-;;   :diminish rainbow-mode
-;;   :init (add-hook 'emacs-lisp-mode-hook #'rainbow-mode))
-
 ;; Visualize TAB, (HARD) SPACE, NEWLINE
 (use-package whitespace
   :ensure nil
   :diminish whitespace-mode
-  :bind (("M-<f12>" . whitespace-mode))
+  ;; :bind (("M-<f12>" . whitespace-mode))
   :config
-  (setq whitespace-line-column fill-column) ;; limit line length
-  ;; automatically clean up bad whitespace
-  (setq whitespace-action '(report-on-bogus)))
+  (setq whitespace-line-column fill-column)
+  (setq whitespace-action '(report-on-bogus))
+  (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)))
+
+(use-package vimish-fold
+  :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
+
+(use-package vi-tilde-fringe
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'vi-tilde-fringe-mode))
 
 (provide 'init-highlight)
 

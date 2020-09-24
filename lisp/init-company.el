@@ -33,15 +33,12 @@
   :diminish company-mode
   :init (add-hook 'after-init-hook #'global-company-mode)
   :bind (:map company-active-map
-         ("<tab>" . company-complete-selection)
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
          :map company-search-map
          ("C-p" . company-select-previous)
          ("C-n" . company-select-next))
   :config
-  (define-key company-active-map (kbd "RET") nil)
-  (define-key company-active-map [return] nil)
   (setq company-tooltip-limit 10
         company-show-numbers t
         company-idle-delay 0.1

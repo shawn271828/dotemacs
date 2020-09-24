@@ -1,9 +1,9 @@
-;; init-yaml.el --- Initialize yaml configurations.	-*- lexical-binding: t -*-
+;; init-lsp.el --- Initialize lsp configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Yaml configurations.
+;;             LSP configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,12 +26,25 @@
 ;;
 ;;; Code:
 
-(use-package yaml-mode
+(use-package rust-mode
+  :hook (rust-mode . lsp)
+  :after lsp-mode
+  :bind(:map lsp-mode-map
+             ("C-c s m" . lsp-rust-analyzer-expand-macro)
+             ("C-c s h" . lsp-rust-analyzer-inlay-hints-mode))
   :config
-  (with-eval-after-load 'smartparens
-    (add-to-list 'sp-no-reindent-after-kill-modes 'yaml-mode)))
+  (setq lsp-rust-server 'rust-analyzer)
+  (setq lsp-rust-analyzer-inlay-hints-mode t)
+  (setq lsp-rust-analyzer-display-chaining-hints t)
+  (setq lsp-rust-analyzer-display-parameter-hints t)
+  (setq lsp-rust-analyzer-server-display-inlay-hints t))
 
-(provide 'init-yaml)
+(use-package cargo
+  :after rust-mode
+  :hook (rust-mode . cargo-minor-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-yaml.el ends here
+(use-package flycheck-rust
+  :after rust-mode flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(provide 'init-rust)

@@ -26,54 +26,84 @@
 ;;
 ;;; Code:
 
-(use-package lsp-mode
-  :defer 1
+(use-package company-lsp
+  :ensure t
   :config
-  ;; imenu support
-  (require 'lsp-imenu)
-  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  (push 'company-lsp company-backends))
 
-  ;; ui integration
-  (use-package lsp-ui
-    :defer 1
-    :init (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-    :config
-    (defun sync-peek-face ()
-      (set-face-attribute 'lsp-ui-peek-selection nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'default :foreground))
-      (set-face-attribute 'lsp-ui-peek-filename nil :foreground (face-attribute 'font-lock-constant-face :foreground))
-      (set-face-attribute 'lsp-ui-peek-highlight nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'highlight :foreground) :distant-foreground (face-attribute 'highlight :foreground))
-      (set-face-attribute 'lsp-ui-peek-header nil :background (face-attribute 'highlight :background) :foreground (face-attribute 'default :foreground)))
-    (sync-peek-face)
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)) 
+(use-package lsp-mode
+  :commands lsp-mode
+  :ensure t
+  :hook (prog-mode . (lambda ()
+                       (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+                         (lsp-deferred))))
+  :bind
+  (:map lsp-mode-map
+        ("C-c s s" . lsp-describe-thing-at-point)
+        ("C-c s c" . lsp-find-references)
+        ("C-c s d" . xref-find-definitions-other-window))
+  :init
+  (setq lsp-auto-guess-root t)  ;; Detect project root
+  (setq lsp-keep-workspace-alive nil)  ;; Auto-kill LSP server
+  (setq lsp-print-performance t)
+  :config
+  (use-package lsp-clients
+    :ensure nil))
 
-  ;; company integration
-  (use-package company-lsp
-    :defer 1
-    (shawn/local-push-company-backend 'company-lsp))
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :bind(:map lsp-ui-mode-map
+             ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
+             ([remap xref-find-references] . #'lsp-ui-peek-find-references))
+  :init
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-doc-use-webkit nil
+        lsp-ui-doc-delay 0.2
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-position 'at-point
+        lsp-ui-doc-border (face-foreground 'default)
+        lsp-eldoc-enable-hover t
 
-  ;; Python
-  ;; caveat: lsp-symbol-highlight currently not supported by pyls
-  (use-package python
-    ;; How to configure lsp-mode for Python:
-    ;; 1. Need to install pyls using: 'pip install 'python-language-server[all]'.
-    ;; 2. pyls honors VIRTUAL_ENV and project root path.
-    ;;    See `https://github.com/palantir/python-language-server/issues/126' and `workspace.py'.
-    ;; 3. See `https://github.com/emacs-lsp/lsp-mode/issues/167' if need to send settings to pyls.
-    :config
-    (setq python-indent-offset 4)
-    (lsp-define-stdio-client lsp-python-mode
-                             "python"
-                             (lsp-make-traverser (lambda (dir)
-                                                   (directory-files
-                                                    dir
-                                                    nil
-                                                    "environment\\.yml")))
-                             '("/Users/ts/anaconda3/bin/pyls"))
-    (with-eval-after-load 'conda
-      (when (fboundp 'conda--switch-buffer-auto-activate)
-        (advice-add 'lsp-python-mode-enable :before #'conda--switch-buffer-auto-activate)))
-    (add-hook 'python-mode-hook #'lsp-python-mode-enable)))
+        lsp-ui-imenu-enable t
+        lsp-ui-imenu-colors `(,(face-foreground 'font-lock-keyword-face)
+                              ,(face-foreground 'font-lock-string-face)
+                              ,(face-foreground 'font-lock-constant-face)
+                              ,(face-foreground 'font-lock-variable-name-face))
+
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-diagnostics nil
+        lsp-ui-sideline-ignore-duplicate t
+        lsp-ui-sideline-show-code-actions nil
+        lsp-modeline-code-actions-enable nil
+
+        lsp-enable-symbol-highlighting t
+        lsp-lens-enable t
+        lsp-headerline-breadcrumb-enable t
+
+        lsp-diagnostics-provider :flycheck
+        lsp-modeline-diagnostics-enable t
+
+        lsp-signature-auto-activate nil
+        lsp-signature-render-documentation nil
+
+        lsp-completion-provider :capf
+        lsp-completion-show-detail t
+        lsp-completion-show-kind t)
+  :config
+  ;; (add-to-list 'lsp-ui-doc-frame-parameters '(right-fringe . 8))
+
+  ;; `C-g'to close doc
+  (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
+
+  ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
+  ;; @see https://github.com/emacs-lsp/lsp-ui/issues/243
+  (defun my-lsp-ui-imenu-hide-mode-line ()
+    "Hide the mode-line in lsp-ui-imenu."
+    (setq mode-line-format nil))
+  (advice-add #'lsp-ui-imenu :after #'my-lsp-ui-imenu-hide-mode-line)
+  )
 
 (provide 'init-lsp)
 

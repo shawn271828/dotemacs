@@ -83,6 +83,30 @@
 (use-package gitconfig-mode)
 (use-package gitignore-mode)
 
+;; Highlight uncommitted changes
+(use-package diff-hl
+  :bind (:map diff-hl-command-map
+              ("SPC" . diff-hl-mark-hunk))
+  :init
+  (add-hook 'after-init-hook #'global-diff-hl-mode)
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  :config
+  (diff-hl-flydiff-mode 1)
+
+  ;; Fall back to the display margin, if the fringe is unavailable
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode 1))
+
+  ;; Avoid restoring `diff-hl-margin-mode'
+  (with-eval-after-load 'desktop
+    (add-to-list 'desktop-minor-mode-table
+                 '(diff-hl-margin-mode nil)))
+
+  ;; Integration with magit and psvn
+  (with-eval-after-load 'magit
+    (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+
 (provide 'init-vcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

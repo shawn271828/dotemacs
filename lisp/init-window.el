@@ -40,7 +40,7 @@
   (use-package transpose-frame :demand)
   (use-package hydra)
   ;; Setup ace-window
-  (setq aw-dispatch-always nil)
+  (setq aw-dispatch-always t)
   (set-face-attribute 'aw-leading-char-face nil
                       :height 2.0 :foreground "Green")
   ;; Winner settings
@@ -105,6 +105,16 @@
           (windmove-find-other-window 'up))
         (shrink-window arg)
       (enlarge-window arg))))
+
+;; winum
+(use-package winum
+  :ensure t
+  :bind (("M-0" . winum-select-window-0-or-10)
+         ("M-1" . winum-select-window-1)
+         ("M-2" . winum-select-window-2)
+         ("M-3" . winum-select-window-3)
+         ("M-4" . winum-select-window-4))
+  :init (add-hook 'after-init-hook #'winum-mode))
 
 ;; Golden Ratio
 ;; (use-package golden-ratio

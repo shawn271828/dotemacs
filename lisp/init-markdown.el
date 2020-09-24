@@ -1,9 +1,9 @@
-;; init-clike.el --- Initialize clike configurations.	-*- lexical-binding: t -*-
+;; init-prog.el --- Initialize version control system configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             C-like language configurations.
+;;             Version control systems, e.g. Git, SVN.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,29 +26,8 @@
 ;;
 ;;; Code:
 
-;; (use-package ggtags
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;;             (lambda ()
-;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;                 (ggtags-mode 1)))))
+(use-package markdown-mode
+  :ensure t
+  :mode "\\.md\\'")
 
-(use-package helm-gtags
-  :init
-  (setq helm-gtags-suggested-key-mapping t)
-  (setq helm-gtags-prefix-key "C-;")
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                (setq c-basic-offset 4)
-                (helm-gtags-mode)
-				(setq indent-tabs-mode t))))
-  :bind (:map helm-gtags-mode-map
-              ("M-." . helm-gtags-find-tag)
-              ("M-," . helm-gtags-pop-stack)
-              ("M-?" . helm-gtags-find-rtag)))
-
-(provide 'init-clike)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-clike.el ends here
+(provide 'init-markdown)

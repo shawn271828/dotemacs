@@ -34,7 +34,6 @@
   :init (helm-mode 1)
   :bind (("C-x b" . helm-mini)
          ("C-h a" . helm-apropos)
-         ("<f1> a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
@@ -93,16 +92,6 @@
                                helm-M-x
                                helm-apropos))
 
-  ;; Raise gc threshold during minibuffer mode (including helm)
-  (defun my-minibuffer-setup-hook ()
-    (setq gc-cons-threshold (* 20 1024 1024)))
-
-  (defun my-minibuffer-exit-hook ()
-    (setq gc-cons-threshold 800000))
-  
-  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-
   ;; Eshell
   (add-hook 'eshell-mode-hook
             (lambda ()
@@ -135,7 +124,7 @@
   (use-package helm-ag
     :demand
     :bind (("M-s o" . helm-do-ag-this-file)
-           ("M-s s" . helm-do-ag)
+           ;; ("M-s s" . helm-do-ag)
            ("M-s a" . helm-do-ag-buffers)
            ("M-s M-o" . helm-occur))
     :config
@@ -169,9 +158,8 @@
 
   ;; Helm-descbinds
   (use-package helm-descbinds
-    :bind (("C-h b" . helm-descbinds)
-           ("<f1> b" . helm-descbinds)))
-  
+    :bind (("C-h b" . helm-descbinds)))
+
   ;; Use wgrep from github to enable wgrep from helm-occur
   (use-package wgrep
     :load-path "site-lisp/wgrep"

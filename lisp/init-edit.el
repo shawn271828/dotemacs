@@ -37,59 +37,46 @@
 ;; from emacs (especially on Microsoft Windows)
 (prefer-coding-system 'utf-8)
 
-;; Misc
+;; Editor settings
+(setq-default auto-save-default nil)
+(setq-default delete-by-moving-to-trash t)
+(setq-default set-mark-command-repeat-pop t)
+(setq-default delete-old-versions -1)
+(setq-default version-control t)
+(setq-default vc-make-backup-files t)
+(setq-default inhibit-startup-screen t)
+(setq-default track-eol t)
+(setq-default line-move-visual nil)
+(setq-default buffers-menu-max-size 30)
+(setq-default case-fold-search t)
+(setq-default require-final-newline t)
+(setq-default indent-tabs-mode nil)
+(setq-default mouse-yank-at-point t)
+(setq-default save-interprogram-paste-before-kill t)
+(setq-default scroll-preserve-screen-position 'always)
+(setq-default set-mark-command-repeat-pop t)
+(setq-default tooltip-delay 1.5)
+(setq-default truncate-lines nil)
+(setq-default visible-bell nil)
+(setq-default echo-keystrokes 0.02)
+(setq-default fill-column 80)
+(setq-default large-file-warning-threshold 100000000)
+(setq-default show-trailing-whitespace t)
+(setq-default window-combination-resize t)
+(setq-default scroll-conservatively 100)
+(setq-default sentence-end-double-space nil)
+(setq-default read-file-name-completion-ignore-case t)
+(setq-default read-buffer-completion-ignore-case t)
+(setq-default tab-always-indent 'complete)
+
+;; Misc settings
 (fset 'yes-or-no-p 'y-or-n-p)
 (blink-cursor-mode -1)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
-
-(setq-default  auto-save-default nil                    ; Disable auto save
-               delete-by-moving-to-trash t              ; Deleting files go to OS's trash folder
-               set-mark-command-repeat-pop t            ; Repeating C-SPC after popping mark pops it again
-               delete-old-versions -1                   ; Don't remove old versions
-               version-control t                        ; Backup as many versions as it could
-               vc-make-backup-files t                   ; Even files under Git will be backuped
-               inhibit-startup-screen t
-               ;; visible-bell t
-               track-eol t                              ; Keep cursor at end of lines. Require line-move-visual is nil.
-               line-move-visual nil
-               ;; blink-cursor-interval 0.4
-               bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
-               buffers-menu-max-size 30
-               case-fold-search t
-               require-final-newline t
-               ediff-split-window-function 'split-window-horizontally
-               ediff-window-setup-function 'ediff-setup-windows-plain
-               indent-tabs-mode nil
-               tab-width 4
-               c-basic-offset 4
-               python-guess-indent nil
-               mouse-yank-at-point t
-               save-interprogram-paste-before-kill t
-               scroll-preserve-screen-position 'always
-               set-mark-command-repeat-pop t
-               tooltip-delay 1.5
-               truncate-lines nil
-               truncate-partial-width-windows nil
-               visible-bell nil
-               echo-keystrokes 1
-               scroll-conservatively 100
-               fill-column 79)
-
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
 (delete-selection-mode t)
-
-;; Exceptions for makefile mode
-(add-hook 'makefile-mode-hook
-	  (lambda ()
-	    (setq tab-width 8)
-	    (setq indent-tabs-mode t)))
-
-;; Use ld-mode for better indentation when editing GNU linker script
-(use-package ld-mode
-  :load-path "site-lisp/ld-mode"
-  :demand)
 
 ;; Place all backup and auto save files in one dir
 ;; and create it if not exists.
@@ -98,6 +85,11 @@
 
 (setq backup-directory-alist `(("." . ,my-backup-dir)))
 (setq auto-save-file-name-transforms  `(("." ,my-backup-dir) t))
+
+;; Desktop save mode
+;; (desktop-save-mode t)
+;; (defvar desktop-restore-eager 5)
+;; (defvar desktop-save t)
 
 ;; Show path if names are the same
 (use-package uniquify
@@ -110,6 +102,11 @@
 
 ;; Newline behavior
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+(use-package beginend
+  :ensure t
+  :config
+  (beginend-global-mode))
 
 ;; Automatically reload files was modified by external program
 (use-package autorevert
@@ -175,45 +172,7 @@
          ([remap kill-region] . nil)
          ([remap delete-region] . nil))
   :config
-  (require 'smartparens-config)
-  (sp-pair "(" ")" :wrap "M-(")
-  (sp-pair "[" "]" :wrap "M-[")
-  (sp-pair "{" "}" :wrap "M-{")
-
-  (add-to-list 'sp-no-reindent-after-kill-modes 'yaml-mode)
-
-  (defun sp-web-mode-is-code-context (id action context)
-      (and (eq action 'insert)
-           (not (or (get-text-property (point) 'part-side)
-                    (get-text-property (point) 'block-side)))))
-  (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
-  
-  (defun shawn-enter-and-indent-sexp (&rest _ignored)
-    "Insert an extra newline after point, and reindent."
-    (newline)
-    (indent-according-to-mode)
-    (forward-line -1)
-    (indent-according-to-mode))
-
-  (dolist (mode '(c-mode c++-mode css-mode objc-mode java-mode
-                         js2-mode json-mode
-                         python-mode sh-mode web-mode))
-    (sp-local-pair mode "{" nil :post-handlers
-                   '((shawn-enter-and-indent-sexp "RET")
-                     (shawn-enter-and-indent-sexp "<return>"))))
-
-  (dolist (mode '(js2-mode json-mode python-mode web-mode))
-    (sp-local-pair mode "[" nil :post-handlers
-                   '((shawn-enter-and-indent-sexp "RET")
-                     (shawn-enter-and-indent-sexp "<return>"))))
-
-  (dolist (mode '(python-mode))
-    (sp-local-pair mode "(" nil :post-handlers
-                   '((shawn-enter-and-indent-sexp "RET")
-                     (shawn-enter-and-indent-sexp "<return>")))
-    (sp-local-pair mode "\"\"\"" "\"\"\"" :post-handlers
-                   '((shawn-enter-and-indent-sexp "RET")
-                     (shawn-enter-and-indent-sexp "<return>")))))
+  (require 'smartparens-config))
 
 ;; Expand region
 (use-package expand-region
@@ -222,7 +181,7 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :init (use-package hydra)
-  :bind ("C-c M" . hydra-multiple-cursors/body)
+  :bind ("C-c M-d" . hydra-multiple-cursors/body)
   :config
   (defhydra hydra-multiple-cursors (:hint nil)
     "
@@ -274,8 +233,8 @@ _m_: smart
 ;; Move text and region
 (use-package move-text
   :bind
-  (([(meta up)] . move-text-up)
-   ([(meta down)] . move-text-down)))
+  (("M-<up>" . move-text-up)
+   ("M-<down>" . move-text-down)))
 
 ;; Auto save buffer
 (use-package super-save
@@ -285,96 +244,22 @@ _m_: smart
 ;; Jump to things in Emacs tree-style
 (use-package avy
   :demand
-  :bind (("C-'" . avy-goto-word-1)
-         ([remap goto-line] . avy-goto-line)
+  :bind (("C-:" . avy-goto-char-timer)
          :map isearch-mode-map
          ("C-j" . avy-isearch))
   :config
   (setq  avy-case-fold-search nil
          avy-all-windows      nil
-         avy-background       nil)
-
-  (defun my-avy-action-copy-line (pt)
-    "Copy to end of line starting on PT."
-    (save-excursion
-      (let (str)
-        (goto-char pt)
-        (end-of-line)
-        (setq str (buffer-substring pt (point)))
-        (kill-new str)
-        (message "Copied: %s" str)))
-    (let ((dat (ring-ref avy-ring 0)))
-      (select-frame-set-input-focus
-       (window-frame (cdr dat)))
-      (select-window (cdr dat))
-      (goto-char (car dat))))
-
-  (defun my-avy-action-yank-line (pt)
-    "Yank end of line starting at PT at the current point."
-    (my-avy-action-copy-line pt)
-    (yank)
-    t)
-
-  (add-to-list 'avy-dispatch-alist '(?N . my-avy-action-copy-line))
-  (add-to-list 'avy-dispatch-alist '(?Y . my-avy-action-yank-line))
-
-  ;; Install avy with modifier
-  (defun my-make-universal-key-handler (func)
-    "Make a univeral key handler with FUNC."
-    (lambda ()
-      (interactive)
-      (let* ((event     last-input-event)
-             (modifiers (event-modifiers event))
-             (basic     (event-basic-type event))
-             (char      (if (memq 'shift modifiers)
-                            (upcase  basic)
-                          basic)))
-        (apply func (list char)))))
-
-  (defun my-install-avy-with-modifier (modifier avy-func)
-    (let ((handler (my-make-universal-key-handler avy-func)))
-      (cl-loop for key-char from 33 to 126
-               do (let ((key (format "%s%s" modifier (string key-char))))
-                    (global-set-key (kbd key) handler)))))
-
-  (my-install-avy-with-modifier "H-" #'avy-goto-word-1))
+         avy-background       t))
 
 ;; Other key chords (should already be enabled in init-package.el)
 (use-package key-chord
-  :chords (("JJ" . mode-line-other-buffer)))
+  :chords (("jj" . mode-line-other-buffer)))
 
 (use-package goto-chg
   :commands goto-last-change
-  ;; complementary to
-  ;; C-x r m / C-x r l
-  ;; and C-<space> C-<space> / C-u C-<space>
-  :bind (("H-<left>" . goto-last-change)
-         ("H-<right>" . goto-last-change-reverse)))
-
-(use-package vimish-fold
-  :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
-
-(use-package neotree
-  :bind (("<f8>" . neotree-project-dir))
-  :config
-  (setq neo-window-width 40)
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (with-eval-after-load 'projectile
-    (setq projectile-switch-project-action 'neotree-projectile-action)
-    (defun neotree-project-dir ()
-      "Open NeoTree using the git root."
-      (interactive)
-      (let ((project-dir (projectile-project-root))
-            (file-name (buffer-file-name)))
-        (neotree-toggle)
-        (if project-dir
-            (if (neo-global--window-exists-p)
-                (progn
-                  (neotree-dir project-dir)
-                  (neotree-find file-name)))
-          (message "Could not find git project root."))))))
-
-;; (use-package all-the-icons)
+  :bind (("C-c b ," . goto-last-change)
+         ("C-c b ." . goto-last-change-reverse)))
 
 (provide 'init-edit)
 

@@ -38,22 +38,14 @@
 (setq enable-local-variables :safe)
 
 ;; Optimize loading performance
-(defvar default-file-name-handler-alist file-name-handler-alist)
-(setq file-name-handler-alist nil)
 (setq gc-cons-threshold (* 128 1024 1024))
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            "Restore defalut values after init"
-            (setq file-name-handler-alist default-file-name-handler-alist)
-            (setq gc-cons-threshold 800000)))
+(setq read-process-output-max (* 1024 1024))
 
 ;; Prefers the newest version of a file
 (setq load-prefer-newer t)
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/org-mode/lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/org-mode/contrib/lisp" user-emacs-directory) t)
 
 ;; Constants
 (require 'init-const)
@@ -64,10 +56,12 @@
 ;; Packages
 (require 'init-package)
 
-;; Basic packages and settings
+;; Extra keymap under terminal
+(require 'init-keymap)
+
+;; Various settings
 (require 'init-basic)
 (require 'init-utils)
-
 (require 'init-ui)
 (require 'init-theme)
 (require 'init-edit)
@@ -77,12 +71,16 @@
 (require 'init-helm)
 (require 'init-projectile)
 (require 'init-hippie-expand)
+(require 'init-flycheck)
 (require 'init-company)
 (require 'init-yasnippet)
 (require 'init-vcs)
+(require 'init-lsp)
+(require 'init-prog)
+(require 'init-rust)
 (require 'init-clike)
-;; Restore
-;; (require 'init-restore)
+(require 'init-markdown)
+(require 'init-treemacs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here

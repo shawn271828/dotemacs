@@ -29,16 +29,11 @@
 (eval-when-compile
   (require 'init-custom))
 
-;; (use-package solarized-theme
-;;   :demand
-;;   :config
-;;   (setq solarized-distinct-fringe-background t)
-;;   (setq solarized-use-variable-pitch t)
-;;   (setq solarized-high-contrast-mode-line nil)
-;;   (setq solarized-use-less-bold nil)
-;;   (setq solarized-use-more-italic t)
-;;   (setq solarized-emphasize-indicators nil)
-;;   (setq solarized-scale-org-headlines t))
+;; Atom theme
+(use-package atom-one-dark-theme)
+
+;; Doom themes
+(use-package doom-themes)
 
 ;; Leuven theme
 (use-package leuven-theme)
@@ -71,15 +66,6 @@ If THEME is given, switch to that theme."
       (disable-theme $current-theme)
       (load-theme $next-theme t)
       (message "Theme changed to %s" $next-theme))))
-
-(use-package smart-mode-line
-  :diminish eldoc-mode
-  :demand
-  :init
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'respectful)
-  :config
-  (sml/setup))
 
 (shawn/rotate-theme my-preferred-theme)
 

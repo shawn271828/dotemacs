@@ -1,9 +1,9 @@
-;; init-flycheck.el --- Initialize flycheck configurations.	-*- lexical-binding: t -*-
+;; init-prog.el --- Initialize version control system configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Flycheck configurations.
+;;             Version control systems, e.g. Git, SVN.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,31 +26,30 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
+(use-package edit-indirect
+  :ensure t)
 
-(use-package flycheck
-  :ensure t
-  :commands (flycheck-mode flycheck-list-errors flycheck-buffer)
-  :init (add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package make-mode
   :config
-  (setq flycheck-indication-mode 'right-margin)
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
+  (add-to-list 'auto-mode-alist '("\\Makefile\\'" . makefile-mode)))
 
-;; Display Flycheck errors in GUI tooltips (only when Emacs 26+)
-(when (>= emacs-major-version 26)
-  (use-package flycheck-pos-tip
-    :init (flycheck-pos-tip-mode 1)
-    :config
-    (setq flycheck-pos-tip-timeout 10)
-    (setq flycheck-display-errors-delay 0.5)))
+(use-package scratch
+  :ensure t
+  :config
+  (autoload 'scratch "scratch" nil t))
 
-;; Colorful Flycheck mode line
-(use-package flycheck-color-mode-line
-  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
+(use-package sh-script
+  :config
+  (add-to-list 'auto-mode-alist '("\\.envrc\\'" . shell-script-mode)))
 
-(provide 'init-flycheck)
+(use-package toml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-mode)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-flycheck.el ends here
+(use-package yaml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+
+(provide 'init-prog)

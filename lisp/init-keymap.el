@@ -1,9 +1,9 @@
-;; init-restore.el --- Initialize restore configurations.	-*- lexical-binding: t -*-
+;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Restore configurations.
+;;             UI configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,11 +26,13 @@
 ;;
 ;;; Code:
 
-(use-package desktop+
-  :bind (("<f2>" . desktop+-load)
-         ("M-<f2>" . desktop+-create)))
+(define-key input-decode-map "\e[27;4;60~" (kbd "M-<"))
+(define-key input-decode-map "\e[27;4;62~" (kbd "M->"))
+(define-key input-decode-map "\e[27;4;37~" (kbd "M-%"))
+(define-key input-decode-map "\e[27;8;37~" (kbd "C-M-%"))
+(define-key input-decode-map "\e[27;4;58~" (kbd "M-:"))
+(define-key input-decode-map "\e[27;4;63~" (kbd "M-?"))
+(define-key input-decode-map "\e[27;3;47~" (kbd "M-/"))
+(define-key input-decode-map "\e[27;7;47~" (kbd "C-M-/"))
 
-(provide 'init-restore)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-restore.el ends here
+(provide 'init-keymap)
