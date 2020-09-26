@@ -165,6 +165,17 @@
     :load-path "site-lisp/wgrep"
     :demand))
 
+(use-package counsel
+  :diminish cousel-mode
+  :commands swiper
+  :bind (("C-S-s" . swiper-isearch)
+         :map isearch-mode-map
+         ("C-S-s" . swiper-from-isearch))
+  :init
+  (setq ivy-height 25)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-count-format "(%d/%d) "))
+
 (provide 'init-helm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

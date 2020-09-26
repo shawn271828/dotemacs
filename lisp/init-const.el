@@ -56,7 +56,7 @@
 
 (defconst my-backup-dir
   (concat user-emacs-directory "backups"))
-  
+
 (provide 'init-const)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

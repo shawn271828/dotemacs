@@ -32,7 +32,7 @@
 
 ;; Title
 (setq frame-title-format
-      '("GNU Emacs " emacs-version "@" user-login-name " : "
+      '("XEmacs"  ": "
         (:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
@@ -77,14 +77,14 @@
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
 ;; Cursor beacon (only work well on Emacs 26 for macos)
-(when (>= emacs-major-version 26)
- (use-package beacon
-   :diminish beacon
-   :init (add-hook 'after-init-hook #'beacon-mode)
-   :config
-   (setq-default beacon-lighter "")
-   (setq-default beacon-size 10)
-   (setq-default beacon-color (face-attribute 'cursor :background))))
+;; (when (>= emacs-major-version 26)
+;;  (use-package beacon
+;;    :diminish beacon
+;;    :init (add-hook 'after-init-hook #'beacon-mode)
+;;    :config
+;;    (setq-default beacon-lighter "")
+;;    (setq-default beacon-size 10)
+;;    (setq-default beacon-color (face-attribute 'cursor :background))))
 
 ;; Fill column indication
 (use-package fill-column-indicator
@@ -105,9 +105,9 @@
   (add-hook 'after-init-hook 'dimmer-mode))
 
 ;; Mode line
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1))
 
 (provide 'init-ui)
 

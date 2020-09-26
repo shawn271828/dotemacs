@@ -34,5 +34,6 @@
 (define-key input-decode-map "\e[27;4;63~" (kbd "M-?"))
 (define-key input-decode-map "\e[27;3;47~" (kbd "M-/"))
 (define-key input-decode-map "\e[27;7;47~" (kbd "C-M-/"))
+(define-key input-decode-map "\e[27;6;83~" (kbd "C-S-s"))
 
 (provide 'init-keymap)
