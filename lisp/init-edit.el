@@ -258,8 +258,8 @@ _m_: smart
 
 (use-package goto-chg
   :commands goto-last-change
-  :bind (("C-c b ," . goto-last-change)
-         ("C-c b ." . goto-last-change-reverse)))
+  :bind (("C-c ," . goto-last-change)
+         ("C-c ." . goto-last-change-reverse)))
 
 (provide 'init-edit)
 

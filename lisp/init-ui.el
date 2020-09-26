@@ -109,6 +109,13 @@
 ;;   :ensure t
 ;;   :init (doom-modeline-mode 1))
 
+(set-face-attribute
+ 'default nil
+ :font (font-spec :name "-*-Operator Mono SSm-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+                  :weight 'normal
+                  :slant 'normal
+                  :size 14.0))
+
 (provide 'init-ui)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

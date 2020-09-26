@@ -55,7 +55,7 @@
 ;; Extra keymap under terminal
 (require 'init-keymap)
 
-;; Various settings
+;; Editor
 (require 'init-basic)
 (require 'init-utils)
 (require 'init-ui)
@@ -71,12 +71,13 @@
 (require 'init-company)
 (require 'init-yasnippet)
 (require 'init-vcs)
+(require 'init-treemacs)
+
+;; Programming
 (require 'init-lsp)
-(require 'init-prog)
 (require 'init-rust)
 (require 'init-clike)
-(require 'init-markdown)
-(require 'init-treemacs)
+(require 'init-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here

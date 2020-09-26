@@ -26,84 +26,75 @@
 ;;
 ;;; Code:
 
-(use-package company-lsp
-  :ensure t
-  :config
-  (push 'company-lsp company-backends))
-
 (use-package lsp-mode
-  :commands lsp-mode
-  :ensure t
-  :hook (prog-mode . (lambda ()
-                       (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
-                         (lsp-deferred))))
+  :commands (lsp lsp-deferred)
+  :hook ((rust-mode . lsp-deferred))
   :bind
   (:map lsp-mode-map
         ("C-c s s" . lsp-describe-thing-at-point)
         ("C-c s c" . lsp-find-references)
         ("C-c s d" . xref-find-definitions-other-window))
-  :init
-  (setq lsp-auto-guess-root t)  ;; Detect project root
-  (setq lsp-keep-workspace-alive nil)  ;; Auto-kill LSP server
-  (setq lsp-print-performance t)
+  :init (setq lsp-auto-guess-root nil)
   :config
-  (use-package lsp-clients
-    :ensure nil))
+  (progn
+    (setq lsp-keep-workspace-alive nil
+          lsp-print-performance t
+          lsp-modeline-code-actions-enable nil
+          lsp-enable-symbol-highlighting t
+          lsp-lens-enable t
+          lsp-headerline-breadcrumb-enable t
+          lsp-diagnostics-provider :flycheck
+          lsp-modeline-diagnostics-enable t
+          lsp-signature-auto-activate nil
+          lsp-signature-render-documentation nil
+          lsp-completion-provider :capf
+          lsp-completion-show-detail t
+          lsp-completion-show-kind t)
 
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :bind(:map lsp-ui-mode-map
-             ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
-             ([remap xref-find-references] . #'lsp-ui-peek-find-references))
-  :init
-  (setq lsp-ui-doc-enable nil
-        lsp-ui-doc-use-webkit nil
-        lsp-ui-doc-delay 0.2
-        lsp-ui-doc-include-signature t
-        lsp-ui-doc-position 'at-point
-        lsp-ui-doc-border (face-foreground 'default)
-        lsp-eldoc-enable-hover t
+    (use-package company-lsp
+      :ensure t
+      :commands company-lsp
+      :config
+      (shawn/local-push-company-backend 'company-lsp))
 
-        lsp-ui-imenu-enable t
-        lsp-ui-imenu-colors `(,(face-foreground 'font-lock-keyword-face)
-                              ,(face-foreground 'font-lock-string-face)
-                              ,(face-foreground 'font-lock-constant-face)
-                              ,(face-foreground 'font-lock-variable-name-face))
+    (use-package lsp-ui
+      :commands lsp-ui-mode
+      :bind(:map lsp-ui-mode-map
+                 ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
+                 ([remap xref-find-references] . #'lsp-ui-peek-find-references))
+      :init
+      (setq lsp-ui-doc-enable nil
+            lsp-ui-doc-use-webkit nil
+            lsp-ui-doc-delay 0.2
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-position 'at-point
+            lsp-ui-doc-border (face-foreground 'default)
+            lsp-eldoc-enable-hover t
 
-        lsp-ui-sideline-enable nil
-        lsp-ui-sideline-show-hover nil
-        lsp-ui-sideline-show-diagnostics nil
-        lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-sideline-show-code-actions nil
-        lsp-modeline-code-actions-enable nil
+            lsp-ui-imenu-enable t
+            lsp-ui-imenu-colors `(,(face-foreground 'font-lock-keyword-face)
+                                  ,(face-foreground 'font-lock-string-face)
+                                  ,(face-foreground 'font-lock-constant-face)
+                                  ,(face-foreground 'font-lock-variable-name-face))
 
-        lsp-enable-symbol-highlighting t
-        lsp-lens-enable t
-        lsp-headerline-breadcrumb-enable t
+            lsp-ui-sideline-enable nil
+            lsp-ui-sideline-show-hover nil
+            lsp-ui-sideline-show-diagnostics nil
+            lsp-ui-sideline-ignore-duplicate t
+            lsp-ui-sideline-show-code-actions nil
+            )
+      :config
+      (add-to-list 'lsp-ui-doc-frame-parameters '(right-fringe . 8))
 
-        lsp-diagnostics-provider :flycheck
-        lsp-modeline-diagnostics-enable t
+      ;; `C-g'to close doc
+      (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
 
-        lsp-signature-auto-activate nil
-        lsp-signature-render-documentation nil
-
-        lsp-completion-provider :capf
-        lsp-completion-show-detail t
-        lsp-completion-show-kind t)
-  :config
-  ;; (add-to-list 'lsp-ui-doc-frame-parameters '(right-fringe . 8))
-
-  ;; `C-g'to close doc
-  (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
-
-  ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
-  ;; @see https://github.com/emacs-lsp/lsp-ui/issues/243
-  (defun my-lsp-ui-imenu-hide-mode-line ()
-    "Hide the mode-line in lsp-ui-imenu."
-    (setq mode-line-format nil))
-  (advice-add #'lsp-ui-imenu :after #'my-lsp-ui-imenu-hide-mode-line)
-  )
+      ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
+      ;; @see https://github.com/emacs-lsp/lsp-ui/issues/243
+      (defun my-lsp-ui-imenu-hide-mode-line ()
+        "Hide the mode-line in lsp-ui-imenu."
+        (setq mode-line-format nil))
+      (advice-add #'lsp-ui-imenu :after #'my-lsp-ui-imenu-hide-mode-line))))
 
 (provide 'init-lsp)
 
