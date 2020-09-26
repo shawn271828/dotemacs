@@ -27,12 +27,15 @@
 ;;; Code:
 
 (use-package rust-mode
+  :after lsp-mode
+  :bind (:map lsp-mode-map
+              ("C-c s l" . lsp-rust-analyzer-inlay-hints-mode))
   :config
   (setq lsp-rust-server 'rust-analyzer)
   (setq lsp-rust-analyzer-inlay-hints-mode nil)
   (setq lsp-rust-analyzer-display-chaining-hints t)
   (setq lsp-rust-analyzer-display-parameter-hints t)
-  (setq lsp-rust-analyzer-server-display-inlay-hints t))
+  (setq lsp-rust-analyzer-server-display-inlay-hints nil))
 
 (use-package cargo
   :after rust-mode

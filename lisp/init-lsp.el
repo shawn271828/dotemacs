@@ -31,26 +31,27 @@
   :hook ((rust-mode . lsp-deferred))
   :bind
   (:map lsp-mode-map
-        ("C-c s s" . lsp-describe-thing-at-point)
+        ("C-c s i" . lsp-describe-thing-at-point)
         ("C-c s c" . lsp-find-references)
         ("C-c s d" . xref-find-definitions-other-window))
-  :init (setq lsp-auto-guess-root nil)
+  :init
+  (setq lsp-keymap-prefix "C-c s"
+        lsp-keep-workspace-alive nil
+        lsp-print-performance t
+        lsp-modeline-code-actions-enable nil
+        lsp-enable-symbol-highlighting t
+        lsp-lens-enable t
+        lsp-headerline-breadcrumb-enable t
+        lsp-diagnostics-provider :flycheck
+        lsp-modeline-diagnostics-enable t
+        lsp-signature-auto-activate nil
+        lsp-signature-render-documentation nil
+        lsp-completion-provider :capf
+        lsp-completion-show-detail t
+        lsp-completion-show-kind t
+        lsp-auto-guess-root nil)
   :config
   (progn
-    (setq lsp-keep-workspace-alive nil
-          lsp-print-performance t
-          lsp-modeline-code-actions-enable nil
-          lsp-enable-symbol-highlighting t
-          lsp-lens-enable t
-          lsp-headerline-breadcrumb-enable t
-          lsp-diagnostics-provider :flycheck
-          lsp-modeline-diagnostics-enable t
-          lsp-signature-auto-activate nil
-          lsp-signature-render-documentation nil
-          lsp-completion-provider :capf
-          lsp-completion-show-detail t
-          lsp-completion-show-kind t)
-
     (use-package company-lsp
       :ensure t
       :commands company-lsp
