@@ -1,4 +1,4 @@
-;; init-prog.el --- Initialize version control system configurations.	-*- lexical-binding: t -*-
+;; init-misc.el --- Initialize misc mode configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -58,3 +58,6 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 (provide 'init-misc)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-misc.el ends here

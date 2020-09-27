@@ -25,8 +25,6 @@
 ;;
 ;;; Code:
 
-(package-initialize)
-
 (when (version< emacs-version "24.4")
   (error "This requires Emacs 24.4 and above!"))
 
@@ -61,7 +59,7 @@
 (require 'init-ui)
 (require 'init-theme)
 (require 'init-edit)
-(require 'init-ibuffer)
+(require 'init-buffman)
 (require 'init-highlight)
 (require 'init-window)
 (require 'init-helm)

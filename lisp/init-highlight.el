@@ -82,9 +82,6 @@
 (use-package vimish-fold
   :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
 
-(use-package vi-tilde-fringe
-  :init (add-hook 'after-init-hook #'global-vi-tilde-fringe-mode))
-
 (provide 'init-highlight)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

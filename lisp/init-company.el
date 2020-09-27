@@ -73,8 +73,7 @@
       (append (if (consp backend) backend (list backend))
               '(:with company-yasnippet))))
 
-  ;; (setq company-backends (mapcar #'company-backend-with-yas company-backends))
-  )
+  (setq company-backends (mapcar #'company-backend-with-yas company-backends)))
 
 (defun shawn/local-push-company-backend (backend)
    "Add BACKEND to a buffer-local version of `company-backends'."
@@ -84,4 +83,4 @@
 (provide 'init-company)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-company.el ends here
+;;; init-company.el ends herel

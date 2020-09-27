@@ -1,9 +1,9 @@
-;; init-lsp.el --- Initialize lsp configurations.	-*- lexical-binding: t -*-
+;; init-lsp.el --- Initialize rust mode configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             LSP configurations.
+;;             rust configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -46,3 +46,6 @@
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (provide 'init-rust)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-rust.el ends here

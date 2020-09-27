@@ -38,6 +38,7 @@
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("M-j" . helm-imenu)
+         ("M-s o" . helm-occur)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
@@ -70,28 +71,6 @@
     (setq helm-candidate-separator "\f")
     (push 'helm-major-mode page-break-lines-modes))
 
-  (when my-helm-in-frame
-    ;; Display some helm sessions in a separate frame
-    ;; More details on `https://github.com/emacs-helm/helm/wiki/frame'
-    (setq helm-actions-inherit-frame-settings t)
-    (setq helm-display-buffer-reuse-frame t)
-    (setq helm-display-buffer-width 72)
-    (setq helm-display-buffer-height 20)
-    ;; (setq helm-display-function #'helm-default-display-buffer)
-    (setq helm-display-function #'helm-display-buffer-in-own-frame))
-
-  (defun my-make-commands-in-frame (commands-list)
-    "Make command in COMMANDS-LIST show in separate frame."
-    (when my-helm-in-frame
-      (dolist (command commands-list)
-        (add-to-list 'helm-commands-using-frame command))))
-
-  (my-make-commands-in-frame '(completion-at-point
-                               helm-occur
-                               helm-occur-from-isearch
-                               helm-M-x
-                               helm-apropos))
-
   ;; Eshell
   (add-hook 'eshell-mode-hook
             (lambda ()
@@ -109,44 +88,14 @@
 
   ;; Minibuffer hiding
   (add-hook 'helm-minibuffer-set-up-hook #'helm-hide-minibuffer-maybe)
-  ;; (defun spacemacs//helm-hide-minibuffer-maybe ()
-  ;;   "Hide minibuffer in Helm session if we use the header line as input field."
-  ;;   (when (with-helm-buffer helm-echo-input-in-header-line)
-  ;;     (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-  ;;       (overlay-put ov 'window (selected-window))
-  ;;       (overlay-put ov 'face
-  ;;                    (let ((bg-color (face-background 'default nil)))
-  ;;                      `(:background ,bg-color :foreground ,bg-color)))
-  ;;       (setq-local cursor-type nil))))
-  ;; (add-hook 'helm-minibuffer-set-up-hook #'spacemacs//helm-hide-minibuffer-maybe)
 
   ;; Helm-ag
   (use-package helm-ag
-    :demand
-    :bind (("M-s o" . helm-do-ag-this-file)
-           ;; ("M-s s" . helm-do-ag)
-           ("M-s a" . helm-do-ag-buffers)
-           ("M-s M-o" . helm-occur))
-    :config
-    (fset 'helm-grep-ag 'helm-do-ag)
-    ;; (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
-    (my-make-commands-in-frame '(helm-do-ag
-                                 helm-do-ag-buffers
-                                 helm-do-ag-this-file
-                                 helm-ag
-                                 helm-ag-buffers)))
+    :demand)
 
-  ;; Company integration
-  ;; (use-package helm-company
-  ;;   :demand
-  ;;   :config
-  ;;   (with-eval-after-load 'company
-  ;;     (define-key company-mode-map (kbd "H-/") 'helm-company)
-  ;;     (my-make-commands-in-frame '(helm-company))
-  ;;     ;; Workaround strange company complete pop up after helm-company cancel
-  ;;     (defun my-hack-to-helm-company ()
-  ;;       (company-cancel))
-  ;;     (advice-add 'helm-company :after 'my-hack-to-helm-company)))
+  ;; Helm xref
+  (use-package helm-xref
+    :demand)
 
   ;; Projectile integration
   (use-package helm-projectile
@@ -160,21 +109,9 @@
   (use-package helm-descbinds
     :bind (("C-h b" . helm-descbinds)))
 
-  ;; Use wgrep from github to enable wgrep from helm-occur
+  ;; Wgrep to enable modification of occur
   (use-package wgrep
-    :load-path "site-lisp/wgrep"
     :demand))
-
-(use-package counsel
-  :diminish cousel-mode
-  :commands swiper
-  :bind (("C-S-s" . swiper-isearch)
-         :map isearch-mode-map
-         ("C-S-s" . swiper-from-isearch))
-  :init
-  (setq ivy-height 25)
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-count-format "(%d/%d) "))
 
 (provide 'init-helm)
 

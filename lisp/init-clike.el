@@ -26,23 +26,14 @@
 ;;
 ;;; Code:
 
-;; (use-package ggtags
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;;             (lambda ()
-;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;                 (ggtags-mode 1)))))
-
 (use-package helm-gtags
-  :init
-  (setq helm-gtags-suggested-key-mapping t)
-  (setq helm-gtags-prefix-key "C-;")
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                (setq c-basic-offset 4)
-                (helm-gtags-mode)
-				(setq indent-tabs-mode t))))
+  :init  (add-hook 'c-mode-common-hook
+                   (lambda ()
+                     (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                       (setq c-basic-offset 8
+                             tab-width 8
+	                     indent-tabs-mode t))
+                     (helm-gtags-mode)))
   :bind (:map helm-gtags-mode-map
               ("M-." . helm-gtags-find-tag)
               ("M-," . helm-gtags-pop-stack)

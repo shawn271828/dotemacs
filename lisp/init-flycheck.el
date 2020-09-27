@@ -39,12 +39,12 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 ;; Display Flycheck errors in GUI tooltips (only when Emacs 26+)
-(when (>= emacs-major-version 26)
-  (use-package flycheck-pos-tip
-    :init (flycheck-pos-tip-mode 1)
-    :config
-    (setq flycheck-pos-tip-timeout 10)
-    (setq flycheck-display-errors-delay 0.5)))
+;; (when (>= emacs-major-version 26)
+;;   (use-package flycheck-pos-tip
+;;     :init (flycheck-pos-tip-mode 1)
+;;     :config
+;;     (setq flycheck-pos-tip-timeout 10)
+;;     (setq flycheck-display-errors-delay 0.5)))
 
 ;; Colorful Flycheck mode line
 (use-package flycheck-color-mode-line

@@ -74,7 +74,7 @@
 (blink-cursor-mode -1)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (line-number-mode t)
-(column-number-mode t)
+(column-number-mode -1)
 (size-indication-mode t)
 (delete-selection-mode t)
 
@@ -165,6 +165,8 @@
   :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
   :bind (("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
+         ("C-M-<right>" . sp-backward-barf-sexp)
+         ("C-M-<left>" . sp-backward-slurp-sexp)
          ("C-<up>" . sp-splice-sexp)
          ("C-<down>" . sp-split-sexp)
          ("C-<return>" . sp-rewrap-sexp)
@@ -177,6 +179,12 @@
 ;; Expand region
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
+
+;; Easy kill
+(use-package easy-kill
+  :ensure t
+  :bind (([remap kill-ring-save] . #'easy-kill)
+         ([remap mark-sexp] . #'easy-mark)))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -210,9 +218,6 @@ _m_: smart
     ("S" mc/reverse-regions :exit t)
     ("i" mc/insert-numbers :exit t)
     ("I" mc/insert-letters :exit t)
-    ("<mouse-1>" mc/add-cursor-on-click)
-    ("<down-mouse-1>" ignore)
-    ("<drag-mouse-1>" ignore)
     ("q" nil "quit")))
 
 ;; Comment
@@ -232,9 +237,8 @@ _m_: smart
 
 ;; Move text and region
 (use-package move-text
-  :bind
-  (("M-<up>" . move-text-up)
-   ("M-<down>" . move-text-down)))
+  :bind (("M-<up>" . move-text-up)
+         ("M-<down>" . move-text-down)))
 
 ;; Auto save buffer
 (use-package super-save
@@ -256,10 +260,18 @@ _m_: smart
 (use-package key-chord
   :chords (("jj" . mode-line-other-buffer)))
 
+;; Goto last change
 (use-package goto-chg
   :commands goto-last-change
-  :bind (("C-c ," . goto-last-change)
-         ("C-c ." . goto-last-change-reverse)))
+  :bind ("C-c ," . goto-last-change))
+
+;; Useful commands
+(use-package crux
+  :demand
+  :bind (("C-x 4 t" . crux-transpose-windows)
+         ("C-c D" . crux-delete-file-and-buffer)
+         ("C-c d" . crux-duplicate-current-line-or-region)
+         ("C-c r" . crux-rename-file-and-buffer)))
 
 (provide 'init-edit)
 

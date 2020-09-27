@@ -40,7 +40,7 @@
   (use-package transpose-frame :demand)
   (use-package hydra)
   ;; Setup ace-window
-  (setq aw-dispatch-always t)
+  (setq aw-dispatch-always nil)
   (set-face-attribute 'aw-leading-char-face nil
                       :height 2.0 :foreground "Green")
   ;; Winner settings
