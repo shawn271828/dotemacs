@@ -49,7 +49,8 @@
         lsp-completion-provider :capf
         lsp-completion-show-detail t
         lsp-completion-show-kind t
-        lsp-auto-guess-root nil)
+        lsp-auto-guess-root nil
+        lsp-file-watch-threshold 2000)
   :config
   (use-package lsp-ui
     :commands lsp-ui-mode
