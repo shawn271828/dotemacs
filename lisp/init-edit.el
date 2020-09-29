@@ -74,7 +74,7 @@
 (blink-cursor-mode -1)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (line-number-mode t)
-(column-number-mode -1)
+(column-number-mode t)
 (size-indication-mode t)
 (delete-selection-mode t)
 
