@@ -77,14 +77,14 @@
   (add-hook 'after-init-hook #'global-prettify-symbols-mode))
 
 ;; Cursor beacon (only work well on Emacs 26 for macos)
-;; (when (>= emacs-major-version 26)
-;;  (use-package beacon
-;;    :diminish beacon
-;;    :init (add-hook 'after-init-hook #'beacon-mode)
-;;    :config
-;;    (setq-default beacon-lighter "")
-;;    (setq-default beacon-size 10)
-;;    (setq-default beacon-color (face-attribute 'cursor :background))))
+(when (>= emacs-major-version 26)
+ (use-package beacon
+   :diminish beacon
+   :init (add-hook 'after-init-hook #'beacon-mode)
+   :config
+   (setq-default beacon-lighter "")
+   (setq-default beacon-size 40)
+   (setq-default beacon-color (face-attribute 'cursor :background))))
 
 ;; Fill column indication
 (use-package fill-column-indicator
@@ -101,7 +101,9 @@
 (use-package dimmer
   :demand
   :init
-  (setq dimmer-exclusion-regexp "^\*helm.*\\|^ \*Minibuf-.*\\|^ \*Echo.*")
+  (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
+                                          "^ \\*Echo.*\\*$"
+                                          "^\\*helm.*\\*$"))
   (add-hook 'after-init-hook 'dimmer-mode))
 
 ;; Mode line

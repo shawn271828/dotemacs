@@ -1,4 +1,4 @@
-;; init-ibuffer.el --- Initialize buffer configurations.	-*- lexical-binding: t -*-
+;; init-buffman.el --- Initialize buffer configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -35,6 +35,22 @@
          ("C-c C-<down>" . centaur-tabs-backward-group)
          ("C-c b" . helm-centaur-tabs-switch-group))
   :config
+  (setq centaur-tabs-style "bar"
+	centaur-tabs-height 32
+	centaur-tabs-set-icons t
+	centaur-tabs-set-modified-marker t
+	centaur-tabs-show-navigation-buttons nil
+	centaur-tabs-set-bar 'left
+	x-underline-at-descent-line nil
+        uniquify-separator "/"
+        uniquify-buffer-name-style 'forward
+        centaur-tabs-gray-out-icons 'nil)
+   ;; (centaur-tabs-enable-buffer-reordering)
+   ;; (setq centaur-tabs-adjust-buffer-order t)
+  (centaur-tabs-headline-match)
+  (centaur-tabs-change-fonts "Monaco" 140)
+  (centaur-tabs-mode t)
+
   ;; The original function uses macro when helm is not present.
   (defun helm-centaur-tabs-switch-group ()
     (interactive)
@@ -43,16 +59,6 @@
       (helm :sources (helm-build-sync-source "Centaur-Tabs Group"
 				  :candidates #'centaur-tabs-get-groups
 				  :action '(("Switch to group" . centaur-tabs-switch-group))))))
-
-  (setq centaur-tabs-style "bar"
-        centaur-tabs-set-icons nil
-        centaur-tabs-set-modified-marker nil
-        centaur-tabs-show-navigation-buttons nil
-        centaur-tabs-set-close-button nil
-        centaur-tabs-set-bar 'under)
-
-  (centaur-tabs-headline-match)
-  (centaur-tabs-mode t)
 
   (defun centaur-tabs-hide-tab (x)
   "Do no to show buffer X in tabs."
@@ -92,4 +98,4 @@
 (provide 'init-buffman)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-buffer.el ends here
+;;; init-buffman.el ends here
