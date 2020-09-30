@@ -52,7 +52,7 @@
           "^\\ *temp.*\\*$"
           "^\\*Help.*\\*$"
           "^\\*Annotate .*\\*$"
-          "^\\*vc- .*\\*$"))
+          "^\\*vc.*\\*$"))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'init-projectile)
