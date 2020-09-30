@@ -26,6 +26,12 @@
 ;;
 ;;; Code:
 
+;; Layout config
+(use-package eyebrowse
+  :hook (after-init . eyebrowse-mode)
+  :config
+  (setq eyebrowse-new-workspace t))
+
 ;; Windows management
 (use-package winner)
 
