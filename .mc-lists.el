@@ -3,12 +3,19 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        hydra-multiple-cursors/nil
+        mwim-beginning-of-code-or-line
         mwim-end-of-code-or-line
+        sp-backward-delete-char
+        sp-backward-kill-word
         sp-delete-char
+        sp-kill-word
+        sp-splice-sexp
         ))
 
 (setq mc/cmds-to-run-once
       '(
         hydra-multiple-cursors/mc/edit-lines-and-exit
         hydra-multiple-cursors/mc/mark-all-like-this-and-exit
+        hydra-multiple-cursors/mc/mark-next-like-this
         ))

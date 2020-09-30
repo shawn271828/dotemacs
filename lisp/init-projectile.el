@@ -36,8 +36,23 @@
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name))))
   (setq projectile-sort-order 'recentf)
   (setq projectile-use-git-grep t)
-  (setq projectile-globally-ignored-buffers '("^\\*[a-zA-Z]+.*\\*$"
-                                              "^magit: .*$"))
+  (setq projectile-globally-ignored-buffers
+        '("^magit: .*$"
+          "^\\*epc.*\\*$"
+          "^\\*helm.*\\*$"
+          "^\\*Helm.*\\*$"
+          "^\\*Compile-Log*.*\\*$"
+          "^\\*lsp.*\\*$"
+          "^\\*company.*\\*$"
+          "^\\*Flycheck.*\\*$"
+          "^\\*tramp.*\\*$"
+          "^\\ *Mini.*\\*$"
+          "^\\*help.*\\*$"
+          "^\\*straight.*\\*$"
+          "^\\ *temp.*\\*$"
+          "^\\*Help.*\\*$"
+          "^\\*Annotate .*\\*$"
+          "^\\*vc- .*\\*$"))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'init-projectile)

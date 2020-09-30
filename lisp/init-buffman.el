@@ -81,6 +81,8 @@
      (string-prefix-p "*straight" name)
      (string-prefix-p " *temp" name)
      (string-prefix-p "*Help" name)
+     (string-prefix-p "*Annotate" name)
+     (string-prefix-p "*vc-" name)
 
      (string-prefix-p "magit" name)
 
