@@ -78,6 +78,9 @@
 (size-indication-mode t)
 (delete-selection-mode t)
 
+;; ido mode enable
+(ido-mode 1)
+
 ;; Place all backup and auto save files in one dir
 ;; and create it if not exists.
 (unless (file-exists-p my-backup-dir)
