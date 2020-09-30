@@ -29,6 +29,7 @@
 (use-package treemacs
   :ensure t
   :init
+  (require 'treemacs)
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
@@ -99,8 +100,9 @@
 
   (use-package treemacs-all-the-icons
     :after treemacs
-    :init (require 'treemacs-all-the-icons)
-    :hook (treemacs-mode . (lambda () (treemacs-load-theme 'all-the-icons)))))
+    :init
+    (require 'treemacs-all-the-icons)
+    (treemacs-load-theme 'all-the-icons)))
 
 (provide 'init-treemacs)
 ;;; init-treemacs.el ends here
