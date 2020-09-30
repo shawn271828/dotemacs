@@ -50,13 +50,25 @@
         lsp-completion-show-detail t
         lsp-completion-show-kind t
         lsp-auto-guess-root nil
+        lsp-headerline-breadcrumb-enable 1
         lsp-file-watch-threshold 2000)
   :config
+  ;; WORKAROUND to fix terminal mode header line breadcrumb arrow
+  (defun my-lsp-headerline--arrow-icon ()
+    "Build the arrow icon for headerline breadcrumb."
+    (if (and (require 'all-the-icons nil t)
+             (display-graphic-p))
+        (all-the-icons-material "chevron_right"
+                                :face 'lsp-headerline-breadcrumb-separator-face)
+      (propertize "›" 'face 'lsp-headerline-breadcrumb-separator-face)))
+  (advice-add #'lsp-headerline--arrow-icon :override #'my-lsp-headerline--arrow-icon)
+
   (use-package company-lsp
     :ensure t
     :commands company-lsp
     :config
     (shawn/local-push-company-backend 'company-lsp))
+
   (use-package lsp-ui
     :commands lsp-ui-mode
     :bind (()
