@@ -32,8 +32,7 @@
 (use-package helm
   :diminish helm-mode
   :init (helm-mode 1)
-  :bind (("C-x b" . helm-mini)
-         ("C-h a" . helm-apropos)
+  :bind (("C-h a" . helm-apropos)
          ("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
@@ -100,10 +99,18 @@
   ;; Projectile integration
   (use-package helm-projectile
     :demand
+    :bind (("C-x b" . my-smart-switch-buffer))
     :config
     (helm-projectile-on)
     (with-eval-after-load 'projectile
-      (setq projectile-completion-system 'helm)))
+      (setq projectile-completion-system 'helm)
+      (defun my-smart-switch-buffer (arg)
+        "Call helm-mini or helm-projectile-switch-to-buffer."
+        (interactive "P")
+        (if (or arg
+                (not (projectile-project-p)))
+            (helm-mini)
+          (helm-projectile-switch-to-buffer)))))
 
   ;; Helm-descbinds
   (use-package helm-descbinds
