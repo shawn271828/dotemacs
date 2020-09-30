@@ -40,7 +40,7 @@
 	centaur-tabs-set-icons t
 	centaur-tabs-set-modified-marker t
 	centaur-tabs-show-navigation-buttons nil
-	centaur-tabs-set-bar 'left
+	centaur-tabs-set-bar (if (display-graphic-p) 'left 'under)
 	x-underline-at-descent-line nil
         uniquify-separator "/"
         uniquify-buffer-name-style 'forward

@@ -52,6 +52,11 @@
         lsp-auto-guess-root nil
         lsp-file-watch-threshold 2000)
   :config
+  (use-package company-lsp
+    :ensure t
+    :commands company-lsp
+    :config
+    (shawn/local-push-company-backend 'company-lsp))
   (use-package lsp-ui
     :commands lsp-ui-mode
     :bind (()
