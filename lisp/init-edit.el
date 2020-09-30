@@ -61,7 +61,7 @@
 (setq-default echo-keystrokes 0.02)
 (setq-default fill-column 80)
 (setq-default large-file-warning-threshold 100000000)
-(setq-default show-trailing-whitespace t)
+(setq-default show-trailing-whitespace nil)
 (setq-default window-combination-resize t)
 (setq-default scroll-conservatively 100)
 (setq-default sentence-end-double-space nil)
@@ -77,6 +77,7 @@
 (column-number-mode t)
 (size-indication-mode t)
 (delete-selection-mode t)
+(add-hook 'prog-mode-hook #'(lambda () (setq show-trailing-whitespace t)))
 
 ;; ido mode enable
 (ido-mode 1)
