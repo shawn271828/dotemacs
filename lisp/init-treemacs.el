@@ -92,16 +92,14 @@
 (use-package treemacs-magit
   :after treemacs magit)
 
-(use-package treemacs-all-the-icons
-  :after treemacs
-  :init (require 'treemacs-all-the-icons))
-
 (when (display-graphic-p)
   (use-package treemacs-icons-dired
     :after treemacs
     :hook (dired-mode . treemacs-icons-dired-mode))
 
   (use-package treemacs-all-the-icons
+    :after treemacs
+    :init (require 'treemacs-all-the-icons)
     :hook (treemacs-mode . (lambda () (treemacs-load-theme 'all-the-icons)))))
 
 (provide 'init-treemacs)
