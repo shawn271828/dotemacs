@@ -43,7 +43,7 @@
 
 (use-package flycheck-rust
   :after rust-mode flycheck
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (provide 'init-rust)
 
