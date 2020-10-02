@@ -38,7 +38,7 @@
          ("M-y" . helm-show-kill-ring)
          ("M-j" . helm-imenu)
          ("M-s o" . helm-occur)
-         ("C-x r m" . helm-bookmarks)
+         ("C-x r m" . helm-filtered-bookmarks)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
