@@ -28,6 +28,7 @@
 
 ;; Tabs
 (use-package centaur-tabs
+  :if (display-graphic-p)
   :demand
   :bind (("C-c C-<left>" . centaur-tabs-backward)
          ("C-c C-<right>" . centaur-tabs-forward)
