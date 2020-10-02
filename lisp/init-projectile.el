@@ -37,22 +37,21 @@
   (setq projectile-sort-order 'recentf)
   (setq projectile-use-git-grep t)
   (setq projectile-globally-ignored-buffers
-        '("^magit: .*$"
+        '("^magit[:|\\-].*$"
           "^\\*epc.*\\*$"
-          "^\\*helm.*\\*$"
-          "^\\*Helm.*\\*$"
+          "^\\*[H|h]elm.*\\*$"
           "^\\*Compile-Log*.*\\*$"
           "^\\*lsp.*\\*$"
           "^\\*company.*\\*$"
           "^\\*Flycheck.*\\*$"
           "^\\*tramp.*\\*$"
           "^\\ *Mini.*\\*$"
-          "^\\*help.*\\*$"
           "^\\*straight.*\\*$"
           "^\\ *temp.*\\*$"
-          "^\\*Help.*\\*$"
+          "^\\*[H|h]elp.*\\*$"
           "^\\*Annotate .*\\*$"
-          "^\\*vc.*\\*$"))
+          "^\\*vc.*\\*$"
+          "^\\*Bufler.*\\*$"))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (provide 'init-projectile)
