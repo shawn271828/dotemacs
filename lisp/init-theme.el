@@ -41,6 +41,9 @@
 ;; Tomorrow theme
 (use-package color-theme-sanityinc-tomorrow)
 
+;; Solarized theme
+(use-package solarized-theme)
+
 ;; Theme switcher
 (defun index-of-theme (theme)
   "Get THEME index in pool."
