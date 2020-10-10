@@ -44,6 +44,11 @@
 ;; Solarized theme
 (use-package solarized-theme)
 
+;; Plan9 theme
+(use-package plan9-theme)
+(use-package parchment-theme)
+(use-package acme-theme)
+
 ;; Theme switcher
 (defun index-of-theme (theme)
   "Get THEME index in pool."
