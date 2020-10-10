@@ -32,22 +32,11 @@
 ;; Atom theme
 (use-package atom-one-dark-theme)
 
-;; Doom themes
-(use-package doom-themes)
-
-;; Leuven theme
-(use-package leuven-theme)
-
 ;; Tomorrow theme
 (use-package color-theme-sanityinc-tomorrow)
 
-;; Solarized theme
-(use-package solarized-theme)
-
-;; Plan9 theme
-(use-package plan9-theme)
-(use-package parchment-theme)
-(use-package acme-theme)
+;; Github theme
+(use-package github-modern-theme)
 
 ;; Theme switcher
 (defun index-of-theme (theme)
