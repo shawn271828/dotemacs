@@ -273,7 +273,7 @@
  :font (font-spec :name "-*-Operator Mono SSm-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
                   :weight 'normal
                   :slant 'normal
-                  :size 14.0))
+                  :size 12))
 
 (provide 'init-ui)
 
