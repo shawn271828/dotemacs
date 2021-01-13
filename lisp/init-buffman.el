@@ -37,7 +37,7 @@
          ("C-c b" . helm-centaur-tabs-switch-group))
   :config
   (setq centaur-tabs-style "bar"
-	centaur-tabs-height 32
+	centaur-tabs-height 22
 	centaur-tabs-set-icons t
 	centaur-tabs-set-modified-marker t
 	centaur-tabs-show-navigation-buttons nil
@@ -49,7 +49,7 @@
    ;; (centaur-tabs-enable-buffer-reordering)
    ;; (setq centaur-tabs-adjust-buffer-order t)
   (centaur-tabs-headline-match)
-  (centaur-tabs-change-fonts "Monaco" 140)
+  (centaur-tabs-change-fonts "Operator Mono SSm" 120)
   (centaur-tabs-mode t)
 
   ;; The original function uses macro when helm is not present.
