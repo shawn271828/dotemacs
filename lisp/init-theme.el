@@ -35,6 +35,11 @@
 ;; Tomorrow theme
 (use-package color-theme-sanityinc-tomorrow)
 
+;; Plan9 theme
+(use-package plan9-theme)
+(use-package parchment-theme)
+(use-package acme-theme)
+
 ;; Github theme
 (use-package github-modern-theme)
 
