@@ -63,11 +63,11 @@
       (propertize "›" 'face 'lsp-headerline-breadcrumb-separator-face)))
   (advice-add #'lsp-headerline--arrow-icon :override #'my-lsp-headerline--arrow-icon)
 
-  (use-package company-lsp
-    :ensure t
-    :commands company-lsp
-    :config
-    (shawn/local-push-company-backend 'company-lsp))
+  ;; (use-package company-lsp
+  ;;   :ensure t
+  ;;   :commands company-lsp
+  ;;   :config
+  ;;   (shawn/local-push-company-backend 'company-lsp))
 
   (use-package lsp-ui
     :commands lsp-ui-mode
