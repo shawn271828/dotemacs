@@ -75,6 +75,7 @@
 (require 'init-lsp)
 (require 'init-rust)
 (require 'init-clike)
+(require 'init-go)
 (require 'init-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

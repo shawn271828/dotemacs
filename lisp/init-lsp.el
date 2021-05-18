@@ -28,7 +28,8 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook ((rust-mode . lsp-deferred))
+  :hook ((rust-mode . lsp-deferred)
+         (go-mode . lsp-deferred))
   :bind
   (:map lsp-mode-map
         ("C-c s i" . lsp-describe-thing-at-point)
