@@ -8,8 +8,8 @@
 ;; (setq my-mail-address "user@email.com")   ; Email address
 ;; (setq my-proxy "127.0.0.1:1080")          ; Network proxy
 ;; (setq my-package-archives 'emacs-china)   ; Package repo: melpa, emacs-china or tuna
-;; (setq my-preferred-theme 'sanityinc-tomorrow-eighties) ; Theme
-;; (setq my-themes-pool '(sanityinc-tomorrow-eighties leuven)) ; Switchable themes
+;; (setq my-preferred-theme 'atom-one-dark) ; Theme
+;; (setq my-themes-pool '(atom-one-dark solarized-light)) ; Switchable themes
 ;; (setq my-anaconda-home "path/to/anaconda")
 ;; (setq my-helm-in-frame nil)
 
