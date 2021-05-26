@@ -27,21 +27,46 @@
 ;;; Code:
 
 (use-package ccls
-  :after lsp-mode
+  :demand
   :bind
   (:map c-mode-map
         ("C-c s l" . hydra-ccls-reference/body))
   (:map c++-mode-map
         ("C-c s l" . hydra-ccls-reference/body))
   :config
+  (defun my-ccls-mode ()
+    "Enable ccls/lsp mode."
+    (interactive)
+    (lsp)
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
+                  (setq c-basic-offset 8
+                        tab-width 8
+	                indent-tabs-mode t))
+                (lsp-deferred))))
+
   (defhydra hydra-ccls-reference ()
+    "
+^References^        ^Hierarchy^
+-------------------------------------^
+_&_: address        _c_: caller/callee
+_#_: macro          _m_: members
+_v_: not calling
+_r_: read
+_w_: write
+"
     ("&" ccls/references-address :exit t)
     ("#" ccls/references-macro :exit t)
     ("v" ccls/references-not-call :exit t)
     ("r" ccls/references-read :exit t)
-    ("w" ccls/references-write :exit t))
+    ("w" ccls/references-write :exit t)
+    ("c" ccls-call-hierarchy :exit t)
+    ("m" ccls-member-hierarchy :exit t))
 
   (setq lsp-enable-file-watchers nil)
+  ;; (setq ccls-sem-highlight-method 'overlay)
+  ;; (ccls-use-default-rainbow-sem-highlight)
 
   (defun ccls/callee ()
     (interactive)

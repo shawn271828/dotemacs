@@ -27,16 +27,23 @@
 ;;; Code:
 
 (use-package helm-gtags
-  :init  (add-hook 'c-mode-common-hook
-                   (lambda ()
-                     (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                       (setq c-basic-offset 8
-                             tab-width 8
-	                     indent-tabs-mode t))))
+  :demand
   :bind (:map helm-gtags-mode-map
               ("M-." . helm-gtags-find-tag)
               ("M-," . helm-gtags-pop-stack)
-              ("M-?" . helm-gtags-find-rtag)))
+              ("M-?" . helm-gtags-find-rtag))
+  :config
+  (defun my-gtags-mode ()
+    "Enable helm gtags mode."
+    (interactive)
+    (helm-gtags-mode)
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode 'java-mode)
+                  (setq c-basic-offset 8
+                        tab-width 8
+	                indent-tabs-mode t))
+                (helm-gtags-mode)))))
 
 (provide 'init-gtags)
 
