@@ -29,7 +29,9 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook ((rust-mode . lsp-deferred)
-         (go-mode . lsp-deferred))
+         (go-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred))
   :bind
   (:map lsp-mode-map
         ("C-c s i" . lsp-describe-thing-at-point)
@@ -37,11 +39,12 @@
         ("C-c s d" . xref-find-definitions-other-window))
   :init
   (setq lsp-keymap-prefix "C-c s"
+        lsp-ui-doc-show-with-cursor nil
         lsp-keep-workspace-alive nil
         lsp-print-performance t
         lsp-modeline-code-actions-enable nil
         lsp-enable-symbol-highlighting t
-        lsp-lens-enable t
+        lsp-lens-enable nil
         lsp-headerline-breadcrumb-enable nil
         lsp-diagnostics-provider :flycheck
         lsp-modeline-diagnostics-enable t

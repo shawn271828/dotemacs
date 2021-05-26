@@ -28,7 +28,7 @@
 
 (use-package rust-mode
   :after lsp-mode
-  :bind (:map lsp-mode-map
+  :bind (:map rust-mode-map
               ("C-c s l" . lsp-rust-analyzer-inlay-hints-mode))
   :config
   (setq lsp-rust-server 'rust-analyzer)

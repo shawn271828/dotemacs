@@ -74,7 +74,8 @@
 (require 'init-flycheck)
 (require 'init-lsp)
 (require 'init-rust)
-(require 'init-clike)
+(require 'init-gtags)
+(require 'init-ccls)
 (require 'init-go)
 (require 'init-misc)
 

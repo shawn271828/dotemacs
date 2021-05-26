@@ -1,9 +1,9 @@
-;; init-clike.el --- Initialize clike configurations.	-*- lexical-binding: t -*-
+;; init-gtags.el --- Initialize clike configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             C-like language configurations.
+;;             C/C++ language configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -32,14 +32,13 @@
                      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                        (setq c-basic-offset 8
                              tab-width 8
-	                     indent-tabs-mode t))
-                     (helm-gtags-mode)))
+	                     indent-tabs-mode t))))
   :bind (:map helm-gtags-mode-map
               ("M-." . helm-gtags-find-tag)
               ("M-," . helm-gtags-pop-stack)
               ("M-?" . helm-gtags-find-rtag)))
 
-(provide 'init-clike)
+(provide 'init-gtags)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-clike.el ends here
+;;; init-gtags.el ends here
