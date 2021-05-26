@@ -25,8 +25,8 @@
 ;;
 ;;; Code:
 
-(when (version< emacs-version "24.4")
-  (error "This requires Emacs 24.4 and above!"))
+(when (version< emacs-version "27")
+  (error "This requires Emacs 27 and above!"))
 
 ;; Accept safe local variables
 (setq enable-local-variables :safe)
