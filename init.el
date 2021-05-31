@@ -77,6 +77,7 @@
 (require 'init-gtags)
 (require 'init-ccls)
 (require 'init-go)
+(require 'init-plantuml)
 (require 'init-misc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

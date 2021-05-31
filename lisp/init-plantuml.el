@@ -27,8 +27,14 @@
 ;;; Code:
 
 (use-package plantuml-mode
+  :init
+  (setq plantuml-jar-path "/usr/local/bin/plantuml.jar"
+        plantuml-executable-path "/usr/local/bin/plantuml")
+  (if (file-exists-p plantuml-executable-path)
+      (setq plantuml-exec-mode 'executable)
+    (when (file-exists-p plantuml-jar-path)
+      (setq plantuml-exec-mode 'jar)))
   :config
-  (setq plantuml-jar-path "/usr/local/Cellar/plantuml/1.2018.2/libexec/plantuml.jar")
   (with-eval-after-load 'org
     (setq org-plantuml-jar-path plantuml-jar-path)))
 
