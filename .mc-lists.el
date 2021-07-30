@@ -4,11 +4,13 @@
 (setq mc/cmds-to-run-for-all
       '(
         hydra-multiple-cursors/nil
+        indent-for-tab-command
         mwim-beginning-of-code-or-line
         mwim-end-of-code-or-line
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
+        sp-forward-slurp-sexp
         sp-kill-word
         sp-splice-sexp
         ))

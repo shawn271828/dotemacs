@@ -47,7 +47,8 @@
         company-require-match nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil
-        company-tooltip-align-annotations t)
+        company-tooltip-align-annotations t
+        company-global-modes '(not gud-mode))
 
   ;; Popup documentation for completion candidates (only when Emacs 26+)
   ;; (when (>= emacs-major-version 26)
