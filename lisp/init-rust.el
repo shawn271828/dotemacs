@@ -35,8 +35,23 @@
   (setq lsp-rust-analyzer-inlay-hints-mode nil)
   (setq lsp-rust-analyzer-display-chaining-hints t)
   (setq lsp-rust-analyzer-display-parameter-hints t)
-  (setq lsp-rust-analyzer-server-display-inlay-hints nil))
+  (setq lsp-rust-analyzer-server-display-inlay-hints nil)
 
+  (defun my-get-linked-projects ()
+    "Get linked projects if exists."
+    (let* ((project-root-suggestion (or (lsp--suggest-project-root) default-directory))
+           (linked-projects-file-name (concat project-root-suggestion ".linked-projects")))
+      (if (file-exists-p linked-projects-file-name)
+          (vconcat (with-temp-buffer
+                     (insert-file-contents linked-projects-file-name)
+                     (split-string (buffer-string) "\n" t)))
+        (vector))))
+
+  (advice-add #'lsp-rust-analyzer--make-init-options
+                    :around
+                    '(lambda (origin-fun &rest args)
+                       (cons :linkedProjects
+                             (cons (my-get-linked-projects) (apply origin-fun args))))))
 (use-package cargo
   :after rust-mode
   :hook (rust-mode . cargo-minor-mode))
