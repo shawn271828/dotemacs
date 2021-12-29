@@ -107,6 +107,14 @@
 ;; Newline behavior
 (global-set-key (kbd "RET") 'newline-and-indent)
 
+;; Initialize C editor basic since ccls/gtags is loaded manually
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
+              (setq c-basic-offset 8
+                    tab-width 8
+                    indent-tabs-mode t))))
+
 (use-package beginend
   :ensure t
   :config

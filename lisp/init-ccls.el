@@ -38,13 +38,7 @@
     "Enable ccls/lsp mode."
     (interactive)
     (lsp)
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
-                  (setq c-basic-offset 8
-                        tab-width 8
-	                indent-tabs-mode t))
-                (lsp-deferred))))
+    (add-hook 'c-mode-common-hook 'lsp-deferred))
 
   (defhydra hydra-ccls-reference ()
     "
