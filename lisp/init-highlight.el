@@ -58,9 +58,10 @@
 ;; Highlight indentions
 (use-package indent-guide
   :diminish indent-guide-mode
-  :bind (("<f12>" . indent-guide-mode))
+  :bind (("<f12>" . indent-guide-global-mode))
   :config
-  (setq indent-guide-char "|"))
+  (setq indent-guide-char ">")
+  (setq indent-guide-recursive t))
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
