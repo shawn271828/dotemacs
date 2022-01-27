@@ -81,7 +81,8 @@
   (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)))
 
 (use-package vimish-fold
-  :init (add-hook 'after-init-hook #'vimish-fold-global-mode))
+  :init (add-hook 'after-init-hook #'vimish-fold-global-mode)
+  :bind (("C-`" . vimish-fold)))
 
 (provide 'init-highlight)
 
