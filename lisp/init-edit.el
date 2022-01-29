@@ -175,18 +175,19 @@
 (use-package smartparens
   :diminish
   :init (add-hook 'after-init-hook #'smartparens-global-strict-mode)
-  :bind (("C-<right>" . sp-forward-slurp-sexp)
+  :bind (:map smartparens-mode-map
+         ("C-<right>" . sp-forward-slurp-sexp)
          ("C-<left>" . sp-forward-barf-sexp)
          ("C-M-<right>" . sp-backward-barf-sexp)
          ("C-M-<left>" . sp-backward-slurp-sexp)
          ("C-<up>" . sp-splice-sexp)
          ("C-<down>" . sp-split-sexp)
-         ("C-<return>" . sp-rewrap-sexp)
          :map smartparens-strict-mode-map
          ([remap kill-region] . nil)
          ([remap delete-region] . nil))
   :config
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  (setq sp-ignore-modes-list (add-to-list 'sp-ignore-modes-list 'org-mode)))
 
 ;; Expand region
 (use-package expand-region
