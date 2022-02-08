@@ -40,7 +40,7 @@
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("M-O" . hydra-layout-manager/body)
+  :bind (("C-M-o" . hydra-layout-manager/body)
          ("M-o" . ace-window))
   :config
   (use-package windmove :demand)
