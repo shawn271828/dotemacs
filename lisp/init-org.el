@@ -50,15 +50,6 @@
         org-pretty-entities nil
         org-src-fontify-natively t)
 
-  ;; Insert some unicode directly.
-  (defmacro my/insert-unicode (unicode-name)
-    `(lambda () (interactive)
-       (ucs-insert (if (> emacs-major-version 25)
-                       (gethash ,unicode-name (ucs-names))
-                     (cdr (assoc-string ,unicode-name (ucs-names)))))))
-
-  (bind-key "C-x 8 s" (my/insert-unicode "ZERO WIDTH SPACE"))
-
   ;; Escape org-entity(e.g. emphasis characters) in orgmode.
   ;; ref: https://emacs.stackexchange.com/questions/16688/how-can-i-escape-the-in-org-mode-to-prevent-bold-fontification/16746#16746
   (defun modi/org-entity-get-name (char)

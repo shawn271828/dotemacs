@@ -95,6 +95,15 @@
 ;; (defvar desktop-restore-eager 5)
 ;; (defvar desktop-save t)
 
+;; Insert some unicode directly.
+(defmacro my/insert-unicode (unicode-name)
+  `(lambda () (interactive)
+     (insert-char (if (> emacs-major-version 25)
+                     (gethash ,unicode-name (ucs-names))
+                   (cdr (assoc-string ,unicode-name (ucs-names)))))))
+
+(bind-key "C-x 8 s" (my/insert-unicode "ZERO WIDTH SPACE"))
+
 ;; Show path if names are the same
 (use-package uniquify
   :ensure nil
