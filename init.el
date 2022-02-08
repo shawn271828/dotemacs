@@ -80,5 +80,8 @@
 (require 'init-plantuml)
 (require 'init-misc)
 
+;; Orgmode
+(require 'init-org)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
