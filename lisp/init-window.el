@@ -40,12 +40,8 @@
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("C-M-o" . hydra-layout-manager/body)
-         ("M-o" . ace-window))
+  :bind (("M-o" . ace-window))
   :config
-  (use-package windmove :demand)
-  (use-package transpose-frame :demand)
-  (use-package hydra)
   ;; Setup ace-window
   (setq aw-dispatch-always nil)
   (set-face-attribute 'aw-leading-char-face nil
@@ -63,55 +59,7 @@
           "*Buffer List*"
           "*Ibuffer*"
           "*esh command on file*"
-          "*Kill Ring*"))
-
-  ;; Layout hydra
-  (defhydra hydra-layout-manager ()
-    "Layout Manager"
-    ("<left>" hydra-move-splitter-left)
-    ("<down>" hydra-move-splitter-down)
-    ("<up>" hydra-move-splitter-up)
-    ("<right>" hydra-move-splitter-right)
-    ("t" transpose-frame)
-    ("f" flop-frame)
-    ("F" flip-frame)
-    ("r" rotate-frame-clockwise)
-    ("R" rotate-frame-anticlockwise)
-    ("o" ace-window)
-    ("q" nil "quit"))
-
-  ;; splitter helper functions
-  (defun hydra-move-splitter-left (arg)
-    "Move window splitter left."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'right))
-        (shrink-window-horizontally arg)
-      (enlarge-window-horizontally arg)))
-
-  (defun hydra-move-splitter-right (arg)
-    "Move window splitter right."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'right))
-        (enlarge-window-horizontally arg)
-      (shrink-window-horizontally arg)))
-
-  (defun hydra-move-splitter-up (arg)
-    "Move window splitter up."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'up))
-        (enlarge-window arg)
-      (shrink-window arg)))
-
-  (defun hydra-move-splitter-down (arg)
-    "Move window splitter down."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'up))
-        (shrink-window arg)
-      (enlarge-window arg))))
+          "*Kill Ring*")))
 
 ;; winum
 (use-package winum
@@ -122,13 +70,6 @@
          ("M-3" . winum-select-window-3)
          ("M-4" . winum-select-window-4))
   :init (add-hook 'after-init-hook #'winum-mode))
-
-;; Golden Ratio
-;; (use-package golden-ratio
-;;   :init (add-hook 'after-init-hook #'golden-ratio-mode)
-;;   :config
-;;   (with-eval-after-load 'ace-window
-;;     (add-to-list 'golden-ratio-extra-commands 'ace-window)))
 
 ;; HACK to try splitting horizontally if possible
 ;; Nowadays display is much wider so make use of it
