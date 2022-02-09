@@ -65,7 +65,6 @@
 (require 'init-yasnippet)
 (require 'init-company)
 (require 'init-projectile)
-;; (require 'init-buffman)
 (require 'init-helm)
 (require 'init-treemacs)
 

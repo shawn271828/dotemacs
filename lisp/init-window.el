@@ -40,7 +40,7 @@
 (use-package ace-window
   :demand
   :init (add-hook 'after-init-hook #'winner-mode)
-  :bind (("M-o" . ace-window))
+  :bind ("M-o" . ace-window)
   :config
   ;; Setup ace-window
   (setq aw-dispatch-always nil)
@@ -70,6 +70,10 @@
          ("M-3" . winum-select-window-3)
          ("M-4" . winum-select-window-4))
   :init (add-hook 'after-init-hook #'winum-mode))
+
+;; Ibuffer
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
 
 ;; HACK to try splitting horizontally if possible
 ;; Nowadays display is much wider so make use of it
