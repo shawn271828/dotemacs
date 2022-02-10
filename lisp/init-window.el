@@ -26,13 +26,6 @@
 ;;
 ;;; Code:
 
-;; Layout config
-;; (use-package eyebrowse
-;;   :hook (after-init . eyebrowse-mode)
-;;   :config
-;;   (setq eyebrowse-new-workspace t
-;;         eyebrowse-keymap-prefix (kbd "C-c \"")))
-
 ;; Windows management
 (use-package winner)
 
@@ -61,7 +54,7 @@
           "*esh command on file*"
           "*Kill Ring*")))
 
-;; winum
+;; Winum
 (use-package winum
   :ensure t
   :bind (("M-0" . winum-select-window-0-or-10)
@@ -70,6 +63,11 @@
          ("M-3" . winum-select-window-3)
          ("M-4" . winum-select-window-4))
   :init (add-hook 'after-init-hook #'winum-mode))
+
+;; Windmove
+(use-package windmove
+  :ensure t
+  :init (windmove-default-keybindings))
 
 ;; Ibuffer
 (use-package ibuffer

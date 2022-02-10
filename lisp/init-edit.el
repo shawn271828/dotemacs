@@ -59,7 +59,7 @@
               truncate-lines nil
               visible-bell nil
               echo-keystrokes 0.02
-              fill-column 80
+              fill-column 120
               large-file-warning-threshold 100000000
               show-trailing-whitespace nil
               window-combination-resize t
@@ -196,7 +196,7 @@
          ([remap delete-region] . nil))
   :config
   (require 'smartparens-config)
-  (setq sp-ignore-modes-list (add-to-list 'sp-ignore-modes-list 'org-mode)))
+  (show-smartparens-global-mode t))
 
 ;; Expand region
 (use-package expand-region

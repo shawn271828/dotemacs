@@ -88,9 +88,7 @@
 
 ;; Fill column indication
 (use-package fill-column-indicator
-  :bind ("H-<f12>" . fci-mode)
-  :config
-  (setq fci-rule-width 2))
+  :bind ("M-<f12>" . fci-mode))
 
 ;; Disable bold face globally
 (defun replace-bold-with-normal (args)

@@ -37,8 +37,7 @@
   :init
   (add-hook 'org-mode-hook (lambda ()
                              (org-indent-mode 1)
-                             (flycheck-mode -1)
-                             (electric-pair-local-mode 1)))
+                             (flycheck-mode -1)))
   :config
   (setq org-catch-invisible-edits 'error
         org-html-inline-images t

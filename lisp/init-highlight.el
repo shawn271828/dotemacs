@@ -41,28 +41,6 @@
          ("M-q" . symbol-overlay-remove-all))
   :init (add-hook 'prog-mode-hook #'symbol-overlay-mode))
 
-;; Highlight matching paren
-(use-package paren
-  :ensure nil
-  :init (add-hook 'after-init-hook #'show-paren-mode)
-  :config
-  (setq show-paren-when-point-inside-paren t)
-  (setq show-paren-when-point-in-periphery t)
-  (setq show-paren-style 'parenthesis)
-  (face-spec-set 'show-paren-match
-                 '((t :foreground nil
-                      :background nil
-                      :underline t))
-                 nil))
-
-;; Highlight indentions
-(use-package indent-guide
-  :diminish indent-guide-mode
-  :bind (("<f12>" . indent-guide-global-mode))
-  :config
-  (setq indent-guide-char ">")
-  (setq indent-guide-recursive t))
-
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -74,15 +52,9 @@
 (use-package whitespace
   :ensure nil
   :diminish whitespace-mode
-  ;; :bind (("M-<f12>" . whitespace-mode))
+  :bind (("<f12>" . whitespace-mode))
   :config
-  (setq whitespace-line-column fill-column)
-  (setq whitespace-action '(report-on-bogus))
-  (setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)))
-
-(use-package vimish-fold
-  :init (add-hook 'after-init-hook #'vimish-fold-global-mode)
-  :bind (("C-`" . vimish-fold)))
+  (setq whitespace-line-column fill-column))
 
 (provide 'init-highlight)
 
