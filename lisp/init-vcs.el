@@ -79,9 +79,7 @@
               ("R" . smeargle-clear)))
 
 ;; Git modes
-(use-package gitattributes-mode)
-(use-package gitconfig-mode)
-(use-package gitignore-mode)
+(use-package git-modes)
 
 ;; Highlight uncommitted changes
 (use-package diff-hl

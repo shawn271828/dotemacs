@@ -28,7 +28,7 @@
 
 ;; Highlight the current line
 (use-package hl-line
-  :ensure nil
+  :ensure t
   :init (add-hook 'after-init-hook #'global-hl-line-mode))
 
 ;; Highlight symbols
@@ -50,7 +50,7 @@
 
 ;; Visualize TAB, (HARD) SPACE, NEWLINE
 (use-package whitespace
-  :ensure nil
+  :ensure t
   :diminish whitespace-mode
   :bind (("<f12>" . whitespace-mode))
   :config
