@@ -74,9 +74,9 @@
 ;; Highlighting regions by last updated time
 (use-package smeargle
   :bind (:map vc-prefix-map
-              ("S" . smeargle)
-              ("C" . smeargle-commits)
-              ("R" . smeargle-clear)))
+              ("s" . smeargle)
+              ("c" . smeargle-commits)
+              ("q" . smeargle-clear)))
 
 ;; Git modes
 (use-package git-modes)
