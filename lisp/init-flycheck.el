@@ -47,8 +47,8 @@
 ;;     (setq flycheck-display-errors-delay 0.5)))
 
 ;; Colorful Flycheck mode line
-(use-package flycheck-color-mode-line
-  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
+;; (use-package flycheck-color-mode-line
+;;   :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
 (provide 'init-flycheck)
 
