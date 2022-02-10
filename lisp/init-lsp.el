@@ -111,49 +111,7 @@
     (add-to-list 'lsp-ui-doc-frame-parameters '(right-fringe . 8))
 
     ;; `C-g'to close doc
-    (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)
-
-    ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
-    ;; @see https://github.com/emacs-lsp/lsp-ui/issues/243
-    (defun my-lsp-ui-imenu-hide-mode-line ()
-      "Hide the mode-line in lsp-ui-imenu."
-      (setq mode-line-format nil))
-    (advice-add #'lsp-ui-imenu :after #'my-lsp-ui-imenu-hide-mode-line)
-
-    ;; WORKAROUND lsp-ui-peek under terminal refs count number overflow
-    ;; reserve one more space from right-fringe
-    (defun my-lsp-ui-peek--show (xrefs)
-      "Create a window to list references/defintions.
-XREFS is a list of references/definitions."
-      (setq lsp-ui-peek--win-start (window-start)
-            lsp-ui-peek--selection 0
-            lsp-ui-peek--offset 0
-            lsp-ui-peek--size-list 0
-            lsp-ui-peek--list nil)
-      (when (eq (logand lsp-ui-peek-peek-height 1) 1)
-        (setq lsp-ui-peek-peek-height (1+ lsp-ui-peek-peek-height)))
-      (when (< (- (line-number-at-pos (window-end)) (line-number-at-pos))
-               (+ lsp-ui-peek-peek-height 3))
-        (recenter 15))
-      (setq xrefs (--sort (string< (plist-get it :file) (plist-get other :file)) xrefs))
-      (--each xrefs
-        (-let* (((&plist :file filename :xrefs xrefs :count count) it)
-                (len-str (number-to-string count)))
-          (setq lsp-ui-peek--size-list (+ lsp-ui-peek--size-list count))
-          (push (concat (propertize (if lsp-ui-peek-show-directory
-                                        (lsp-ui--workspace-path filename)
-                                      (file-name-nondirectory filename))
-                                    'face 'lsp-ui-peek-filename
-                                    'file filename
-                                    'xrefs xrefs)
-                        ;; (propertize " " 'display `(space :align-to (- right-fringe ,(1+ (length len-str)))))
-                        (propertize " " 'display `(space :align-to (- right-fringe ,(1+ (1+ (length len-str))))))
-                        (propertize len-str 'face 'lsp-ui-peek-filename))
-                lsp-ui-peek--list)))
-      (setq lsp-ui-peek--list (nreverse lsp-ui-peek--list))
-      (lsp-ui-peek--expand xrefs)
-      (lsp-ui-peek--peek))
-    (advice-add #'lsp-ui-peek--show :override #'my-lsp-ui-peek--show)))
+    (advice-add #'keyboard-quit :before #'lsp-ui-doc-hide)))
 
 (provide 'init-lsp)
 
