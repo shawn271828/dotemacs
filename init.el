@@ -67,6 +67,7 @@
 (require 'init-projectile)
 (require 'init-helm)
 (require 'init-treemacs)
+(require 'init-persp)
 
 ;; Programming
 (require 'init-vcs)

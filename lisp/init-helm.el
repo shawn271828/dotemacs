@@ -39,6 +39,7 @@
          ("M-j" . helm-imenu)
          ("M-s o" . helm-occur)
          ("C-x r m" . helm-filtered-bookmarks)
+         ("C-x b" . my-switch-to-buffer)
          :map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
@@ -65,6 +66,13 @@
         helm-buffers-fuzzy-matching           nil
         helm-recentf-fuzzy-match              nil
         helm-apropos-fuzzy-match              nil)
+
+  (defun my-switch-to-buffer (arg)
+        "Call helm-mini or helm-buffers-list."
+        (interactive "P")
+        (if arg
+            (helm-mini)
+          (helm-buffers-list)))
 
   ;; Beautify candidate separator
   (with-eval-after-load 'page-break-lines
@@ -100,18 +108,10 @@
   ;; Projectile integration
   (use-package helm-projectile
     :demand
-    :bind (("C-x b" . my-smart-switch-buffer))
     :config
     (helm-projectile-on)
     (with-eval-after-load 'projectile
-      (setq projectile-completion-system 'helm)
-      (defun my-smart-switch-buffer (arg)
-        "Call helm-mini or helm-projectile-switch-to-buffer."
-        (interactive "P")
-        (if (or arg
-                (not (projectile-project-p)))
-            (helm-mini)
-          (helm-projectile-switch-to-buffer)))))
+      (setq projectile-completion-system 'helm)))
 
   ;; Helm-descbinds
   (use-package helm-descbinds
