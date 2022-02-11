@@ -1,9 +1,9 @@
-;; init-flycheck.el --- Initialize flycheck configurations.	-*- lexical-binding: t -*-
+;; init-eglot.el --- Initialize eglot configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Flycheck configurations.
+;;             EGLOT configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,31 +26,10 @@
 ;;
 ;;; Code:
 
-(eval-when-compile
-  (require 'init-const))
+(use-package eglot
+  :ensure t)
 
-(use-package flycheck
-  :ensure t
-  :commands (flycheck-mode flycheck-list-errors flycheck-buffer)
-  :init (add-hook 'after-init-hook #'global-flycheck-mode)
-  :config
-  (setq flycheck-indication-mode 'right-margin)
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
-
-;; Display Flycheck errors in GUI tooltips (only when Emacs 26+)
-;; (when (>= emacs-major-version 26)
-;;   (use-package flycheck-pos-tip
-;;     :init (flycheck-pos-tip-mode 1)
-;;     :config
-;;     (setq flycheck-pos-tip-timeout 10)
-;;     (setq flycheck-display-errors-delay 0.5)))
-
-;; Colorful Flycheck mode line
-;; (use-package flycheck-color-mode-line
-;;   :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
-
-(provide 'init-flycheck)
+(provide 'init-eglot)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-flycheck.el ends here
+;;; init-eglot.el ends here

@@ -1,9 +1,9 @@
-;; init-clike.el --- Initialize clike configurations.	-*- lexical-binding: t -*-
+;; init-flymake.el --- Initialize flymake configurations.	-*- lexical-binding: t -*-
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;; Commentary:
-;;             Go language configurations.
+;;             Flymake configurations.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -26,10 +26,16 @@
 ;;
 ;;; Code:
 
-(use-package go-mode
-  :after lsp-mode)
+(eval-when-compile
+  (require 'init-const))
 
-(provide 'init-go)
+(use-package flymake
+  :ensure t
+  :init (add-hook 'prog-mode-hook #'flymake-mode)
+  :bind (:map flymake-mode-map
+              ("C-c ! l" . flymake-show-diagnostics-buffer)
+              ("C-c ! p" . flymake-show-project-diagnostics)))
 
+(provide 'init-flymake)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-go.el ends here
+;;; init-flymake.el ends here

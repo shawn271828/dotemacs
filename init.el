@@ -71,12 +71,9 @@
 
 ;; Programming
 (require 'init-vcs)
-(require 'init-flycheck)
-(require 'init-lsp)
-(require 'init-rust)
+(require 'init-flymake)
+(require 'init-eglot)
 (require 'init-gtags)
-(require 'init-ccls)
-(require 'init-go)
 (require 'init-plantuml)
 (require 'init-misc)
 
