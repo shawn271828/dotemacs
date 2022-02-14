@@ -30,7 +30,8 @@
 (use-package perspective
   :hook (after-init . persp-mode)
   :config
-  (custom-set-variables '(persp-mode-prefix-key (kbd "C-c \""))))
+  (custom-set-variables '(persp-mode-prefix-key (kbd "C-c \"")))
+  (setq persp-modestring-short t))
 
 (provide 'init-persp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
