@@ -55,6 +55,9 @@
         lsp-headerline-breadcrumb-enable 1
         lsp-file-watch-threshold 2000)
   :config
+  ;; Use `>' for separator under terminal.
+  (or (display-graphic-p)
+      (setq lsp-headerline-arrow ">"))
 
   (use-package lsp-ui
     :commands lsp-ui-mode
