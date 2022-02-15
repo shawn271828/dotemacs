@@ -26,12 +26,21 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'init-custom))
 
 (use-package perspective
-  :hook (after-init . persp-mode)
+  :hook ((after-init . persp-mode)
+         (kill-emacs . persp-state-save))
   :config
   (custom-set-variables '(persp-mode-prefix-key (kbd "C-c \"")))
-  (setq persp-modestring-short t))
+  (setq persp-modestring-short t)
+  (setq persp-state-default-file (expand-file-name persp-auto-save user-emacs-directory))
+
+  ;; Automatically load saved perspective.
+  (if (file-exists-p persp-state-default-file)
+      (persp-state-load persp-state-default-file)))
+
 
 (provide 'init-persp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

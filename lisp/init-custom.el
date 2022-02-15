@@ -42,28 +42,28 @@
   "Set network proxy."
   :type 'string)
 
-(defcustom my-package-archives 'melpa
+(defcustom my-package-archives 'tuna
   "Set package archives from which to fetch."
   :type '(choice
           (const :tag "Melpa" melpa)
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-(defcustom my-anaconda-home "/path/to/Anaconda"
-  "Set Anaconda home path."
+(defcustom persp-auto-save ".persp-saved"
+  "Perspective auto-save file name."
   :type 'string)
 
-(defcustom my-preferred-theme 'sanityinc-tomorrow-eighties
+(defcustom my-preferred-theme 'doom-one
   "Theme."
   :type 'symbol)
 
-(defcustom my-themes-pool '(solarized-dark sanityinc-tomorrow-bright solarized-light)
+(defcustom org-directory "~/org"
+  "Org file diretory."
+  :type 'string)
+
+(defcustom my-themes-pool '(doom-one-light doome-on)
   "Themes pool."
   :type 'list)
-
-(defcustom my-helm-in-frame 'nil
-  "Helm in separateframe"
-  :type 'bool)
 
 ;; For Emacs devel
 ;; e.g. release is 24.5 or 25.1, while devel build is 26.0.90
