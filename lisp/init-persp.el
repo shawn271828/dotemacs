@@ -35,11 +35,7 @@
   :config
   (custom-set-variables '(persp-mode-prefix-key (kbd "C-c \"")))
   (setq persp-modestring-short t)
-  (setq persp-state-default-file (expand-file-name persp-auto-save user-emacs-directory))
-
-  ;; Automatically load saved perspective.
-  (if (file-exists-p persp-state-default-file)
-      (persp-state-load persp-state-default-file)))
+  (setq persp-state-default-file (expand-file-name persp-auto-save user-emacs-directory)))
 
 
 (provide 'init-persp)
