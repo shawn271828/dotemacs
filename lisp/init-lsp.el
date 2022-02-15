@@ -60,9 +60,8 @@
       (setq lsp-headerline-arrow ">"))
 
   (use-package lsp-ui
-    :commands lsp-ui-mode
-    :bind (()
-           :map lsp-ui-mode-map
+    :hook (lsp-mode . lsp-ui-mode)
+    :bind (:map lsp-ui-mode-map
            ("C-c s !" . #'lsp-ui-flycheck-list)
            ("M-j" . #'lsp-ui-imenu)
            ([remap xref-find-definitions] . #'lsp-ui-peek-find-definitions)
