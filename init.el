@@ -79,6 +79,7 @@
 (require 'init-go)
 (require 'init-plantuml)
 (require 'init-misc)
+(require 'init-script)
 
 ;; Orgmode
 (require 'init-org)
