@@ -122,6 +122,10 @@
         (awk-mode . "awk")
         (other . "linux")))
 
+;; Set inextern-lang to 0 to avoid extern "C" { indentation
+(add-hook 'c-mode-common-hook
+	'(lambda () (c-set-offset 'inextern-lang 0)))
+
 (use-package beginend
   :ensure t
   :config
