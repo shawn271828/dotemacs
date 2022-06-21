@@ -80,6 +80,7 @@
 (require 'init-plantuml)
 (require 'init-misc)
 (require 'init-script)
+(require 'google-c-style)
 
 ;; Orgmode
 (require 'init-org)
