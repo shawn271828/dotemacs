@@ -81,6 +81,7 @@
 (require 'init-misc)
 (require 'init-script)
 (require 'google-c-style)
+(require 'init-cuda)
 
 ;; Orgmode
 (require 'init-org)

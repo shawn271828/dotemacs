@@ -152,8 +152,10 @@ Suitable for inclusion in `c-offsets-alist'."
   (interactive)
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-  (google-set-c-style)
-)
+  (google-set-c-style))
+
+(add-hook 'c++-mode-hook 'google-set-c-style)
+(add-hook 'cuda-mode-hook 'google-set-c-style)
 
 (provide 'google-c-style)
 ;;; google-c-style.el ends here
