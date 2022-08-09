@@ -126,6 +126,10 @@
 (add-hook 'c-mode-common-hook
 	'(lambda () (c-set-offset 'inextern-lang 0)))
 
+;; Use clang-format
+(use-package clang-format
+  :ensure t)
+
 (use-package beginend
   :ensure t
   :config
